@@ -9,7 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
-import ui.views.ConcreteViewCreator;
+import ui.views.FactoryViewCreator;
 import ui.views.I_View;
 import ui.views.NewTestScenarioView;
 

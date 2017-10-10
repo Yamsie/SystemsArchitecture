@@ -1,7 +1,7 @@
 import bll.models.NewTestScenarioModel;
 import javafx.application.Application;
 import ui.controllers.NewTestScenarioController;
-import ui.views.ConcreteViewCreator;
+import ui.views.FactoryViewCreator;
 import ui.views.I_View;
 import ui.views.MainMenuView;
 import ui.views.NewTestScenarioView;
