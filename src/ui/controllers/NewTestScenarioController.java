@@ -2,11 +2,15 @@ package ui.controllers;
 
 
 import bll.models.NewTestScenarioModel;
+import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
+import ui.views.ConcreteViewCreator;
+import ui.views.I_View;
 import ui.views.NewTestScenarioView;
 
 public class NewTestScenarioController {
@@ -20,6 +24,10 @@ public class NewTestScenarioController {
     NewTestScenarioModel model;
     NewTestScenarioView view;
 
+    public NewTestScenarioController() {
+
+    }
+
 
     public NewTestScenarioController(NewTestScenarioModel model, NewTestScenarioView view){
         this.model = model;
@@ -31,7 +39,19 @@ public class NewTestScenarioController {
 
     }
 
+    public void launch(String[] args) {
+        Application.launch(NewTestScenarioView.class, args);
+    }
+
     public void getTableInfo() {
         model.getData();
+    }
+
+    public void addTest() {
+
+    }
+
+    public void setTableView() {
+
     }
 }
