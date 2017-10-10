@@ -2,11 +2,10 @@ package ui.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import ui.views.ConcreteViewCreator;
+import ui.views.FactoryViewCreator;
 import ui.views.I_View;
+import ui.views.SingletonFactory;
 
 public class MainMenuController {
 
@@ -21,7 +20,7 @@ public class MainMenuController {
 
     @FXML
     protected void handleButtonAction(ActionEvent event) throws Exception {
-        ConcreteViewCreator vc = new ConcreteViewCreator();
+        FactoryViewCreator vc = SingletonFactory.getInstance();
         I_View x = vc.createView("newTestScenario");
         x.runView(exitApplication.getScene());
     }

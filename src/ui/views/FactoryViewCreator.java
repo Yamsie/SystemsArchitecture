@@ -1,6 +1,6 @@
 package ui.views;
 
-public class ConcreteViewCreator extends ViewCreator {
+public class FactoryViewCreator {
 
     public I_View createView(String name) {
         I_View view = null;
