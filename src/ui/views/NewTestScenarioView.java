@@ -16,13 +16,15 @@ public class NewTestScenarioView extends Application implements I_View{
     @FXML
     TableView tableView;
 
-    public void NewTestScenario(){ }
+    public NewTestScenarioView(){ }
 
-    public void runView(Scene s){
+    public void runView(Stage st){
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxml/newtestscenario.fxml"));
-            s.setRoot(root);
-        }
+            Parent root = FXMLLoader.load(getClass().getResource("/testselection.fxml"));
+            //Scene s = new Scene(root);
+            st.setScene(new Scene(root));
+            st.show();
+            }
         catch(IOException ex){
             System.out.println("Error - IO exception");
         }
