@@ -26,7 +26,7 @@ public class MainMenuController {
         FactoryViewCreator vc = SingletonFactory.getInstance();
         I_View testView = vc.createView("newTestScenario");
         Stage st = (Stage) exitApplication.getScene().getWindow();
-        Scene s = exitApplication.getScene();
-        testView.runView(s, st);
+        //Scene s = exitApplication.getScene();
+        testView.runView(st);
     }
 }

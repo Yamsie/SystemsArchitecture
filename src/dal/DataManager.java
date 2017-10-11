@@ -3,6 +3,7 @@ package dal;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class DataManager {
 
@@ -13,14 +14,10 @@ public class DataManager {
 
 
     public DataManager() {
-        try(BufferedReader br = new BufferedReader(new FileReader("data/TEST_SCENARIOS.txt"))) {
-            StringBuilder sb = new StringBuilder();
-            String line = br.readLine();
+        try(Scanner in = new Scanner(new FileReader("data/TEST_CASES.txt"))) {
 
-            for(int i = 0; line != null; i++) {
-                sb.append(line);
-                sb.append(System.lineSeparator());
-                data.add(br.readLine());
+            while(in.hasNext()) {
+                data.add(in.nextLine());
             }
         }
         catch(IOException exception) {
