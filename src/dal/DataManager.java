@@ -1,5 +1,7 @@
 package dal;
 
+import dal.datamanipulation.DataCapsule;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,33 +9,40 @@ import java.util.Scanner;
 
 public class DataManager {
 
-    private static DataManager instance = null;
-
-    File file;
-    List<String> data = new ArrayList<>();
+    private File file;
+    private DataCapsule dataCapsule;
 
 
     public DataManager() {
-        try(Scanner in = new Scanner(new FileReader("data/TEST_CASES.txt"))) {
 
+    }
+
+    protected void readData() {
+        try(Scanner in = new Scanner(file)) {
+            String[] columns = in.nextLine().split(","); //get columns, move on to first line with data
+            List<String> data = new ArrayList<>();
+            String line;
             while(in.hasNext()) {
-                data.add(in.nextLine());
+                line = in.nextLine();
+                data.add(line);
             }
+            dataCapsule = new DataCapsule(data, columns);
         }
         catch(IOException exception) {
             System.out.println("File not found in " + getClass().getResource("").toString());
         }
     }
 
-    public static DataManager getInstance() {
-        if(instance == null) {
-            instance = new DataManager();
-        }
-        return instance;
+    public DataCapsule getDataCapsule() {
+        return dataCapsule;
     }
 
-    public List<String> getData() {
-        return data;
+    public File getSource() {
+        return file;
+    }
+
+    public void setTarget(File file) {
+        this.file = file;
     }
 
 }

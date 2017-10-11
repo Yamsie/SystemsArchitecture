@@ -5,10 +5,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
-import javax.swing.text.TableView;
 import java.io.IOException;
+import java.util.List;
 
 public class NewTestScenarioView extends Application implements I_View{
 
@@ -37,7 +38,7 @@ public class NewTestScenarioView extends Application implements I_View{
         primaryStage.show();
     }
 
-    public void setTableView(TableView tableView) {
+    public void setTableView(TableView<List<String>> tableView) {
         this.tableView = tableView;
     }
 }

@@ -9,9 +9,12 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
-import ui.views.ConcreteViewCreator;
 import ui.views.I_View;
 import ui.views.NewTestScenarioView;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 
 public class NewTestScenarioController {
 
@@ -32,6 +35,7 @@ public class NewTestScenarioController {
     public NewTestScenarioController(NewTestScenarioModel model, NewTestScenarioView view){
         this.model = model;
         this.view = view;
+        setTableView();
     }
 
     @FXML
@@ -52,6 +56,8 @@ public class NewTestScenarioController {
     }
 
     public void setTableView() {
-
+        Path path = Paths.get("/data/TEST_CASES.txt");
+        System.out.println();
+        view.setTableView(model.readTabDelimitedFileIntoTable(path));
     }
 }

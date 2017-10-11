@@ -19,6 +19,6 @@
             <TableColumn prefWidth="190.39996337890625" text="Input" />
         </columns>
       </TableView>
-      <Button fx:id="addTestInput" onAction="#addTest" layoutX="102.0" layoutY="87.0" mnemonicParsing="false" text="+" />
+      <Button fx:id="addTestInput" layoutX="102.0" layoutY="87.0" mnemonicParsing="false" onAction="#addTest" text="+" />
    </children>
 </AnchorPane>
