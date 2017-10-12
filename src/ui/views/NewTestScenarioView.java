@@ -19,7 +19,7 @@ public class NewTestScenarioView extends Application implements I_View{
     public NewTestScenarioView(){ }
 
     public void runView(Stage st){
-        try {
+        /*try {
             Parent root = FXMLLoader.load(getClass().getResource("/testselection.fxml"));
             //Scene s = new Scene(root);
             st.setScene(new Scene(root));
@@ -27,7 +27,7 @@ public class NewTestScenarioView extends Application implements I_View{
             }
         catch(IOException ex){
             System.out.println("Error - IO exception");
-        }
+        }*/
     }
 
     @Override

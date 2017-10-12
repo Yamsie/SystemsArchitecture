@@ -12,8 +12,12 @@ import ui.views.SingletonFactory;
 
 public class MainMenuController {
 
+    public MainMenuController() { }
+
     @FXML
     private Button exitApplication;
+
+    public String name = "MainMenuController"; //may not bee needed, necessary for other controllers
 
 
     @FXML

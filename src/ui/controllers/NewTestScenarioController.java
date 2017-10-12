@@ -13,7 +13,7 @@ import ui.views.FactoryViewCreator;
 import ui.views.I_View;
 import ui.views.NewTestScenarioView;
 
-public class NewTestScenarioController {
+public class NewTestScenarioController implements Command{
 
     @FXML
     Button addTestInput;
@@ -23,10 +23,9 @@ public class NewTestScenarioController {
 
     NewTestScenarioModel model;
     NewTestScenarioView view;
+    public String name = "NewTestScenarioController";
 
-    public NewTestScenarioController() {
-
-    }
+    public NewTestScenarioController() {    }
 
 
     public NewTestScenarioController(NewTestScenarioModel model, NewTestScenarioView view){
@@ -53,5 +52,9 @@ public class NewTestScenarioController {
 
     public void setTableView() {
 
+    }
+
+    public I_View execute(){
+        return new NewTestScenarioView();
     }
 }
