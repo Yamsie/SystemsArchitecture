@@ -33,8 +33,10 @@ public class XMLFormatter implements I_DataFormatter
             rootElement.setAttributeNode(type);
             for(String [] array: list)
             {
+                // Doesnt create elements with no attributes, looks ugly I know
                 if(array[1].equals("") && array[2].equals("") && array[3].equals("") && array[3].equals("") && array[4].equals(""))
                     continue;
+
                     element = document.createElement("element");
                     rootElement.appendChild(element);
                     type = document.createAttribute("type");
@@ -42,12 +44,9 @@ public class XMLFormatter implements I_DataFormatter
                     element.setAttributeNode(type);
                     for(int i = 0; i < attr.length; i++)
                     {
-                        if(!array[i+1].equals(""))
-                        {
-                            child = document.createElement(attr[i]);
-                            child.appendChild(document.createTextNode(array[i+1]));
-                            element.appendChild(child);
-                        }
+                        child = document.createElement(attr[i]);
+                        child.appendChild(document.createTextNode(array[i+1]));
+                        element.appendChild(child);
                     }
                 }
                 TransformerFactory transformerFactory = TransformerFactory.newInstance();

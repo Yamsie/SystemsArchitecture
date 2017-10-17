@@ -23,6 +23,7 @@ public class Main {
         //NewTestScenarioView view = new NewTestScenarioView();
         //NewTestScenarioController controller = new NewTestScenarioController(model, view);
         //controller.launch(args);
+
         I_QueryBuilder queryBuilder = new QueryBuilder();
         queryBuilder.setDataOperation(new SelectOperation("url"));
         queryBuilder.setTargetFile(new TableTestCases());
