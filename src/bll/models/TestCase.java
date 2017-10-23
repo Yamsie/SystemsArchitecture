@@ -4,14 +4,14 @@ public class TestCase {
     //1,google.com,textBox,"Test Google Search","hello"
     private int id;
     private String url;
-    private String textBox;
+    private String element;
     private String input;
     private String name;
 
-    public TestCase(int id, String url, String textBox, String input, String name) {
+    public TestCase(int id, String url, String element, String input, String name) {
         this.id = id;
         this.url = url;
-        this.textBox = textBox;
+        this.element = element;
         this.input = input;
         this.name = name;
     }
@@ -19,7 +19,7 @@ public class TestCase {
     public TestCase(String[] data) {
         this.id = Integer.parseInt(data[0]);
         this.url = data[1];
-        this.textBox = data[2];
+        this.element = data[2];
         this.input = data[3];
         this.name = data[4];
     }
@@ -41,11 +41,11 @@ public class TestCase {
     }
 
     public String getTextBox() {
-        return textBox;
+        return element;
     }
 
     public void setTextBox(String textBox) {
-        this.textBox = textBox;
+        this.element = textBox;
     }
 
     public String getInput() {

@@ -19,21 +19,20 @@ public class Main {
         //ConcreteViewCreator vc = new ConcreteViewCreator();
         //I_View view = vc.createView("MainWindowView");
         //view.runView(this.getScene());
-        //NewTestScenarioModel model = new NewTestScenarioModel();
-        //NewTestScenarioView view = new NewTestScenarioView();
-        //NewTestScenarioController controller = new NewTestScenarioController(model, view);
-        //controller.launch(args);
 
-        I_QueryBuilder queryBuilder = new QueryBuilder();
-        queryBuilder.setDataOperation(new SelectOperation("url"));
-        queryBuilder.setTargetFile(new TableTestCases());
-        queryBuilder.addClause(new WhereClause("id", "1"));
+        NewTestScenarioController controller = new NewTestScenarioController();
+        controller.launch(args);
 
-        Query query = queryBuilder.getResult();
-        List<String> data = query.getResult();
-
-        for (int i = 0; i < data.size(); i++) {
-            System.out.println(data.get(i));
-        }
+        //I_QueryBuilder queryBuilder = new QueryBuilder();
+        //queryBuilder.setDataOperation(new SelectOperation("url"));
+        //queryBuilder.setTargetFile(new TableTestCases());
+        //queryBuilder.addClause(new WhereClause("id", "1"));
+//
+        //Query query = queryBuilder.getResult();
+        //List<String> data = query.getResult();
+//
+        //for (int i = 0; i < data.size(); i++) {
+        //    System.out.println(data.get(i));
+        //}
     }
 }

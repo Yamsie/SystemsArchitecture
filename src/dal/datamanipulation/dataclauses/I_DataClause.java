@@ -2,7 +2,7 @@ package dal.datamanipulation.dataclauses;
 
 public interface I_DataClause {
 
-    public String getColumn();
+    String getColumn();
 
-    public String getValue();
+    String getValue();
 }

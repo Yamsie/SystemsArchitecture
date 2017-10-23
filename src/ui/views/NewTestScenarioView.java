@@ -5,16 +5,20 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.List;
 
-public class NewTestScenarioView extends Application implements I_View{
+public class NewTestScenarioView extends Application implements I_View {
 
-    @FXML
-    TableView tableView;
+    @FXML private TableView tableView;
+    @FXML private TableColumn idColumn;
+    @FXML private TableColumn urlColumn;
+    @FXML private TableColumn elementColumn;
+    @FXML private TableColumn inputColumn;
 
     public NewTestScenarioView(){ }
 
