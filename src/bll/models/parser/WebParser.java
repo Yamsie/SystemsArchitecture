@@ -34,8 +34,7 @@ public class WebParser
             org.jsoup.nodes.Document document = Jsoup.connect(file).get();
             for(Element e: document.body().select("a, input, button, textarea"))
             {
-                list.add(new String []
-                {
+                list.add(new String [] {
                         e.nodeName(),
                         e.attr("id"),
                         e.attr("name"),
