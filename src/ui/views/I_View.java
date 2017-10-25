@@ -4,5 +4,5 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public interface I_View {
-    public void runView(Stage st);
+    void runView(Stage st);
 }
