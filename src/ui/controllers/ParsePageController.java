@@ -8,7 +8,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -28,7 +27,6 @@ public class ParsePageController implements Initializable {
     @FXML
     public void changeFormat() {
         parser.setFileFormat(options.getValue().equals("XML") ? formatter[0] : formatter[1]);
-        System.out.println(options.getValue());
     }
 
     @FXML

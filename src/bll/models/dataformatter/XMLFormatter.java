@@ -20,7 +20,9 @@ public class XMLFormatter implements I_DataFormatter, Runnable
 {
     private String name;
     private DocumentBuilderFactory xmlFactory = DocumentBuilderFactory.newInstance();
+    private Document document;
     private ArrayList<String []> list = new ArrayList<>();
+    private Element rootElement;
 
     public void convertFile(String rootName, ArrayList<String[]> list)
     {
@@ -29,37 +31,39 @@ public class XMLFormatter implements I_DataFormatter, Runnable
         new Thread(this).start(); //  make a thread and call this
     }
 
-    @Override
-    public void run()
+    private void createElements()
     {
-        Element element, child;
+        int null_counter = 0;
+
+        for(String [] array: list)
+        {
+            Element element = document.createElement("element");
+            rootElement.appendChild(element);
+            Attr type = document.createAttribute("type");
+            type.setValue(array[0]);
+            element.setAttributeNode(type);
+
+            for(int i = 0; i < attr.length; i++)
+            {
+                Element child = document.createElement(attr[i]);
+                child.appendChild(document.createTextNode((array[i+1].equals("")) ? "null" :  array[i+1]));
+                element.appendChild(child);
+
+                if((array[i+1].equals("")))
+                    null_counter++;
+
+                if(null_counter == 4)
+                    rootElement.removeChild(element);
+            }
+
+            null_counter = 0;
+        }
+    }
+
+    private void transformCode()
+    {
         try
         {
-            DocumentBuilder docBuilder = xmlFactory.newDocumentBuilder();
-            Document document = docBuilder.newDocument();
-            Element rootElement = document.createElement("root");
-            document.appendChild(rootElement);
-            Attr type = document.createAttribute("page");
-            type.setValue(name);
-            rootElement.setAttributeNode(type);
-            for(String [] array: list)
-            {
-                if(array[1].equals("") && array[2].equals("") && array[3].equals("") && array[3].equals("") && array[4].equals(""))
-                    continue;
-
-                element = document.createElement("element");
-                rootElement.appendChild(element);
-                type = document.createAttribute("type");
-                type.setValue(array[0]);
-                element.setAttributeNode(type);
-
-                for(int i = 0; i < attr.length; i++)
-                {
-                    child = document.createElement(attr[i]);
-                    child.appendChild(document.createTextNode((array[i+1].equals("")) ? "null" :  array[i+1]));
-                    element.appendChild(child);
-                }
-            }
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
@@ -68,9 +72,29 @@ public class XMLFormatter implements I_DataFormatter, Runnable
             DOMSource source = new DOMSource(document);
             StreamResult result = new StreamResult(new File("src/xml/pages/" + name + ".xml"));
             transformer.transform(source, result);
-            list.clear();
         }
-        catch (ParserConfigurationException | TransformerException | DOMException e)
+
+        catch (TransformerException | DOMException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void run() {
+        try
+        {
+            DocumentBuilder docBuilder = xmlFactory.newDocumentBuilder();
+            document = docBuilder.newDocument();
+            this.rootElement = document.createElement("root");
+            document.appendChild(rootElement);
+            Attr type = document.createAttribute("page");
+            type.setValue(name);
+            rootElement.setAttributeNode(type);
+            createElements();
+            transformCode();
+        }
+        catch (ParserConfigurationException e)
         {
             e.printStackTrace();
         }
