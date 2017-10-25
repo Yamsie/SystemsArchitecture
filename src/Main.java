@@ -1,4 +1,6 @@
 import bll.models.NewTestScenarioModel;
+import bll.models.parser.WebParser;
+import bll.models.parser.XMLParser;
 import dal.TableTestCases;
 import dal.datamanipulation.I_QueryBuilder;
 import dal.datamanipulation.Query;
@@ -21,8 +23,8 @@ public class Main {
         //I_View view = vc.createView("MainWindowView");
         //view.runView(this.getScene());
 
-        NewTestScenarioController controller = new NewTestScenarioController();
-        controller.launch(args);
+       // NewTestScenarioController controller = new NewTestScenarioController();
+        //controller.launch(args);
 
         //I_QueryBuilder queryBuilder = new QueryBuilder();
         //queryBuilder.setDataOperation(new SelectOperation("url"));
@@ -35,5 +37,8 @@ public class Main {
         //for (int i = 0; i < data.size(); i++) {
         //    System.out.println(data.get(i));
         //}
+
+       // new WebParser().parse("https://www.facebook.com/");
+        new XMLParser().parse("C:\\Users\\George\\Desktop\\SystemsArchitecture\\src\\xml\\pages\\google.xml");
     }
 }

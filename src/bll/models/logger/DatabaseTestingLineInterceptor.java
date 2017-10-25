@@ -2,23 +2,16 @@ package bll.models.logger;
 
 public class DatabaseTestingLineInterceptor implements Interceptor{
     boolean statement = false;
+    int priority = 2;
 
     @Override
-    public void before(Action action) {
+    public void operation(Action action) {
         checkDatabaseTestingLineInterceptor(action.getDatabaseTestingLine());
         System.out.println("before : Checking Database Testing Line");
     }
 
     @Override
-    public String intercept(ActionInvocation invocation, Action action) {
-        before(action);
-        String result = invocation.invoke();
-        after(action);
-        return result;
-    }
-
-    @Override
-    public void after(Action action) {
+    public void checkOperation(Action action) {
         // TODO Auto-generated method stub
         if(statement == true){
             System.out.println("Checking Database Testing Line is existed!");
@@ -26,6 +19,11 @@ public class DatabaseTestingLineInterceptor implements Interceptor{
         else{
             System.out.println("Checking Database Testing Line not existed!");
         }
+    }
+
+    @Override
+    public int getPriority(){
+        return this.priority;
     }
 
     public void checkDatabaseTestingLineInterceptor(String testingLine){

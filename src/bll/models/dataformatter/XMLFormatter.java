@@ -18,12 +18,13 @@ import java.io.File;
 
 public class XMLFormatter implements I_DataFormatter
 {
+    private DocumentBuilderFactory xmlFactory = DocumentBuilderFactory.newInstance();
+
     public void convertFile(String rootName, ArrayList<String[]> list)
     {
         Element element, child;
         try
         {
-            DocumentBuilderFactory xmlFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = xmlFactory.newDocumentBuilder();
             Document document = docBuilder.newDocument();
             Element rootElement = document.createElement("root");
@@ -33,6 +34,7 @@ public class XMLFormatter implements I_DataFormatter
             rootElement.setAttributeNode(type);
             for(String [] array: list)
             {
+
                 // Doesnt create elements with no attributes, looks ugly I know
                 if(array[1].equals("") && array[2].equals("") && array[3].equals("") && array[3].equals("") && array[4].equals(""))
                     continue;
@@ -42,10 +44,11 @@ public class XMLFormatter implements I_DataFormatter
                     type = document.createAttribute("type");
                     type.setValue(array[0]);
                     element.setAttributeNode(type);
+
                     for(int i = 0; i < attr.length; i++)
                     {
                         child = document.createElement(attr[i]);
-                        child.appendChild(document.createTextNode(array[i+1]));
+                        child.appendChild(document.createTextNode((array[i+1].equals("")) ? "null" :  array[i+1]));
                         element.appendChild(child);
                     }
                 }
@@ -55,7 +58,7 @@ public class XMLFormatter implements I_DataFormatter
                 transformer.setOutputProperty(OutputKeys.INDENT, "yes");
                 transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
                 DOMSource source = new DOMSource(document);
-                StreamResult result = new StreamResult(new File("src/xml/" + rootName + ".xml"));
+                StreamResult result = new StreamResult(new File("src/xml/pages/" + rootName + ".xml"));
                 transformer.transform(source, result);
         }
         catch (ParserConfigurationException | TransformerException | DOMException e)

@@ -2,8 +2,10 @@ package bll.models.logger;
 
 public class TestingStatementInterceptor implements Interceptor{
     Boolean statement = false;
+    int priority = 1;
+
     @Override
-    public void before(Action action) {
+    public void operation(Action action) {
         boolean temp = checkTestingResult(action.getTestingStatement());
         if(temp)
             statement = true;
@@ -12,16 +14,9 @@ public class TestingStatementInterceptor implements Interceptor{
         System.out.println("before : Testing Statement Interceptor");
     }
 
-    @Override
-    public String intercept(ActionInvocation invocation, Action action) {
-        before(action);
-        String result = invocation.invoke();
-        after(action);
-        return result;
-    }
 
     @Override
-    public void after(Action action) {
+    public void checkOperation(Action action) {
         // TODO Auto-generated method stub
         if(statement == true){
             System.out.println("This testing have valued result!");
@@ -29,6 +24,11 @@ public class TestingStatementInterceptor implements Interceptor{
         else{
             System.out.println("This testing don't have valued result!");
         }
+    }
+
+    @Override
+    public int getPriority(){
+        return this.priority;
     }
 
     public boolean checkTestingResult(String result){

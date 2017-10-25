@@ -2,10 +2,9 @@ package bll.models.logger;
 
 import java.util.ArrayList;
 import java.util.List;
+// In this Dispatcher will use priority callback strategies
 
-public class InterceptorDispatcher implements  ActionInvocation {
-
-    int index = 0;
+public class InterceptorDispatcher{
 
     private Action action;
 
@@ -23,17 +22,36 @@ public class InterceptorDispatcher implements  ActionInvocation {
         this.interceptors.add(interceptors);
     }
 
-    @Override
+    public void removeInterceptor(int i){
+        this.interceptors.remove(i);
+    }
+
     public String invoke() {
+
         // TODO Auto-generated method stub
         String result = "";
-        if (index == interceptors.size()) {
-            result = action.execute();
-        } else {
-            Interceptor interceptor = interceptors.get(index);
-            index++;
-            result = interceptor.intercept(this, action);
+        int maxPriority;
+        while(interceptors.size()!=0){                                   // Always invoke the interceptor who has max priority
+            maxPriority = getMaxPriority();                              // Get the max priority in the List
+            for(int i = 0; i < interceptors.size(); ++i){                //Callback the interceptor who has max priority
+                if(maxPriority == this.interceptors.get(i).getPriority()){
+                    interceptors.get(i).operation(this.action);
+                    interceptors.get(i).checkOperation(this.action);
+                    removeInterceptor(i);
+                }
+            }
         }
+        result = action.execute();
         return result;
+    }
+
+    public int getMaxPriority(){
+        int maxPriority = -1;
+        for(int i = 0; i < this.interceptors.size(); ++i){
+            if(this.interceptors.get(i).getPriority() >= maxPriority){
+                maxPriority = this.interceptors.get(i).getPriority();
+            }
+        }
+        return maxPriority;
     }
 }
