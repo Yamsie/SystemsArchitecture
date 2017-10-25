@@ -1,8 +1,7 @@
 package ui.controllers;
 
 
-import bll.models.NewTestScenarioModel;
-import bll.models.TestCase;
+import bll.models.*;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,11 +16,9 @@ import ui.views.FactoryViewCreator;
 import ui.views.I_View;
 import ui.views.NewTestScenarioView;
 
+//import javax.xml.ws.RequestWrapper;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class NewTestScenarioController implements Command, Initializable {
@@ -30,13 +27,22 @@ public class NewTestScenarioController implements Command, Initializable {
 
     @FXML private Button addTestInput;
     @FXML private TextArea textArea;
+    @FXML private TextField newItem;
+    @FXML private Button addItemBtn;
 
     private NewTestScenarioModel model;
     private NewTestScenarioView view;
     private ObservableList<TestCase> data;
+    private StringBuilder sb;
+    private Stack<DataOriginator> originators;
+    private Stack<I_Memento> mementos;
+    private DataOriginator originator;
 
     public NewTestScenarioController() {
         model = new NewTestScenarioModel();
+        sb = new StringBuilder();
+        originators = new Stack<>();
+        mementos = new Stack<>();
     }
 
     @FXML
@@ -52,10 +58,6 @@ public class NewTestScenarioController implements Command, Initializable {
         model.getData();
     }
 
-    public void addTest() {
-
-    }
-
     public void setTableView() {
 
     }
@@ -67,8 +69,6 @@ public class NewTestScenarioController implements Command, Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        StringBuilder sb = new StringBuilder();
-
         model.setData();
         List<List<String>> data = model.getData();
 
@@ -86,6 +86,36 @@ public class NewTestScenarioController implements Command, Initializable {
                 }
             }
         }
-        System.out.print(sb.toString());
+
+        originator = new DataOriginator(sb.toString());
+        originators.push(originator);
+        mementos.push(originator.createMemento());
+        setTextAreaText();
+    }
+
+    public void addItemHandler(ActionEvent actionEvent) {
+        sb.append(newItem.getText());
+        sb.append("\n");
+        originator = new DataOriginator(sb.toString());
+        originators.push(originator);
+        mementos.push(originator.createMemento());
+        newItem.clear();
+        setTextAreaText();
+    }
+
+    private void setTextAreaText() {
+        textArea.setText(sb.toString());
+    }
+
+    public void undoAddItemHandler(ActionEvent actionEvent) {
+        try {
+            originator = originators.pop();
+            originator.restore(mementos.pop());
+            sb = new StringBuilder(originators.peek().getText());
+        }
+        catch(EmptyStackException e) {
+            System.err.println("Stack is empty");
+        }
+        setTextAreaText();
     }
 }

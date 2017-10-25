@@ -12,12 +12,7 @@ public abstract class DataManager {
     private File file;
     private DataCapsule dataCapsule;
 
-
-    public DataManager() {
-
-    }
-
-    protected void readData() {
+    void readData() {
         try(Scanner in = new Scanner(file)) {
             String[] columns = in.nextLine().split(","); //get columns, move on to first line with data
             List<String> data = new ArrayList<>();
@@ -41,7 +36,7 @@ public abstract class DataManager {
         return file;
     }
 
-    public void setTarget(File file) {
+    void setTarget(File file) {
         this.file = file;
     }
 

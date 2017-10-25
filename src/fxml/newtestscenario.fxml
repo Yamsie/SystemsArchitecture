@@ -11,6 +11,9 @@
       <TextField layoutX="226.0" layoutY="44.0" prefHeight="26.0" prefWidth="295.0" />
       <Label layoutX="147.0" layoutY="49.0" text="Page URL: " />
       <Button fx:id="addTestInput" layoutX="102.0" layoutY="87.0" mnemonicParsing="false" onAction="#addTest" text="+" />
-      <TextArea fx:id="textArea" editable="false" layoutX="126.0" layoutY="87.0" prefHeight="266.0" prefWidth="396.0" />
+      <TextArea fx:id="textArea" layoutX="126.0" layoutY="87.0" prefHeight="266.0" prefWidth="396.0" />
+      <TextField fx:id="newItem" layoutX="126.0" layoutY="361.0" prefHeight="26.0" prefWidth="330.0" />
+      <Button fx:id="addItemBtn" layoutX="456.0" layoutY="361.0" mnemonicParsing="false" onAction="#addItemHandler" text="Add Item" />
+      <Button fx:id="undoAddItemBtn" layoutX="521.0" layoutY="361.0" mnemonicParsing="false" onAction="#undoAddItemHandler" text="Undo Add" />
    </children>
 </AnchorPane>

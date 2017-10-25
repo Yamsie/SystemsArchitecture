@@ -10,7 +10,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/selenium-server-standalone-3.6.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/selenium-server-standalone-3.6.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -19,7 +19,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/json-simple-1.1.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/scenebuilder-9.0.0-all.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -28,7 +28,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/jsoup-1.10.3.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/jsoup-1.10.3.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -37,7 +37,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/json-lib-2.4-jdk15.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/json-simple-1.1.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -46,16 +46,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/scenebuilder-9.0.0-all.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/jdom2-2.0.5.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/jdom-2.0.6.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

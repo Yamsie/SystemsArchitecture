@@ -16,11 +16,21 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import java.io.File;
 
-public class XMLFormatter implements I_DataFormatter
+public class XMLFormatter implements I_DataFormatter, Runnable
 {
+    private String name;
     private DocumentBuilderFactory xmlFactory = DocumentBuilderFactory.newInstance();
+    private ArrayList<String []> list = new ArrayList<>();
 
     public void convertFile(String rootName, ArrayList<String[]> list)
+    {
+        this.name = rootName;
+        this.list = list;
+        new Thread(this).start(); //  make a thread and call this
+    }
+
+    @Override
+    public void run()
     {
         Element element, child;
         try
@@ -30,36 +40,35 @@ public class XMLFormatter implements I_DataFormatter
             Element rootElement = document.createElement("root");
             document.appendChild(rootElement);
             Attr type = document.createAttribute("page");
-            type.setValue(rootName);
+            type.setValue(name);
             rootElement.setAttributeNode(type);
             for(String [] array: list)
             {
-
-                // Doesnt create elements with no attributes, looks ugly I know
                 if(array[1].equals("") && array[2].equals("") && array[3].equals("") && array[3].equals("") && array[4].equals(""))
                     continue;
 
-                    element = document.createElement("element");
-                    rootElement.appendChild(element);
-                    type = document.createAttribute("type");
-                    type.setValue(array[0]);
-                    element.setAttributeNode(type);
+                element = document.createElement("element");
+                rootElement.appendChild(element);
+                type = document.createAttribute("type");
+                type.setValue(array[0]);
+                element.setAttributeNode(type);
 
-                    for(int i = 0; i < attr.length; i++)
-                    {
-                        child = document.createElement(attr[i]);
-                        child.appendChild(document.createTextNode((array[i+1].equals("")) ? "null" :  array[i+1]));
-                        element.appendChild(child);
-                    }
+                for(int i = 0; i < attr.length; i++)
+                {
+                    child = document.createElement(attr[i]);
+                    child.appendChild(document.createTextNode((array[i+1].equals("")) ? "null" :  array[i+1]));
+                    element.appendChild(child);
                 }
-                TransformerFactory transformerFactory = TransformerFactory.newInstance();
-                Transformer transformer = transformerFactory.newTransformer();
-                transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
-                transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-                transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
-                DOMSource source = new DOMSource(document);
-                StreamResult result = new StreamResult(new File("src/xml/pages/" + rootName + ".xml"));
-                transformer.transform(source, result);
+            }
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
+            DOMSource source = new DOMSource(document);
+            StreamResult result = new StreamResult(new File("src/xml/pages/" + name + ".xml"));
+            transformer.transform(source, result);
+            list.clear();
         }
         catch (ParserConfigurationException | TransformerException | DOMException e)
         {

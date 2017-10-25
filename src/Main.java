@@ -9,9 +9,11 @@ import dal.datamanipulation.dataclauses.WhereClause;
 import dal.datamanipulation.dataoperations.SelectOperation;
 import javafx.application.Application;
 import ui.controllers.NewTestScenarioController;
+import ui.controllers.TestWebPageController;
 import ui.views.I_View;
 import ui.views.MainMenuView;
 import ui.views.NewTestScenarioView;
+import ui.views.ParsePageView;
 
 import java.util.List;
 
@@ -32,12 +34,12 @@ public class Main {
 //
         //Query query = queryBuilder.getResult();
         //List<String> data = query.getResult();
-//
+        //
         //for (int i = 0; i < data.size(); i++) {
         //    System.out.println(data.get(i));
         //}
 
        // new WebParser().parse("https://www.facebook.com/");
-        new XMLParser().parse("C:\\Users\\George\\Desktop\\SystemsArchitecture\\src\\xml\\pages\\google.xml");
+        Application.launch(ParsePageView.class, args);
     }
 }
