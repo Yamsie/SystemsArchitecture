@@ -7,25 +7,46 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 @SuppressWarnings("unchecked")
-public class JSONFormatter implements I_DataFormatter {
-    public void convertFile(String rootElement, ArrayList<String[]> list) {
+public class JSONFormatter implements I_DataFormatter , Runnable
+{
+    private String rootElement;
+    private ArrayList<String []> list;
+
+    public void convertFile(String rootElement, ArrayList<String[]> list)
+    {
+        this.rootElement = rootElement;
+        this.list = list;
+        new Thread(this).start();
+    }
+
+    @Override
+    public void run()
+    {
         JSONArray jArray = new JSONArray();
-        for (String [] objects : list) {
+        for (String [] objects : list)
+        {
             if (objects[1].equals("") && objects[2].equals("") && objects[3].equals("") && objects[4].equals(""))
                 continue;
+
             JSONObject obj = new JSONObject();
             obj.put("element", objects[0]);
-            for (int i = 0; i < attr.length; i++) {
+
+            for (int i = 0; i < attr.length; i++)
+            {
                 if (!objects[i+1].equals(""))
-                  obj.put(attr[i], objects[i+1]);
+                    obj.put(attr[i], objects[i+1]);
             }
             jArray.add(obj.toJSONString());
         }
-        try (FileWriter file = new FileWriter("src/json/pages/" + rootElement + ".json")) {
+
+        try (FileWriter file = new FileWriter("src/json/pages/" + rootElement + ".json"))
+        {
             file.write(jArray.toJSONString());
             file.flush();
         }
-        catch (IOException e) {
+
+        catch (IOException e)
+        {
             e.printStackTrace();
         }
     }

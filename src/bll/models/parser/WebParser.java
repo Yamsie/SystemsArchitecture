@@ -26,7 +26,7 @@ public class WebParser
         this.fileFormat = fileFormat;
     }
 
-    public void parse(String file)
+    public void parse(String nameOfFile, String file)
     {
         ArrayList<String[]> list = new ArrayList<>();
         try
@@ -42,7 +42,7 @@ public class WebParser
                         e.attr("class")
                 });
             }
-            fileFormat.convertFile(document.title().replaceAll("([^A-Za-z0-9])", "").toLowerCase(), list);
+            fileFormat.convertFile(nameOfFile, list);
         }
         catch(IOException e)
         {

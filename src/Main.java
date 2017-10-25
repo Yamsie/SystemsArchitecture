@@ -13,6 +13,7 @@ import ui.controllers.TestWebPageController;
 import ui.views.I_View;
 import ui.views.MainMenuView;
 import ui.views.NewTestScenarioView;
+import ui.views.ParsePageView;
 
 import java.util.List;
 
@@ -39,6 +40,6 @@ public class Main {
         //}
 
        // new WebParser().parse("https://www.facebook.com/");
-        new XMLParser().parse("C:\\Users\\George\\Desktop\\SystemsArchitecture\\src\\xml\\pages\\google.xml");
+        Application.launch(ParsePageView.class, args);
     }
 }
