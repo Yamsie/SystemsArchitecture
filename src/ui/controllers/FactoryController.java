@@ -1,29 +1,26 @@
-package ui.views;
-
-import ui.controllers.Command;
-import ui.controllers.NewTestScenarioController;
-import ui.controllers.TestWebPageController;
+package ui.controllers;
 
 import java.util.ArrayList;
 
-public class FactoryViewCreator {
+public class FactoryController {
 
     private ArrayList<Command> handlers;
 
-    public FactoryViewCreator(){
+    public FactoryController(){
         this.handlers = setHandlers();
     }
 
-    public I_View createView(String name) {
+    public Command createController(String name) {
         Command c = getController(name);
-        I_View view = c.execute();
-        return view;
+        return c;
     }
 
     public ArrayList setHandlers(){
         ArrayList h = new ArrayList<Command>();
         h.add(new TestWebPageController());
         h.add(new NewTestScenarioController());
+        h.add(new TestSelectionController());
+        h.add(new ParsePageController());
         return h;
     }
 

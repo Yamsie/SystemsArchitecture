@@ -8,20 +8,26 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import ui.views.FactoryViewCreator;
-import ui.views.I_View;
-import ui.views.NewTestScenarioView;
-import ui.views.SingletonFactory;
 
 public class MainMenuController extends Application{
 
-    public MainMenuController() { }
+    FactoryController fc;
 
     @FXML
     private Button exitApplication;
 
-    public void start(Stage PrimaryStage){
-        Parent root = FXMLLoader.load
+    public MainMenuController() {
+        fc = SingletonFactory.getInstance();
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/mainmenu.fxml"));
+        Scene scene = new Scene(root);
+
+        primaryStage.setTitle("Main Menu");
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 
     @FXML
@@ -31,10 +37,36 @@ public class MainMenuController extends Application{
 
     @FXML
     protected void handleViewTestsButtonAction(ActionEvent event) throws Exception {
-        /*FactoryViewCreator vc = SingletonFactory.getInstance();
-        I_View testView = vc.createView("newTestScenario");
-        Stage st = (Stage) exitApplication.getScene().getWindow();
-        //Scene s = exitApplication.getScene();
-        testView.runView(st);*/
+
+    }
+
+    @FXML
+    protected void handleTestWebPage(){
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/testselection.fxml"));
+            Scene scene = new Scene(root);
+            Stage st = (Stage) exitApplication.getScene().getWindow();
+            st.setTitle("Test Selection");
+            st.setScene(scene);
+            st.show();
+        }
+        catch(Exception ex){
+            System.out.println("blahhh");
+        }
+    }
+
+    @FXML
+    protected void handleNewTestScenario(){
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/newtestscenario.fxml"));
+            Scene scene = new Scene(root);
+            Stage st = (Stage) exitApplication.getScene().getWindow();
+            st.setTitle("New Test Scenario");
+            st.setScene(scene);
+            st.show();
+        }
+        catch(Exception ex){
+            System.out.println("blahhh");
+        }
     }
 }

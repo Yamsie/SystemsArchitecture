@@ -1,31 +1,11 @@
-//import bll.RunTestCase;
-import bll.models.NewTestScenarioModel;
-import bll.models.parser.WebParser;
-import bll.models.parser.XMLParser;
-import dal.TableTestCases;
-import dal.datamanipulation.I_QueryBuilder;
-import dal.datamanipulation.Query;
-import dal.datamanipulation.QueryBuilder;
-import dal.datamanipulation.dataclauses.WhereClause;
-import dal.datamanipulation.dataoperations.SelectOperation;
 import javafx.application.Application;
 import ui.controllers.MainMenuController;
 
 public class Main {
     public static void main(String[] args) {
 
+
         Application.launch(MainMenuController.class, args);
-
-        //Application.launch(MainMenuView.class, args);
-        //ConcreteViewCreator vc = new ConcreteViewCreator();
-        //I_View view = vc.createView("MainWindowView");
-        //view.runView(this.getScene());
-       //NewTestScenarioController controller = new NewTestScenarioController();
-        //controller.launch(args);
-
-       // TestSelectionController controller = new TestSelectionController();
-        //controller.launch(args);
-
 
         //I_QueryBuilder queryBuilder = new QueryBuilder();
         //queryBuilder.setDataOperation(new SelectOperation("url"));
@@ -38,10 +18,6 @@ public class Main {
         //for (int i = 0; i < data.size(); i++) {
         //    System.out.println(data.get(i));
         //}
-
-       // new WebParser().parse("https://www.facebook.com/");
-
-       // new XMLParser().parse("C:\\Users\\George\\Desktop\\SystemsArchitecture\\src\\xml\\pages\\google.xml");
 
     }
 }

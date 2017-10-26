@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class TestWebPageView extends JFrame implements I_View{
+public class TestWebPageView extends JFrame{
     String str[] = {"google.com"};
     private JComboBox jcb = new JComboBox(str);
     private JLabel additionLabel = new JLabel("Please choose a website you want to test: ");

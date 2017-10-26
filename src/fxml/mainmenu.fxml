@@ -20,12 +20,12 @@
           <RowConstraints maxHeight="211.0" minHeight="10.0" prefHeight="133.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="testWebPage" mnemonicParsing="false" prefHeight="134.0" prefWidth="657.0" text="Test Web Page" onAction="#handleSubmitButtonAction">
+            <Button fx:id="testWebPage" mnemonicParsing="false" prefHeight="134.0" prefWidth="657.0" text="Run Test" onAction="#handleTestWebPage">
                <font>
                   <Font size="32.0" />
                </font>
             </Button>
-            <Button fx:id="viewTestScenarios" mnemonicParsing="false" prefHeight="169.0" prefWidth="600.0" text="View Test Scenarios" GridPane.rowIndex="1" onAction ="#handleViewTestsButtonAction">
+            <Button fx:id="viewTestScenarios" mnemonicParsing="false" prefHeight="169.0" prefWidth="600.0" text="View Test Scenarios" GridPane.rowIndex="1" onAction ="#handleNewTestScenario">
                <font>
                   <Font size="32.0" />
                </font>

@@ -2,24 +2,16 @@ package ui.controllers;
 
 
 import bll.models.*;
-import javafx.application.Application;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import ui.views.FactoryViewCreator;
-import ui.views.I_View;
-import ui.views.NewTestScenarioView;
 
 //import javax.xml.ws.RequestWrapper;
 import java.net.URL;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class NewTestScenarioController implements Command, Initializable {
 
@@ -31,7 +23,6 @@ public class NewTestScenarioController implements Command, Initializable {
     @FXML private Button addItemBtn;
 
     private NewTestScenarioModel model;
-    private NewTestScenarioView view;
     private ObservableList<TestCase> data;
     private StringBuilder sb;
     private Stack<DataOriginator> originators;
@@ -50,10 +41,6 @@ public class NewTestScenarioController implements Command, Initializable {
 
     }
 
-    public void launch(String[] args) {
-        Application.launch(NewTestScenarioView.class, args);
-    }
-
     public void getTableInfo() {
         model.getData();
     }
@@ -61,11 +48,6 @@ public class NewTestScenarioController implements Command, Initializable {
     public void setTableView() {
 
     }
-
-    public I_View execute(){
-        return new NewTestScenarioView();
-    }
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

@@ -1,7 +1,6 @@
 package ui.controllers;
 
 import javafx.scene.control.Button;
-import ui.views.I_View;
 import ui.views.TestWebPageView;
 
 import java.awt.event.ActionListener;
@@ -24,9 +23,5 @@ public class TestWebPageController implements Command{
             String web = view.getWebChoosed();
         }
 
-    }
-
-    public I_View execute(){
-        return new TestWebPageView();
     }
 }

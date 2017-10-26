@@ -1,30 +1,26 @@
 package ui.controllers;
 
 import dal.TableTestCases;
-import dal.datamanipulation.DataCapsule;
 import dal.datamanipulation.I_QueryBuilder;
 import dal.datamanipulation.Query;
 import dal.datamanipulation.QueryBuilder;
 import dal.datamanipulation.dataclauses.WhereClause;
 import dal.datamanipulation.dataoperations.SelectOperation;
-import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ListView;
-import ui.views.NewTestScenarioView;
-import ui.views.TestSelectionView;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
+import javafx.stage.Stage;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -35,8 +31,6 @@ public class TestSelectionController implements Initializable {
     private String selected = "";
 
     public TestSelectionController () { }
-
-    public void launch(String[] args) { Application.launch(TestSelectionView.class, args); }
 
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -50,7 +44,6 @@ public class TestSelectionController implements Initializable {
 
         for (int i = 0; i < data.size(); i++) {
             values.add(data.get(i));
-            //System.out.println(data.get(i));
         }
         list.setItems(FXCollections.observableList(values));
         list.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
@@ -89,5 +82,6 @@ public class TestSelectionController implements Initializable {
     }
 
     public void setSelected(String s){ this.selected = s; }
+
 }
 
