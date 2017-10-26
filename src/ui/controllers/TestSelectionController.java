@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class TestSelectionController implements Initializable {
+public class TestSelectionController implements Initializable, IController{
 
     @FXML
     private ListView list;
@@ -83,5 +83,21 @@ public class TestSelectionController implements Initializable {
 
     public void setSelected(String s){ this.selected = s; }
 
+    public String getName(){
+        return "TestSelectionController";
+    }
+
+    public void changeScene(Stage st){
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/newtestscenario.fxml"));
+            Scene scene = new Scene(root);
+            st.setTitle(this.getName());
+            st.setScene(scene);
+            st.show();
+        }
+        catch(Exception ex){
+            System.out.println("blahhh");
+        }
+    }
 }
 

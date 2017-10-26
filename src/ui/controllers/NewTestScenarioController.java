@@ -6,14 +6,18 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 //import javax.xml.ws.RequestWrapper;
 import java.net.URL;
 import java.util.*;
 
-public class NewTestScenarioController implements Command, Initializable {
+public class NewTestScenarioController implements IController, Initializable {
 
 
 
@@ -100,4 +104,22 @@ public class NewTestScenarioController implements Command, Initializable {
         }
         setTextAreaText();
     }
+
+    public String getName(){
+        return "NewTestScenarioController";
+    }
+
+    public void changeScene(Stage st){
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/newtestscenario.fxml"));
+            Scene scene = new Scene(root);
+            st.setTitle(this.getName());
+            st.setScene(scene);
+            st.show();
+        }
+        catch(Exception ex){
+            System.out.println("blahhh");
+        }
+    }
+
 }

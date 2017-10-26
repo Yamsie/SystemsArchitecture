@@ -2,21 +2,21 @@ package ui.controllers;
 
 import java.util.ArrayList;
 
-public class FactoryController {
+public class FactoryController{
 
-    private ArrayList<Command> handlers;
+    private ArrayList<IController> handlers;
 
     public FactoryController(){
         this.handlers = setHandlers();
     }
 
-    public Command createController(String name) {
-        Command c = getController(name);
+    public IController createController(String name) {
+        IController c = getController(name);
         return c;
     }
 
     public ArrayList setHandlers(){
-        ArrayList h = new ArrayList<Command>();
+        ArrayList h = new ArrayList<IController>();
         h.add(new TestWebPageController());
         h.add(new NewTestScenarioController());
         h.add(new TestSelectionController());
@@ -24,10 +24,10 @@ public class FactoryController {
         return h;
     }
 
-    public Command getController(String n){
-        Command c = null;
-        for(int i = 0; i < handlers.size(); i++) {
-            if (handlers.get(i).equals(n))
+    public IController getController(String n){
+        IController c = null;
+        for(int i = 0; i < handlers.size() && c == null; i++) {
+            if (handlers.get(i).getName().equals(n))
                 c = handlers.get(i);
         }
         return c;

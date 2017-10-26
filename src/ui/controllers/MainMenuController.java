@@ -11,23 +11,24 @@ import javafx.stage.Stage;
 
 public class MainMenuController extends Application{
 
-    FactoryController fc;
-
     @FXML
     private Button exitApplication;
 
+    private FactoryController fc;
+
     public MainMenuController() {
-        fc = SingletonFactory.getInstance();
+        this.fc = SingletonFactory.getFactoryInstance();
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/mainmenu.fxml"));
+        //right after this line the constructor is called again
         Scene scene = new Scene(root);
-
         primaryStage.setTitle("Main Menu");
         primaryStage.setScene(scene);
         primaryStage.show();
+        setFc(SingletonFactory.getFactoryInstance());
     }
 
     @FXML
@@ -42,31 +43,22 @@ public class MainMenuController extends Application{
 
     @FXML
     protected void handleTestWebPage(){
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxml/testselection.fxml"));
-            Scene scene = new Scene(root);
-            Stage st = (Stage) exitApplication.getScene().getWindow();
-            st.setTitle("Test Selection");
-            st.setScene(scene);
-            st.show();
-        }
-        catch(Exception ex){
-            System.out.println("blahhh");
-        }
+        IController c = fc.createController("TestWebPageController");
+        c.changeScene((Stage) exitApplication.getScene().getWindow());
     }
 
     @FXML
     protected void handleNewTestScenario(){
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxml/newtestscenario.fxml"));
-            Scene scene = new Scene(root);
-            Stage st = (Stage) exitApplication.getScene().getWindow();
-            st.setTitle("New Test Scenario");
-            st.setScene(scene);
-            st.show();
-        }
-        catch(Exception ex){
-            System.out.println("blahhh");
-        }
+        IController c = fc.createController("NewTestScenarioController");
+        c.changeScene((Stage) exitApplication.getScene().getWindow());
     }
+
+    public FactoryController getFc() {
+        return fc;
+    }
+
+    public void setFc(FactoryController fc) {
+        this.fc = fc;
+    }
+
 }
