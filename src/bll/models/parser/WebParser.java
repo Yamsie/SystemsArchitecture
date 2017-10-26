@@ -2,10 +2,13 @@ package bll.models.parser;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+
 import bll.models.dataformatter.I_DataFormatter;
 import bll.models.dataformatter.XMLFormatter;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
+import org.jsoup.nodes.TextNode;
 
 public class WebParser
 {
@@ -32,7 +35,7 @@ public class WebParser
         try
         {
             org.jsoup.nodes.Document document = Jsoup.connect(file).get();
-            for(Element e: document.body().select("a, input, button, textarea"))
+            for(Element e: document.body().select("a, input, button, textarea, td, span, tr"))
             {
                 list.add(new String [] {
                         e.nodeName(),
