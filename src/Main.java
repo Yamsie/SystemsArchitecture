@@ -9,6 +9,7 @@ import dal.datamanipulation.QueryBuilder;
 import dal.datamanipulation.dataclauses.WhereClause;
 import dal.datamanipulation.dataoperations.SelectOperation;
 import javafx.application.Application;
+import ui.controllers.MainMenuController;
 import ui.controllers.NewTestScenarioController;
 
 import ui.controllers.TestWebPageController;
@@ -24,15 +25,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        //Application.launch(MainMenuView.class, args);
-        //ConcreteViewCreator vc = new ConcreteViewCreator();
-        //I_View view = vc.createView("MainWindowView");
-        //view.runView(this.getScene());
-       //NewTestScenarioController controller = new NewTestScenarioController();
-        //controller.launch(args);
-
-        TestSelectionController controller = new TestSelectionController();
-        controller.launch(args);
+        Application.launch(MainMenuController.class, args);
 
         //I_QueryBuilder queryBuilder = new QueryBuilder();
         //queryBuilder.setDataOperation(new SelectOperation("url"));
@@ -47,10 +40,7 @@ public class Main {
         //}
 
        // new WebParser().parse("https://www.facebook.com/");
-<<<<<<< Updated upstream
-        Application.launch(ParsePageView.class, args);
-=======
        // new XMLParser().parse("C:\\Users\\George\\Desktop\\SystemsArchitecture\\src\\xml\\pages\\google.xml");
->>>>>>> Stashed changes
+
     }
 }
