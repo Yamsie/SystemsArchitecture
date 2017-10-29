@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ParsePageController implements Initializable {
+public class ParsePageController implements Initializable, IController {
 
     @FXML private TextField pageName;
     @FXML private TextField pageURL;
@@ -60,8 +60,7 @@ public class ParsePageController implements Initializable {
             st.show();
         }
         catch(Exception ex){
-            System.out.println("blahhh");
+            System.out.println("Exception caught in ParsePageController changeScene()");
         }
     }
-
 }

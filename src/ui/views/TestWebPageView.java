@@ -1,4 +1,4 @@
-package ui.views;
+/*package ui.views;
 
 import javafx.stage.Stage;
 
@@ -40,3 +40,4 @@ public class TestWebPageView extends JFrame{
 
     public void runView(Stage st){ }
 }
+*/

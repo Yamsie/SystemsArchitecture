@@ -13,6 +13,10 @@ public class MyElement
     public MyElement(String pageURL, String elementType, String id, String name, String url, String classType) {
         this.pageURL = pageURL;
         this.elementType = elementType;
+        this.elementID = id;
+        this.elementName = name;
+        this.elementClass = classType;
+        this.elementURL = url;
     }
 
     public String getPageURL() {

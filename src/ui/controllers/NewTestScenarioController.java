@@ -118,7 +118,7 @@ public class NewTestScenarioController implements IController, Initializable {
             st.show();
         }
         catch(Exception ex){
-            System.out.println("blahhh");
+            System.out.println("Exception caught in NewTestScenarioController changeScene()");
         }
     }
 

@@ -32,24 +32,25 @@ public class MainMenuController extends Application{
     }
 
     @FXML
-    protected void handleSubmitButtonAction(ActionEvent event) {
+    protected void handleExit() {
         exitApplication.setText("Button Pressed");
     }
 
     @FXML
-    protected void handleViewTestsButtonAction(ActionEvent event) throws Exception {
-
-    }
-
-    @FXML
-    protected void handleTestWebPage(){
-        IController c = fc.createController("TestWebPageController");
+    protected void handleTestSelection(){
+        IController c = fc.createController("TestSelectionController");
         c.changeScene((Stage) exitApplication.getScene().getWindow());
     }
 
     @FXML
     protected void handleNewTestScenario(){
         IController c = fc.createController("NewTestScenarioController");
+        c.changeScene((Stage) exitApplication.getScene().getWindow());
+    }
+
+    @FXML
+    protected void handleParsePage(){
+        IController c = fc.createController("ParsePageController");
         c.changeScene((Stage) exitApplication.getScene().getWindow());
     }
 
