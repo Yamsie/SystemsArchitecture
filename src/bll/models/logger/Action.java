@@ -6,6 +6,7 @@ package bll.models.logger;
  */
 public interface Action {         //Interface Of Context Object
     String execute();
+
     String getDate();
     String getDatabaseTestingLine();
     String getTestingStatement();

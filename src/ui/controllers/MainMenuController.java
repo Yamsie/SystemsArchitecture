@@ -1,36 +1,65 @@
 package ui.controllers;
 
+import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import ui.views.FactoryViewCreator;
-import ui.views.I_View;
-import ui.views.NewTestScenarioView;
-import ui.views.SingletonFactory;
 
-public class MainMenuController {
-
-    public MainMenuController() { }
+public class MainMenuController extends Application{
 
     @FXML
     private Button exitApplication;
 
-    public String name = "MainMenuController"; //may not bee needed, necessary for other controllers
+    private FactoryController fc;
 
+    public MainMenuController() {
+        this.fc = SingletonFactory.getFactoryInstance();
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/mainmenu.fxml"));
+        //right after this line the constructor is called again
+        Scene scene = new Scene(root);
+        primaryStage.setTitle("Main Menu");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+        setFc(SingletonFactory.getFactoryInstance());
+    }
 
     @FXML
-    protected void handleSubmitButtonAction(ActionEvent event) {
+    protected void handleExit() {
         exitApplication.setText("Button Pressed");
     }
 
     @FXML
-    protected void handleViewTestsButtonAction(ActionEvent event) throws Exception {
-        FactoryViewCreator vc = SingletonFactory.getInstance();
-        I_View testView = vc.createView("newTestScenario");
-        Stage st = (Stage) exitApplication.getScene().getWindow();
-        //Scene s = exitApplication.getScene();
-        testView.runView(st);
+    protected void handleTestSelection(){
+        IController c = fc.createController("TestSelectionController");
+        c.changeScene((Stage) exitApplication.getScene().getWindow());
     }
+
+    @FXML
+    protected void handleNewTestScenario(){
+        IController c = fc.createController("NewTestScenarioController");
+        c.changeScene((Stage) exitApplication.getScene().getWindow());
+    }
+
+    @FXML
+    protected void handleParsePage(){
+        IController c = fc.createController("ParsePageController");
+        c.changeScene((Stage) exitApplication.getScene().getWindow());
+    }
+
+    public FactoryController getFc() {
+        return fc;
+    }
+
+    public void setFc(FactoryController fc) {
+        this.fc = fc;
+    }
+
 }
