@@ -2,41 +2,31 @@ package bll.models.parser;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-
 import bll.models.dataformatter.I_DataFormatter;
 import bll.models.dataformatter.XMLFormatter;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
-import org.jsoup.nodes.TextNode;
 
-public class WebParser
-{
+public class WebParser {
     private I_DataFormatter fileFormat;
 
-    public WebParser()
-    {
+    public WebParser() {
         this.fileFormat = new XMLFormatter();
     }
 
-    public WebParser(I_DataFormatter fileFormat)
-    {
+    public WebParser(I_DataFormatter fileFormat) {
         this.fileFormat = fileFormat;
     }
 
-    public void setFileFormat(I_DataFormatter fileFormat)
-    {
+    public void setFileFormat(I_DataFormatter fileFormat) {
         this.fileFormat = fileFormat;
     }
 
-    public void parse(String nameOfFile, String file)
-    {
+    public void parse(String nameOfFile, String file) {
         ArrayList<String[]> list = new ArrayList<>();
-        try
-        {
+        try {
             org.jsoup.nodes.Document document = Jsoup.connect(file).get();
-            for(Element e: document.body().select("a, input, button, textarea, td, span, tr"))
-            {
+            for(Element e: document.body().select("a, input, button, textarea, td, span, tr")) {
                 list.add(new String [] {
                         e.nodeName(),
                         e.attr("id"),
@@ -47,8 +37,7 @@ public class WebParser
             }
             fileFormat.convertFile(nameOfFile, list);
         }
-        catch(IOException e)
-        {
+        catch(IOException e) {
             e.printStackTrace();
         }
     }

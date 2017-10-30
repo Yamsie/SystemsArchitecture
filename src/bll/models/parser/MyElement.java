@@ -9,14 +9,18 @@ public class MyElement
     private String elementName;
     private String elementURL;
     private String elementClass;
+    private String elementXPath;
+    private int elementSleep;
 
-    public MyElement(String pageURL, String elementType, String id, String name, String url, String classType) {
+    public MyElement(String pageURL, String elementType, String id, String name, String url, String classType, String xPath, int sleep) {
         this.pageURL = pageURL;
         this.elementType = elementType;
         this.elementID = id;
         this.elementName = name;
         this.elementClass = classType;
         this.elementURL = url;
+        this.elementXPath = xPath;
+        this.elementSleep = sleep;
     }
 
     public String getPageURL() {
@@ -41,5 +45,21 @@ public class MyElement
 
     public String getElementClass() {
         return elementClass;
+    }
+
+    public String getElementXPath() {
+        return elementXPath;
+    }
+
+    public void setElementXPath(String elementXPath) {
+        this.elementXPath = elementXPath;
+    }
+
+    public int getElementSleep() {
+        return elementSleep;
+    }
+
+    public void setElementSleep(int elementSleep) {
+        this.elementSleep = elementSleep;
     }
 }

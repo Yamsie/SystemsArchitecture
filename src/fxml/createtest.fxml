@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="657.0" prefWidth="747.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.controllers.CreateTestController">
+      <TableView fx:id="elementTable" layoutX="36.0" layoutY="44.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="229.0" prefWidth="672.0">
+        <columns>
+          <TableColumn fx:id="page" prefWidth="106.0" text="ElementPage" />
+          <TableColumn fx:id="type" prefWidth="126.0" text="ElementType" />
+            <TableColumn fx:id="id" prefWidth="91.0" text="ElementID" />
+            <TableColumn fx:id="name" prefWidth="104.0" text="ElementName" />
+            <TableColumn fx:id="className" prefWidth="117.0" text="ElementClass" />
+            <TableColumn fx:id="url" prefWidth="127.0" text="ElementURL" />
+        </columns>
+      </TableView>
+
+      <Button layoutX="517.0" layoutY="614.0" mnemonicParsing="false" text="Save Test" />
+      <TextField layoutX="218.0" layoutY="614.0" prefHeight="25.0" prefWidth="270.0" />
+      <Label layoutX="134.0" layoutY="618.0" text="Test Name" />
+      <Button layoutX="444.0" layoutY="284.0" mnemonicParsing="false" text="Redo" />
+   <TableView fx:id="testTable" layoutX="38.0" layoutY="321.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="209.0" prefWidth="672.0">
+      <columns>
+        <TableColumn fx:id="rowNumber" prefWidth="106.0" text="number" />
+        <TableColumn fx:id="elPageTest" prefWidth="106.0" text="ElementPage" />
+        <TableColumn fx:id="elTypeTest" prefWidth="126.0" text="ElementType" />
+        <TableColumn fx:id="elIdTest" prefWidth="91.0" text="ElementID" />
+        <TableColumn fx:id="elNameTest" prefWidth="104.0" text="ElementName" />
+        <TableColumn fx:id="elClassTest" prefWidth="117.0" text="ElementClass" />
+        <TableColumn fx:id="XPath" prefWidth="127.0" text="XPath" />
+      </columns>
+   </TableView>
+      <Button layoutX="218.0" layoutY="284.0" mnemonicParsing="false" text="Undo" />
+</AnchorPane>
