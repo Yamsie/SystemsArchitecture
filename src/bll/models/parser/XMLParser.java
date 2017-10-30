@@ -17,10 +17,17 @@ public class XMLParser {
             Element classElement = document.getRootElement();
             List<Element> elementList = classElement.getChildren();
 
-            for (Element e : elementList) {
-                elementObjects.add(new MyElement(document.getRootElement().getAttributeValue("page"),
-                        e.getAttribute("type").getValue(), e.getChild("id").getText(), e.getChild("name").getText(),
-                        e.getChild("url").getText(), e.getChild("class").getText(), "null", 0));
+            for (Element e : elementList)
+            {
+                elementObjects.add(
+                        new MyElement(
+                            document.getRootElement().getAttributeValue("page"),
+                            e.getAttribute("type").getValue(),
+                            e.getChild("id").getText(),
+                            e.getChild("name").getText(),
+                            e.getChild("url").getText(),
+                            e.getChild("class").getText(),
+                            "null"));
             }
         }
 

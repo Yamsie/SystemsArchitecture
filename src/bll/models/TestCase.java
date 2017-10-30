@@ -99,10 +99,10 @@ public class TestCase {
         WebDriver driver = new FirefoxDriver();
         String site = "https://" + this.url;
         driver.get(site);
-        WebElement element = driver.findElement(By.id(this.e.getElementID()));
-        element.click();
-        element.sendKeys(this.input);
-        element.submit();
-        System.out.println("Page title is: " + driver.getTitle());
+      //  WebElement element = driver.findElement(By.id(this.e.getElementID()));
+      //  element.click();
+      //  element.sendKeys(this.input);
+      //  element.submit();
+      //  System.out.println("Page title is: " + driver.getTitle());
     }
 }

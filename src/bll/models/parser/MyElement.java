@@ -1,50 +1,94 @@
 package bll.models.parser;
 
-// Entity class used to store elements for selection to create tests
 public class MyElement
 {
-    private String pageURL;
-    private String elementType;
-    private String elementID;
-    private String elementName;
-    private String elementURL;
-    private String elementClass;
-    private String elementXPath;
-    private int elementSleep;
+    private String pageURL = "null";
+    private String elementType = "null";
+    private String elementID = "null";
+    private String elementName = "null";
+    private String elementURL = "null";
+    private String elementClass = "null";
+    private String elementXPath = "null";
+    private String input = "null";
 
-    public MyElement(String pageURL, String elementType, String id, String name, String url, String classType, String xPath, int sleep) {
+    public MyElement() {
+
+    }
+
+    public MyElement(String pageURL, String elementType, String elementID, String elementName, String elementURL, String elementClass, String elementXPath) {
         this.pageURL = pageURL;
         this.elementType = elementType;
-        this.elementID = id;
-        this.elementName = name;
-        this.elementClass = classType;
-        this.elementURL = url;
-        this.elementXPath = xPath;
-        this.elementSleep = sleep;
+        this.elementID = elementID;
+        this.elementName = elementName;
+        this.elementURL = elementURL;
+        this.elementClass = elementClass;
+        this.elementXPath = elementXPath;
+    }
+
+    public MyElement(MyElement element) {
+        this.pageURL = element.getPageURL();
+        this.elementType = element.getElementType();
+        this.elementID = element.getElementID();
+        this.elementName = element.getElementName();
+        this.elementURL = element.getElementURL();
+        this.elementClass = element.getElementClass();
+        this.elementXPath = element.getElementXPath();
+    }
+
+    public void setInput(String input) {
+        this.input = input;
+    }
+
+    public String getInput() {
+        return this.input;
     }
 
     public String getPageURL() {
         return pageURL;
     }
 
+    public void setPageURL(String pageURL) {
+        this.pageURL = pageURL;
+    }
+
     public String getElementType() {
         return elementType;
+    }
+
+    public void setElementType(String elementType) {
+        this.elementType = elementType;
     }
 
     public String getElementID() {
         return elementID;
     }
 
+    public void setElementID(String elementID) {
+        this.elementID = elementID;
+    }
+
     public String getElementName() {
         return elementName;
+    }
+
+    public void setElementName(String elementName) {
+        this.elementName = elementName;
     }
 
     public String getElementURL() {
         return elementURL;
     }
 
+    public void setElementURL(String elementURL) {
+        this.elementURL = elementURL;
+    }
+
     public String getElementClass() {
         return elementClass;
+    }
+
+    public void setElementClass(String elementClass) {
+        this.elementClass = elementClass;
     }
 
     public String getElementXPath() {
@@ -53,13 +97,5 @@ public class MyElement
 
     public void setElementXPath(String elementXPath) {
         this.elementXPath = elementXPath;
-    }
-
-    public int getElementSleep() {
-        return elementSleep;
-    }
-
-    public void setElementSleep(int elementSleep) {
-        this.elementSleep = elementSleep;
     }
 }

@@ -38,6 +38,12 @@ public class MainMenuController extends Application{
     }
 
     @FXML
+    protected void handleCreateTest(){
+        IController c = fc.createController("CreateTestController");
+        c.changeScene((Stage) exitApplication.getScene().getWindow());
+    }
+
+    @FXML
     protected void handleTestSelection(){
         IController c = fc.createController("TestSelectionController");
         c.changeScene((Stage) exitApplication.getScene().getWindow());
