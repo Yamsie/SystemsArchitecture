@@ -14,10 +14,6 @@ public class WebParser {
         this.fileFormat = new XMLFormatter();
     }
 
-    public WebParser(I_DataFormatter fileFormat) {
-        this.fileFormat = fileFormat;
-    }
-
     public void setFileFormat(I_DataFormatter fileFormat) {
         this.fileFormat = fileFormat;
     }
@@ -35,7 +31,7 @@ public class WebParser {
                         e.attr("class")
                 });
             }
-            fileFormat.convertFile(nameOfFile, list);
+            fileFormat.convertFile(nameOfFile, file, list);
         }
         catch(IOException e) {
             e.printStackTrace();

@@ -1,5 +1,6 @@
 package ui.controllers;
 
+import bll.models.XMLTestCreator;
 import bll.models.parser.MyElement;
 import bll.models.parser.XMLParser;
 import javafx.collections.FXCollections;
@@ -12,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
@@ -24,16 +26,25 @@ public class CreateTestController implements Initializable, IController {
 
     private static final String XML_PATH = "src/xml/pages/";
     @FXML private TableView<MyElement> elementTable, testTable;
-    @FXML private TableColumn<MyElement, String> page, type, id, name, className, elPageTest;
-    @FXML private TableColumn<MyElement, String> elTypeTest, elIdTest, elNameTest, elClassTest, elXPath, elInput;
+    @FXML private TableColumn<MyElement, String> page, type, id, name, className, elPageTest,
+            elTypeTest, elIdTest, elNameTest, elClassTest, elXPath, elInput;
     @FXML private Button addElement;
+    @FXML private TextField testName;
 
     public CreateTestController() {
-
     }
 
     public String getName() {
         return "CreateTestController";
+    }
+
+    private void setUp() {
+        elTypeTest.setSortable(false);
+        elIdTest.setSortable(false);
+        elNameTest.setSortable(false);
+        elClassTest.setSortable(false);
+        elXPath.setSortable(false);
+        elInput.setSortable(false);
     }
 
     public void clearTable() {
@@ -69,22 +80,35 @@ public class CreateTestController implements Initializable, IController {
             testTable.getItems().add(new MyElement());
             testTable.setItems(tList);
         });
+
+        testTable.setOnMousePressed(event -> {
+            if(event.getClickCount() == 2) {
+                int num = testTable.getFocusModel().getFocusedCell().getRow();
+                testTable.getItems().remove(num);
+            }});
+    }
+
+    @FXML
+    private void saveTest() {
+        String name = testName.getText().equals("") ? "Default" : testName.getText().replaceAll(" ","");
+        new XMLTestCreator().createTest(name, testTable.getItems());
+        testName.clear();
     }
 
     private void editCells() {
         testTable.setEditable(true);
         elTypeTest.setCellFactory(TextFieldTableCell.forTableColumn());
-        elTypeTest.setOnEditCommit(event -> event.getTableView().getItems().get(event.getTablePosition().getRow()).setElementType(event.getNewValue()));
+        elTypeTest.setOnEditCommit(e -> e.getTableView().getItems().get(e.getTablePosition().getRow()).setElementType(e.getNewValue()));
         elIdTest.setCellFactory(TextFieldTableCell.forTableColumn());
-        elIdTest.setOnEditCommit(event -> event.getTableView().getItems().get(event.getTablePosition().getRow()).setElementID(event.getNewValue()));
+        elIdTest.setOnEditCommit(e -> e.getTableView().getItems().get(e.getTablePosition().getRow()).setElementID(e.getNewValue()));
         elNameTest.setCellFactory(TextFieldTableCell.forTableColumn());
-        elNameTest.setOnEditCommit(event -> event.getTableView().getItems().get(event.getTablePosition().getRow()).setElementName(event.getNewValue()));
+        elNameTest.setOnEditCommit(e -> e.getTableView().getItems().get(e.getTablePosition().getRow()).setElementName(e.getNewValue()));
         elClassTest.setCellFactory(TextFieldTableCell.forTableColumn());
-        elClassTest.setOnEditCommit(event -> event.getTableView().getItems().get(event.getTablePosition().getRow()).setElementClass(event.getNewValue()));
+        elClassTest.setOnEditCommit(e -> e.getTableView().getItems().get(e.getTablePosition().getRow()).setElementClass(e.getNewValue()));
         elXPath.setCellFactory(TextFieldTableCell.forTableColumn());
-        elXPath.setOnEditCommit(event -> event.getTableView().getItems().get(event.getTablePosition().getRow()).setElementXPath(event.getNewValue()));
+        elXPath.setOnEditCommit(e -> e.getTableView().getItems().get(e.getTablePosition().getRow()).setElementXPath(e.getNewValue()));
         elInput.setCellFactory(TextFieldTableCell.forTableColumn());
-        elInput.setOnEditCommit(event -> event.getTableView().getItems().get(event.getTablePosition().getRow()).setInput(event.getNewValue()));
+        elInput.setOnEditCommit(e -> e.getTableView().getItems().get(e.getTablePosition().getRow()).setInput(e.getNewValue()));
     }
 
     private File [] getFiles(String path) {
@@ -93,16 +117,16 @@ public class CreateTestController implements Initializable, IController {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ObservableList<MyElement> elementList, testList;
-        elementList = FXCollections.observableArrayList();
-        testList = FXCollections.observableArrayList();
+        ObservableList<MyElement> elementList = FXCollections.observableArrayList();
+        ObservableList<MyElement> testList = FXCollections.observableArrayList();
+        editCells();
+        setUp();
         updateElementTable();
         updateTestTable();
         addListeners(elementList, testList);
-        editCells();
 
         for(File f: getFiles(XML_PATH))
-            elementList.addAll(new XMLParser().parse(XML_PATH+f.getName()));
+            elementList.addAll(new XMLParser().parse(XML_PATH + f.getName()));
 
         elementTable.setItems(elementList);
         testTable.setItems(testList);

@@ -2,17 +2,17 @@ package bll.models.parser;
 
 public class MyElement
 {
-    private String pageURL = "null";
-    private String elementType = "null";
-    private String elementID = "null";
-    private String elementName = "null";
-    private String elementURL = "null";
-    private String elementClass = "null";
-    private String elementXPath = "null";
-    private String input = "null";
+    private String pageURL = "";
+    private String elementType = "";
+    private String elementID = "";
+    private String elementName = "";
+    private String elementURL = "";
+    private String elementClass = "";
+    private String elementXPath = "";
+    private String input = "";
 
     public MyElement() {
-
+        pageURL = "Default";
     }
 
     public MyElement(String pageURL, String elementType, String elementID, String elementName, String elementURL, String elementClass, String elementXPath) {
@@ -35,20 +35,16 @@ public class MyElement
         this.elementXPath = element.getElementXPath();
     }
 
+    public String getInput() {
+        return input;
+    }
+
     public void setInput(String input) {
         this.input = input;
     }
 
-    public String getInput() {
-        return this.input;
-    }
-
     public String getPageURL() {
         return pageURL;
-    }
-
-    public void setPageURL(String pageURL) {
-        this.pageURL = pageURL;
     }
 
     public String getElementType() {
@@ -77,10 +73,6 @@ public class MyElement
 
     public String getElementURL() {
         return elementURL;
-    }
-
-    public void setElementURL(String elementURL) {
-        this.elementURL = elementURL;
     }
 
     public String getElementClass() {

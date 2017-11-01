@@ -18,8 +18,8 @@
         </columns>
       </TableView>
 
-      <Button layoutX="517.0" layoutY="614.0" mnemonicParsing="false" text="Save Test" />
-      <TextField layoutX="218.0" layoutY="614.0" prefHeight="25.0" prefWidth="270.0" />
+      <Button layoutX="517.0" layoutY="614.0" mnemonicParsing="false" text="Save Test" onMouseClicked="#saveTest" />
+      <TextField fx:id="testName" layoutX="218.0" layoutY="614.0" prefHeight="25.0" prefWidth="270.0" />
       <Label layoutX="134.0" layoutY="618.0" text="Test Name" />
       <Button layoutX="466.0" layoutY="284.0" mnemonicParsing="false" text="Redo" />
    <TableView fx:id="testTable" layoutX="38.0" layoutY="321.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="209.0" prefWidth="672.0">
