@@ -22,14 +22,44 @@ public abstract class DataManager {
                 data.add(line);
             }
             dataCapsule = new DataCapsule(data, columns);
+            in.close();
         }
         catch(IOException exception) {
             System.out.println("File not found in " + getClass().getResource("").toString());
         }
     }
 
+    void writeData() {
+        try(BufferedWriter out = new BufferedWriter(new FileWriter(file))) {
+
+            for(int i = 0; i < dataCapsule.getColumns().length; i++) {
+                out.write(dataCapsule.getColumns()[i]);
+                if(i != (dataCapsule.getColumns().length - 1)) {
+                    out.write(",");
+                }
+            }
+
+            for(int i = 0; i < dataCapsule.getData().size(); i++) {
+                out.write("\n");
+                out.write(dataCapsule.getData().get(i));
+            }
+
+            out.close();
+        }
+        catch(IOException exception) {
+            System.out.println("File not found in " + getClass().getResource("").toString());
+        }
+
+        readData();
+    }
+
     public DataCapsule getDataCapsule() {
         return dataCapsule;
+    }
+
+    public void setDataCapsule(DataCapsule dataCapsule) {
+        this.dataCapsule = dataCapsule;
+        writeData();
     }
 
     public File getSource() {

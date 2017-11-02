@@ -19,7 +19,7 @@ public class TableTestCases extends DataManager {
     }
 
     public TableTestCases() {
-        super.setTarget(new File("data/TEST_CASES.txt"));
+        super.setTarget(new File("data/PLACE_HOLDER.txt"));
         super.readData();
     }
 }

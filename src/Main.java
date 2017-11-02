@@ -7,6 +7,7 @@ import dal.datamanipulation.I_QueryBuilder;
 import dal.datamanipulation.Query;
 import dal.datamanipulation.QueryBuilder;
 import dal.datamanipulation.dataclauses.WhereClause;
+import dal.datamanipulation.dataoperations.DeleteOperation;
 import dal.datamanipulation.dataoperations.SelectOperation;
 import javafx.application.Application;
 import ui.controllers.NewTestScenarioController;
@@ -27,17 +28,27 @@ public class Main {
         //TestSelectionController controller = new TestSelectionController();
         //controller.launch(args);
 
+        //I_QueryBuilder queryBuilder = new QueryBuilder();
+        //queryBuilder.setDataOperation(new SelectOperation("id", "element"));
+        //queryBuilder.setTargetFile(new TableTestCases());
+        //queryBuilder.addClause(new WhereClause("id", "2"));
+////
+        //Query query = queryBuilder.getResult();
+        //List<String> data = query.getResult();
+//
+        //for (int i = 0; i < data.size(); i++) {
+        //    System.out.println(data.get(i));
+        //}
+
         I_QueryBuilder queryBuilder = new QueryBuilder();
-        queryBuilder.setDataOperation(new SelectOperation("*"));
+        queryBuilder.setDataOperation(new DeleteOperation());
         queryBuilder.setTargetFile(new TableTestCases());
         queryBuilder.addClause(new WhereClause("id", "1"));
+        queryBuilder.addClause(new WhereClause("element", "btn"));
 //
         Query query = queryBuilder.getResult();
-        List<String> data = query.getResult();
+        query.getResult();
 
-        for (int i = 0; i < data.size(); i++) {
-            System.out.println(data.get(i));
-        }
 
        // new WebParser().parse("https://www.facebook.com/");
         //Application.launch(ParsePageView.class, args);

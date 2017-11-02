@@ -11,6 +11,7 @@ public class SelectOperation extends DataOperation implements I_Visitable{
 
     public SelectOperation(String...columns) {
             this.columns = columns;
+            super.setReadOnly(true);
     }
 
     public List<String> doSelect() {
@@ -39,10 +40,11 @@ public class SelectOperation extends DataOperation implements I_Visitable{
         //    newData.add(super.getDataCapsule().getData().get(index).split(",")[columnIndex]);
         //}
 
+        super.getDataCapsule().setData(newData);
         return newData;
     }
 
-    public List<String> accept(Visitor visitor) {
+    public List<String> accept(I_Visitor visitor) {
         return visitor.visit(this);
     }
 }

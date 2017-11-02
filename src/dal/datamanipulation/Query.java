@@ -1,12 +1,10 @@
 package dal.datamanipulation;
 
 import dal.DataManager;
-import dal.I_TextFileTable;
 import dal.datamanipulation.dataclauses.I_DataClause;
 import dal.datamanipulation.dataoperations.DataOperation;
 import dal.datamanipulation.dataoperations.DataOperationVisitor;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +31,17 @@ public class Query {
     private void doQuery() {
         doClauses();
         doDataOperation();
+
+        List<String> temp = new ArrayList<>(target.getDataCapsule().getData());
+
+        if(!dataOperation.getReadOnly()) { // Here as a placeholder - can't figure out how to integrate deletion. Lots of refactoring expected after more consideration
+            for(int j = 0; j < dataOperation.getDataCapsule().getData().size(); j++) {
+                if(target.getDataCapsule().getData().contains(dataOperation.getDataCapsule().getData().get(j))) {
+                    temp.remove(dataOperation.getDataCapsule().getData().get(j));
+                }
+            }
+            target.setDataCapsule(new DataCapsule(temp, target.getDataCapsule().getColumns()));
+        }
     }
 
     public List<String> getResult() {
@@ -67,9 +76,7 @@ public class Query {
     private void doDataOperation() {
         //List<String> newData = new ArrayList<>(target.getDataCapsule().getData());
         dataOperation.setDataCapsule(new DataCapsule(data, target.getDataCapsule().getColumns()));
-
         DataOperationVisitor visitor = new DataOperationVisitor();
         data = new ArrayList<>(dataOperation.accept(visitor));
     }
-
 }

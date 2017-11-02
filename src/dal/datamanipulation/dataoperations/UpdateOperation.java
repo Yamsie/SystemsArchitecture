@@ -4,7 +4,7 @@ import java.util.List;
 
 public class UpdateOperation extends DataOperation implements I_Visitable {
     @Override
-    public List<String> accept(Visitor visitor) {
+    public List<String> accept(I_Visitor visitor) {
         return visitor.visit(this);
     }
 }
