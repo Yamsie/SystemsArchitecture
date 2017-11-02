@@ -16,54 +16,42 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import java.io.File;
 
-public class XMLFormatter implements I_DataFormatter, Runnable
-{
-    private String name;
-    private DocumentBuilderFactory xmlFactory = DocumentBuilderFactory.newInstance();
-    private Document document;
-    private ArrayList<String []> list = new ArrayList<>();
-    private Element rootElement;
+public class XMLFormatter implements I_DataFormatter, Runnable {
 
-    public void convertFile(String rootName, ArrayList<String[]> list)
-    {
+    private String name, url;
+    private Document document;
+    private Element rootElement;
+    private ArrayList<String []> list = new ArrayList<>();
+    private DocumentBuilderFactory xmlFactory = DocumentBuilderFactory.newInstance();
+
+    public void convertFile(String rootName, String url, ArrayList<String[]> list) {
         this.name = rootName;
         this.list = list;
-        new Thread(this).start(); //  make a thread and call this
+        this.url = url;
+        new Thread(this).start();
     }
 
-    private void createElements()
-    {
-        int null_counter = 0;
-
-        for(String [] array: list)
-        {
+    private void createElements() {
+        for(String [] array: list) {
             Element element = document.createElement("element");
             rootElement.appendChild(element);
             Attr type = document.createAttribute("type");
             type.setValue(array[0]);
+            Attr hurl = document.createAttribute("home");
+            hurl.setValue(url);
             element.setAttributeNode(type);
+            element.setAttributeNode(hurl);
 
-            for(int i = 0; i < attr.length; i++)
-            {
+            for(int i = 0; i < attr.length; i++) {
                 Element child = document.createElement(attr[i]);
                 child.appendChild(document.createTextNode((array[i+1].equals("")) ? "null" :  array[i+1]));
                 element.appendChild(child);
-
-                if((array[i+1].equals("")))
-                    null_counter++;
-
-                if(null_counter == 4)
-                    rootElement.removeChild(element);
             }
-
-            null_counter = 0;
         }
     }
 
-    private void transformCode()
-    {
-        try
-        {
+    private void transformCode() {
+        try {
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
@@ -74,16 +62,14 @@ public class XMLFormatter implements I_DataFormatter, Runnable
             transformer.transform(source, result);
         }
 
-        catch (TransformerException | DOMException e)
-        {
+        catch (TransformerException | DOMException e) {
             e.printStackTrace();
         }
     }
 
     @Override
     public void run() {
-        try
-        {
+        try {
             DocumentBuilder docBuilder = xmlFactory.newDocumentBuilder();
             document = docBuilder.newDocument();
             this.rootElement = document.createElement("root");
@@ -94,8 +80,7 @@ public class XMLFormatter implements I_DataFormatter, Runnable
             createElements();
             transformCode();
         }
-        catch (ParserConfigurationException e)
-        {
+        catch (ParserConfigurationException e) {
             e.printStackTrace();
         }
     }

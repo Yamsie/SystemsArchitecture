@@ -1,22 +1,46 @@
 package bll.models.parser;
 
-// Entity class used to store elements for selection to create tests
 public class MyElement
 {
-    private String pageURL;
-    private String elementType;
-    private String elementID;
-    private String elementName;
-    private String elementURL;
-    private String elementClass;
+    private String pageURL = "";
+    private String elementType = "";
+    private String elementID = "";
+    private String elementName = "";
+    private String elementURL = "";
+    private String elementClass = "";
+    private String elementXPath = "";
+    private String input = "";
 
-    public MyElement(String pageURL, String elementType, String id, String name, String url, String classType) {
+    public MyElement() {
+        pageURL = "Default";
+    }
+
+    public MyElement(String pageURL, String elementType, String elementID, String elementName, String elementURL, String elementClass, String elementXPath) {
         this.pageURL = pageURL;
         this.elementType = elementType;
-        this.elementID = id;
-        this.elementName = name;
-        this.elementClass = classType;
-        this.elementURL = url;
+        this.elementID = elementID;
+        this.elementName = elementName;
+        this.elementURL = elementURL;
+        this.elementClass = elementClass;
+        this.elementXPath = elementXPath;
+    }
+
+    public MyElement(MyElement element) {
+        this.pageURL = element.getPageURL();
+        this.elementType = element.getElementType();
+        this.elementID = element.getElementID();
+        this.elementName = element.getElementName();
+        this.elementURL = element.getElementURL();
+        this.elementClass = element.getElementClass();
+        this.elementXPath = element.getElementXPath();
+    }
+
+    public String getInput() {
+        return input;
+    }
+
+    public void setInput(String input) {
+        this.input = input;
     }
 
     public String getPageURL() {
@@ -27,12 +51,24 @@ public class MyElement
         return elementType;
     }
 
+    public void setElementType(String elementType) {
+        this.elementType = elementType;
+    }
+
     public String getElementID() {
         return elementID;
     }
 
+    public void setElementID(String elementID) {
+        this.elementID = elementID;
+    }
+
     public String getElementName() {
         return elementName;
+    }
+
+    public void setElementName(String elementName) {
+        this.elementName = elementName;
     }
 
     public String getElementURL() {
@@ -41,5 +77,17 @@ public class MyElement
 
     public String getElementClass() {
         return elementClass;
+    }
+
+    public void setElementClass(String elementClass) {
+        this.elementClass = elementClass;
+    }
+
+    public String getElementXPath() {
+        return elementXPath;
+    }
+
+    public void setElementXPath(String elementXPath) {
+        this.elementXPath = elementXPath;
     }
 }

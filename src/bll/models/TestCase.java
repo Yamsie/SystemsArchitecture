@@ -100,6 +100,7 @@ public class TestCase {
         WebDriver driver = new FirefoxDriver();
         String site = "https://" + this.url;
         driver.get(site);
+
        /*WebElement element = driver.findElement(By.id(this.e.getElementID()));
         WebElement element = driver.findElement(By.id(element));
         System.out.println(this.e.getElementID());

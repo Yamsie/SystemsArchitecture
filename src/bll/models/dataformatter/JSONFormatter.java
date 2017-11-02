@@ -7,24 +7,21 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 @SuppressWarnings("unchecked")
-public class JSONFormatter implements I_DataFormatter , Runnable
-{
+public class JSONFormatter implements I_DataFormatter , Runnable {
     private String rootElement;
     private ArrayList<String []> list;
 
-    public void convertFile(String rootElement, ArrayList<String[]> list)
-    {
+    public void convertFile(String rootElement, String url, ArrayList<String[]> list) {
         this.rootElement = rootElement;
         this.list = list;
         new Thread(this).start();
     }
 
     @Override
-    public void run()
-    {
+    public void run() {
         JSONArray jArray = new JSONArray();
-        for (String [] objects : list)
-        {
+
+        for (String [] objects : list) {
             JSONObject obj = new JSONObject();
             obj.put("element", objects[0]);
 
@@ -34,14 +31,12 @@ public class JSONFormatter implements I_DataFormatter , Runnable
             jArray.add(obj.toJSONString());
         }
 
-        try (FileWriter file = new FileWriter("src/json/pages/" + rootElement + ".json"))
-        {
+        try (FileWriter file = new FileWriter("src/json/pages/" + rootElement + ".json")) {
             file.write(jArray.toJSONString());
             file.flush();
         }
 
-        catch (IOException e)
-        {
+        catch (IOException e) {
             e.printStackTrace();
         }
     }

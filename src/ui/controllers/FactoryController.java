@@ -21,6 +21,7 @@ public class FactoryController{
         h.add(new NewTestScenarioController());
         h.add(new TestSelectionController());
         h.add(new ParsePageController());
+        h.add(new CreateTestController());
         return h;
     }
 
