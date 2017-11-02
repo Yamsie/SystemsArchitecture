@@ -12,7 +12,7 @@ public class TestCase {
     //1,google.com,textBox,"Test Google Search","hello"
     private int id;
     private String url;
-    private String element;
+    private String element="";
     private MyElement e;
     private String input;
     private String name;
@@ -96,13 +96,17 @@ public class TestCase {
     }
 
     public void runTest(){
+        System.out.println("run test method line 99");
         WebDriver driver = new FirefoxDriver();
         String site = "https://" + this.url;
         driver.get(site);
-        WebElement element = driver.findElement(By.id(this.e.getElementID()));
+       /*WebElement element = driver.findElement(By.id(this.e.getElementID()));
+        WebElement element = driver.findElement(By.id(element));
+        System.out.println(this.e.getElementID());
         element.click();
         element.sendKeys(this.input);
-        element.submit();
+        System.out.println(this.input);
+        element.submit();*/
         System.out.println("Page title is: " + driver.getTitle());
     }
 }

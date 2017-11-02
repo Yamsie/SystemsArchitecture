@@ -1,7 +1,7 @@
 package ui.controllers;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -32,9 +32,7 @@ public class MainMenuController extends Application{
     }
 
     @FXML
-    protected void handleExit() {
-        exitApplication.setText("Button Pressed");
-    }
+    protected void handleExit() {   Platform.exit();    }
 
     @FXML
     protected void handleTestSelection(){

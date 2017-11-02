@@ -58,16 +58,42 @@ public class TestSelectionController implements Initializable, IController{
         }
 
     @FXML
-    protected void handleSubmitButtonAction(ActionEvent event) {
-        //TestCase tc = new TestCase(selected);
+    protected void handleSubmitButtonAction() {
+        //(int id, String url, String element, String input, String name) {
         I_QueryBuilder queryBuilder = new QueryBuilder();
-        queryBuilder.setDataOperation(new SelectOperation("url"));
+        queryBuilder.setDataOperation(new SelectOperation("id"));
         queryBuilder.setTargetFile(new TableTestCases());
         queryBuilder.addClause(new WhereClause("name", this.selected));
-
         Query query = queryBuilder.getResult();
         List<String> data = query.getResult();
-        TestCase tc = new TestCase(data);
+
+        I_QueryBuilder queryBuilder2 = new QueryBuilder();
+        queryBuilder2.setDataOperation(new SelectOperation("url"));
+        queryBuilder2.setTargetFile(new TableTestCases());
+        queryBuilder2.addClause(new WhereClause("name", this.selected));
+        Query query2 = queryBuilder2.getResult();
+        List<String> data2 = query2.getResult();
+
+        I_QueryBuilder queryBuilder3 = new QueryBuilder();
+        queryBuilder3.setDataOperation(new SelectOperation("element"));
+        queryBuilder3.setTargetFile(new TableTestCases());
+        queryBuilder3.addClause(new WhereClause("name", this.selected));
+        Query query3 = queryBuilder3.getResult();
+        List<String> data3 = query3.getResult();
+
+        I_QueryBuilder queryBuilder4 = new QueryBuilder();
+        queryBuilder4.setDataOperation(new SelectOperation("input"));
+        queryBuilder4.setTargetFile(new TableTestCases());
+        queryBuilder4.addClause(new WhereClause("name", this.selected));
+        Query query4 = queryBuilder4.getResult();
+        List<String> data4 = query4.getResult();
+
+        int id = Integer.parseInt(data.get(0));
+        String url = data2.get(0);
+        String element = data3.get(0);
+        String input = data4.get(0);
+
+        TestCase tc = new TestCase(id, url, element, input, this.selected);
         tc.runTest();
 
     }
