@@ -42,10 +42,9 @@ public class Main {
         //}
 
         I_QueryBuilder queryBuilder = new QueryBuilder();
-        queryBuilder.setDataOperation(new SelectOperation("*"));
+        queryBuilder.setDataOperation(new SelectOperation("url", "id", "element"));
         queryBuilder.setTargetFile(new TableTestCases());
         queryBuilder.addClause(new WhereClause("id", "1"));
-        queryBuilder.addClause(new WhereClause("id", "2"));
 
         Query query = queryBuilder.getResult();
         List<String> data = new ArrayList<>(query.getResult());
