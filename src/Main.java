@@ -14,6 +14,7 @@ import ui.controllers.NewTestScenarioController;
 import ui.controllers.TestWebPageController;
 import ui.controllers.TestSelectionController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
@@ -41,14 +42,18 @@ public class Main {
         //}
 
         I_QueryBuilder queryBuilder = new QueryBuilder();
-        queryBuilder.setDataOperation(new DeleteOperation());
+        queryBuilder.setDataOperation(new SelectOperation("*"));
         queryBuilder.setTargetFile(new TableTestCases());
         queryBuilder.addClause(new WhereClause("id", "1"));
-        queryBuilder.addClause(new WhereClause("element", "btn"));
-//
-        Query query = queryBuilder.getResult();
-        query.getResult();
+        queryBuilder.addClause(new WhereClause("id", "2"));
 
+        Query query = queryBuilder.getResult();
+        List<String> data = new ArrayList<>(query.getResult());
+
+
+        for (int i = 0; i < data.size(); i++) {
+            System.out.println(data.get(i));
+        }
 
        // new WebParser().parse("https://www.facebook.com/");
         //Application.launch(ParsePageView.class, args);

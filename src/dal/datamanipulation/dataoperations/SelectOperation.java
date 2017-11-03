@@ -27,9 +27,11 @@ public class SelectOperation extends DataOperation implements I_Visitable{
                     for (int index = 0; index < super.getDataCapsule().getData().size(); index++) {
                         try {
                             newData.set(index, newData.get(index) + "," + super.getDataCapsule().getData().get(index).split(",")[columnIndex]);//.concat("," + super.getDataCapsule().getData().get(index).split(",")[columnIndex]);
+                            System.out.println("Set: " + index);
                         }
                         catch(IndexOutOfBoundsException e) {
                             newData.add(super.getDataCapsule().getData().get(index).split(",")[columnIndex]);
+                            System.out.println("Add: " + index);
                         }
                     }
                 }
