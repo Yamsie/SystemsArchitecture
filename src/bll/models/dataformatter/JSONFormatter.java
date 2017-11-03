@@ -1,38 +1,34 @@
 package bll.models.dataformatter;
 
-import java.util.ArrayList;
+import bll.models.parser.MyElement;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
+
 
 @SuppressWarnings("unchecked")
-public class JSONFormatter implements I_DataFormatter , Runnable {
-    private String rootElement;
-    private ArrayList<String []> list;
-
-    public void convertFile(String rootElement, String url, ArrayList<String[]> list) {
-        this.rootElement = rootElement;
-        this.list = list;
-        new Thread(this).start();
-    }
+public class JSONFormatter implements I_DataFormatter {
 
     @Override
-    public void run() {
-        JSONArray jArray = new JSONArray();
+    public void convertFile(String rootElement, List<MyElement> list) {
+        JSONObject obj;
+        JSONArray jsonArray = new JSONArray();
 
-        for (String [] objects : list) {
-            JSONObject obj = new JSONObject();
-            obj.put("element", objects[0]);
-
-            for (int i = 0; i < attr.length; i++)
-                obj.put(attr[i], objects[i+1].equals("") ? "null" : objects[i+1]);
-
-            jArray.add(obj.toJSONString());
+        for (MyElement el : list) {
+            if(el.isEmpty()) continue;
+            obj = new JSONObject();
+            obj.put("home", el.getPageURL());
+            obj.put("element", el.getElementType());
+            obj.put("id", el.getElementID());
+            obj.put("name", el.getElementName());
+            obj.put("class", el.getElementClass());
+            jsonArray.add(obj.toJSONString());
         }
 
         try (FileWriter file = new FileWriter("src/json/pages/" + rootElement + ".json")) {
-            file.write(jArray.toJSONString());
+            file.write(jsonArray.toJSONString());
             file.flush();
         }
 

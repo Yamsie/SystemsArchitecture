@@ -26,8 +26,7 @@ public class CreateTestController implements Initializable, IController {
 
     private static final String XML_PATH = "src/xml/pages/";
     @FXML private TableView<MyElement> elementTable, testTable;
-    @FXML private TableColumn<MyElement, String> page, type, id, name, className, elPageTest,
-            elTypeTest, elIdTest, elNameTest, elClassTest, elXPath, elInput;
+    @FXML private TableColumn<MyElement, String> page, type, id, name, className, elPageTest, elTypeTest, elIdTest, elNameTest, elClassTest, elXPath, elInput;
     @FXML private Button addElement;
     @FXML private TextField testName;
 

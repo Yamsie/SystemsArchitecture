@@ -1,8 +1,8 @@
 package bll.models.dataformatter;
 
-import java.util.ArrayList;
+import java.util.List;
+import bll.models.parser.MyElement;
 
 public interface I_DataFormatter {
-    String [] attr = {"id", "name", "url", "class"};
-    void convertFile(String rootElement, String url, ArrayList<String[]> list);
+    void convertFile(String rootElement, List<MyElement> list);
 }

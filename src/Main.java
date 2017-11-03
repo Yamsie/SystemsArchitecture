@@ -1,46 +1,47 @@
-//import bll.RunTestCase;
-import bll.models.NewTestScenarioModel;
-import bll.models.parser.WebParser;
-import bll.models.parser.XMLParser;
-import dal.TableTestCases;
-import dal.datamanipulation.I_QueryBuilder;
-import dal.datamanipulation.Query;
-import dal.datamanipulation.QueryBuilder;
-import dal.datamanipulation.dataclauses.WhereClause;
-import dal.datamanipulation.dataoperations.SelectOperation;
+import bll.models.parser.MyElement;
+import bll.models.parser.TestParser;
 import javafx.application.Application;
-import ui.controllers.NewTestScenarioController;
-import ui.controllers.TestWebPageController;
-import ui.controllers.TestSelectionController;
+import org.openqa.selenium.support.ui.Select;
+import ui.controllers.MainMenuController;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-        //Application.launch(MainMenuView.class, args);
-        //ConcreteViewCreator vc = new ConcreteViewCreator();
-        //I_View view = vc.createView("MainWindowView");
-        //view.runView(this.getScene());
-        //NewTestScenarioController controller = new NewTestScenarioController();
-        //controller.launch(args);
+        Application.launch(MainMenuController.class, args);
 
-        //TestSelectionController controller = new TestSelectionController();
-        //controller.launch(args);
+        ArrayList<MyElement> list = new TestParser().parse("src/xml/tests/TEST.xml");
+        System.setProperty("webdriver.gecko.driver", "./geckodriver.exe");
+        System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, "/dev/null");
 
-        I_QueryBuilder queryBuilder = new QueryBuilder();
-        queryBuilder.setDataOperation(new SelectOperation("*"));
-        queryBuilder.setTargetFile(new TableTestCases());
-        queryBuilder.addClause(new WhereClause("id", "1"));
-//
-        Query query = queryBuilder.getResult();
-        List<String> data = query.getResult();
+        WebDriver driver = new FirefoxDriver(); // Create instance of the webdriver, optional can pass a profile
+        driver.get(list.get(0).getPageURL()); // open browser with page
+        WebElement element;
 
-        for (int i = 0; i < data.size(); i++) {
-            System.out.println(data.get(i));
+        Select dropdown = new Select(driver.findElement(By.id("month")));
+        dropdown.selectByVisibleText("Apr");
+
+        dropdown = new Select(driver.findElement(By.id("day")));
+        dropdown.selectByVisibleText("3");
+
+        dropdown = new Select(driver.findElement(By.id("year")));
+        dropdown.selectByVisibleText("1989");
+
+
+        /*
+        for (MyElement aList : list)
+        {
+            element = driver.findElement(By.id(aList.getElementID()));
+            element.click();
+
+            if(!aList.getInput().equals("")) {
+                element.sendKeys(aList.getInput());
+            }
         }
-
-       // new WebParser().parse("https://www.facebook.com/");
-        //Application.launch(ParsePageView.class, args);
-       // new XMLParser().parse("C:\\Users\\George\\Desktop\\SystemsArchitecture\\src\\xml\\pages\\google.xml");
+        */
     }
 }

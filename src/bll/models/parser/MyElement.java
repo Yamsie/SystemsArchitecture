@@ -6,23 +6,30 @@ public class MyElement
     private String elementType = "";
     private String elementID = "";
     private String elementName = "";
-    private String elementURL = "";
     private String elementClass = "";
     private String elementXPath = "";
     private String input = "";
 
     public MyElement() {
-        pageURL = "Default";
+        pageURL = "DefaultPage";
     }
 
-    public MyElement(String pageURL, String elementType, String elementID, String elementName, String elementURL, String elementClass, String elementXPath) {
+    public MyElement(String pageURL, String elementType, String elementID, String elementName, String elementClass) {
         this.pageURL = pageURL;
         this.elementType = elementType;
         this.elementID = elementID;
         this.elementName = elementName;
-        this.elementURL = elementURL;
         this.elementClass = elementClass;
-        this.elementXPath = elementXPath;
+    }
+
+    public MyElement(String pageURL, String elementType, String elementID, String elementName, String elementClass, String xpath, String input) {
+        this.pageURL = pageURL;
+        this.elementType = elementType;
+        this.elementID = elementID;
+        this.elementName = elementName;
+        this.elementClass = elementClass;
+        this.elementXPath = xpath;
+        this.input = input;
     }
 
     public MyElement(MyElement element) {
@@ -30,7 +37,6 @@ public class MyElement
         this.elementType = element.getElementType();
         this.elementID = element.getElementID();
         this.elementName = element.getElementName();
-        this.elementURL = element.getElementURL();
         this.elementClass = element.getElementClass();
         this.elementXPath = element.getElementXPath();
     }
@@ -71,10 +77,6 @@ public class MyElement
         this.elementName = elementName;
     }
 
-    public String getElementURL() {
-        return elementURL;
-    }
-
     public String getElementClass() {
         return elementClass;
     }
@@ -89,5 +91,9 @@ public class MyElement
 
     public void setElementXPath(String elementXPath) {
         this.elementXPath = elementXPath;
+    }
+
+    public boolean isEmpty() {
+        return (elementID.equals("") && elementName.equals("") && elementName.equals(""));
     }
 }

@@ -17,11 +17,11 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 
 public class XMLTestCreator {
-    private DocumentBuilderFactory xmlFactory = DocumentBuilderFactory.newInstance();
+
     private Element [] elementArray = new Element[7];
+    private DocumentBuilderFactory xmlFactory = DocumentBuilderFactory.newInstance();
 
     public XMLTestCreator() {
-
     }
 
     public void createTest(String nameOfTest, ObservableList<MyElement> arrayList) {
@@ -34,22 +34,27 @@ public class XMLTestCreator {
             for(MyElement e: arrayList) {
                 Element element = document.createElement("element");
                 root.appendChild(element);
-                elementArray[0] = document.createElement("homepage");
+                elementArray[0] = document.createElement("home");
                 elementArray[0].appendChild(document.createTextNode(e.getPageURL()));
+
                 elementArray[1] = document.createElement("type");
                 elementArray[1].appendChild(document.createTextNode(e.getElementType()));
+
                 elementArray[2] = document.createElement("id");
                 elementArray[2].appendChild(document.createTextNode(e.getElementID()));
+
                 elementArray[3] = document.createElement("class");
                 elementArray[3].appendChild(document.createTextNode(e.getElementClass()));
+
                 elementArray[4] = document.createElement("name");
                 elementArray[4].appendChild(document.createTextNode(e.getElementName()));
-                elementArray[5] = document.createElement("url");
-                elementArray[5].appendChild(document.createTextNode(e.getElementURL()));
-                elementArray[6] = document.createElement("xpath");
-                elementArray[6].appendChild(document.createTextNode(e.getElementXPath()));
+
+                elementArray[5] = document.createElement("xpath");
+                elementArray[5].appendChild(document.createTextNode(e.getElementXPath()));
+
                 elementArray[6] = document.createElement("input");
                 elementArray[6].appendChild(document.createTextNode(e.getInput()));
+
                 for (Element el : elementArray)
                     element.appendChild(el);
             }

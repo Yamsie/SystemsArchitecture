@@ -3,14 +3,14 @@ package bll.models.parser;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.input.SAXBuilder;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class XMLParser {
 
     public ArrayList<MyElement> parse(String url) {
-        ArrayList<MyElement> elementObjects = new ArrayList<>();
+
+        ArrayList<MyElement> myElements = new ArrayList<>();
         SAXBuilder saxBuilder = new SAXBuilder();
 
         try {
@@ -19,13 +19,13 @@ public class XMLParser {
             List<Element> elementList = classElement.getChildren();
 
             for (Element e : elementList) {
-                elementObjects.add(new MyElement(e.getAttributeValue("home"),
-                        e.getAttribute("type").getValue(),
+                myElements.add(new MyElement(
+                        e.getChild("home").getValue(),
+                        e.getChild("type").getValue(),
                         e.getChild("id").getText(),
                         e.getChild("name").getText(),
-                        e.getChild("url").getText(),
-                        e.getChild("class").getText(),
-                        "null"));
+                        e.getChild("class").getText()
+                ));
             }
         }
 
@@ -33,6 +33,6 @@ public class XMLParser {
             e.printStackTrace();
         }
 
-        return elementObjects;
+        return myElements;
     }
 }
