@@ -2,11 +2,13 @@ package dal.datamanipulation.dataoperations;
 
 import dal.datamanipulation.DataCapsule;
 
+import javax.xml.crypto.Data;
 import java.util.List;
 
 public class DataOperation implements I_Visitable {
 
-    private DataCapsule dataCapsule;
+    private DataCapsule whereData;
+    private DataCapsule rawData;
     private boolean readOnly = false;
 
     public void setReadOnly(boolean readOnly) {
@@ -17,15 +19,21 @@ public class DataOperation implements I_Visitable {
         return readOnly;
     }
 
-    public void setDataCapsule(DataCapsule dataCapsule) {
-        this.dataCapsule = dataCapsule;
+    public void setWhereData(DataCapsule dataCapsule) {
+        this.whereData = dataCapsule;
     }
 
-    public DataCapsule getDataCapsule() {
-        return dataCapsule;
+    public DataCapsule getWhereData() {
+        return whereData;
     }
 
-    public List<String> accept(I_Visitor visitor) {
-        return null;
+    public void setRawData(DataCapsule dataCapsule) {
+        this.rawData = dataCapsule;
     }
+
+    public DataCapsule getRawData() {
+        return rawData;
+    }
+
+    public void accept(I_Visitor visitor){ }
 }

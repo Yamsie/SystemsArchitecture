@@ -14,22 +14,22 @@ public class SelectOperation extends DataOperation implements I_Visitable{
             super.setReadOnly(true);
     }
 
-    public List<String> doSelect() {
+    public void doSelect() {
         List<String> newData = new ArrayList<>();
 
         if(columns[0].equals("*")) {
-            columns = super.getDataCapsule().getColumns().clone();
+            columns = super.getWhereData().getColumns().clone();
         }
 
         for(int i = 0; i < columns.length; i++) { // Iterates through each column passed in
-            for (int columnIndex = 0; columnIndex < super.getDataCapsule().getColumns().length; columnIndex++) {
-                if (columns[i].equals(super.getDataCapsule().getColumns()[columnIndex])) { // Locates column index in "table" for column(s) in statement
-                    for (int index = 0; index < super.getDataCapsule().getData().size(); index++) {
+            for (int columnIndex = 0; columnIndex < super.getWhereData().getColumns().length; columnIndex++) {
+                if (columns[i].equals(super.getWhereData().getColumns()[columnIndex])) { // Locates column index in "table" for column(s) in statement
+                    for (int index = 0; index < super.getWhereData().getData().size(); index++) {
                         try {
-                            newData.set(index, newData.get(index) + "," + super.getDataCapsule().getData().get(index).split(",")[columnIndex]);//.concat("," + super.getDataCapsule().getData().get(index).split(",")[columnIndex]);
+                            newData.set(index, newData.get(index) + "," + super.getWhereData().getData().get(index).split(",")[columnIndex]);//.concat("," + super.getDataCapsule().getData().get(index).split(",")[columnIndex]);
                         }
                         catch(IndexOutOfBoundsException e) {
-                            newData.add(super.getDataCapsule().getData().get(index).split(",")[columnIndex]);
+                            newData.add(super.getWhereData().getData().get(index).split(",")[columnIndex]);
                         }
                     }
                 }
@@ -40,11 +40,10 @@ public class SelectOperation extends DataOperation implements I_Visitable{
         //    newData.add(super.getDataCapsule().getData().get(index).split(",")[columnIndex]);
         //}
 
-        super.getDataCapsule().setData(newData);
-        return newData;
+        super.getWhereData().setData(newData);
     }
 
-    public List<String> accept(I_Visitor visitor) {
-        return visitor.visit(this);
+    public void accept(I_Visitor visitor) {
+        visitor.visit(this);
     }
 }

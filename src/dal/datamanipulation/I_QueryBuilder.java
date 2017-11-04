@@ -12,5 +12,7 @@ public interface I_QueryBuilder {
 
     void addClause(I_DataClause dataClause);
 
+    void doQuery();
+
     Query getResult();
 }
