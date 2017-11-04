@@ -13,7 +13,8 @@ public class Query {
     private DataOperation dataOperation;
     private DataManager target;
     private List<I_DataClause> dataClauses = new ArrayList<>();
-    private List<String> data = new ArrayList<>();
+    private List<String> rawData = new ArrayList<>();
+    private List<String> whereData = new ArrayList<>();
 
 
     public void setDataOperation(DataOperation dataOperation) {
@@ -22,6 +23,7 @@ public class Query {
 
     public void setTarget(DataManager target) {
         this.target = target;
+        rawData = new ArrayList<>(target.getDataCapsule().getData());
     }
 
     public void addClause(I_DataClause dataClause) {
@@ -35,18 +37,24 @@ public class Query {
         List<String> temp = new ArrayList<>(target.getDataCapsule().getData());
 
         if(!dataOperation.getReadOnly()) { // Here as a placeholder - can't figure out how to integrate deletion. Lots of refactoring expected after more consideration
-            for(int j = 0; j < dataOperation.getDataCapsule().getData().size(); j++) {
+            /*for(int j = 0; j < dataOperation.getDataCapsule().getData().size(); j++) {
                 if(target.getDataCapsule().getData().contains(dataOperation.getDataCapsule().getData().get(j))) {
                     temp.remove(dataOperation.getDataCapsule().getData().get(j));
                 }
             }
             target.setDataCapsule(new DataCapsule(temp, target.getDataCapsule().getColumns()));
+            */
+            target.setDataCapsule(dataOperation.getRawData());
         }
+
+    }
+
+    public void compileQuery() {
+        doQuery();
     }
 
     public List<String> getResult() {
-        doQuery();
-        return data;
+        return dataOperation.getRawData().getData();
     }
 
     private void doClauses() {
@@ -70,13 +78,14 @@ public class Query {
             tempData.clear();
         }
 
-        data = new ArrayList<>(newData);
+        whereData = new ArrayList<>(newData);
     }
 
     private void doDataOperation() {
         //List<String> newData = new ArrayList<>(target.getDataCapsule().getData());
-        dataOperation.setDataCapsule(new DataCapsule(data, target.getDataCapsule().getColumns()));
+        dataOperation.setWhereData(new DataCapsule(whereData, target.getDataCapsule().getColumns()));
+        dataOperation.setRawData(new DataCapsule(rawData, target.getDataCapsule().getColumns()));
         DataOperationVisitor visitor = new DataOperationVisitor();
-        data = new ArrayList<>(dataOperation.accept(visitor));
+        dataOperation.accept(visitor);
     }
 }

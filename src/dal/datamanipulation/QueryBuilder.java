@@ -24,6 +24,10 @@ public class QueryBuilder implements I_QueryBuilder{
         query.addClause(dataClause);
     }
 
+    public void doQuery() {
+        query.compileQuery();
+    }
+
     public Query getResult() {
         return query;
     }
