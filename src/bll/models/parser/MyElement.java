@@ -1,8 +1,8 @@
 package bll.models.parser;
 
-public class MyElement
+public class MyElement implements Cloneable
 {
-    private String pageURL = "";
+    private String pageURL = "default";
     private String elementType = "";
     private String elementID = "";
     private String elementName = "";
@@ -10,8 +10,7 @@ public class MyElement
     private String elementXPath = "";
     private String input = "";
 
-    public MyElement() {
-        pageURL = "DefaultPage";
+    public MyElement () {
     }
 
     public MyElement(String pageURL, String elementType, String elementID, String elementName, String elementClass) {
@@ -22,23 +21,8 @@ public class MyElement
         this.elementClass = elementClass;
     }
 
-    public MyElement(String pageURL, String elementType, String elementID, String elementName, String elementClass, String xpath, String input) {
-        this.pageURL = pageURL;
-        this.elementType = elementType;
-        this.elementID = elementID;
-        this.elementName = elementName;
-        this.elementClass = elementClass;
-        this.elementXPath = xpath;
-        this.input = input;
-    }
-
-    public MyElement(MyElement element) {
-        this.pageURL = element.getPageURL();
-        this.elementType = element.getElementType();
-        this.elementID = element.getElementID();
-        this.elementName = element.getElementName();
-        this.elementClass = element.getElementClass();
-        this.elementXPath = element.getElementXPath();
+    public MyElement clone() throws CloneNotSupportedException {
+        return (MyElement) super.clone();
     }
 
     public String getInput() {

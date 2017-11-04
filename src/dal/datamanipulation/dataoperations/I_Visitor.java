@@ -2,7 +2,7 @@ package dal.datamanipulation.dataoperations;
 
 import java.util.List;
 
-public interface Visitor {
+public interface I_Visitor {
 
     List<String> visit(SelectOperation select);
     List<String> visit(DeleteOperation select);

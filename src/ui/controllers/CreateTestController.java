@@ -1,5 +1,6 @@
 package ui.controllers;
 
+import bll.models.Caretaker;
 import bll.models.XMLTestCreator;
 import bll.models.parser.MyElement;
 import bll.models.parser.XMLParser;
@@ -20,15 +21,22 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class CreateTestController implements Initializable, IController {
 
-    private static final String XML_PATH = "src/xml/pages/";
-    @FXML private TableView<MyElement> elementTable, testTable;
-    @FXML private TableColumn<MyElement, String> page, type, id, name, className, elPageTest, elTypeTest, elIdTest, elNameTest, elClassTest, elXPath, elInput;
     @FXML private Button addElement;
     @FXML private TextField testName;
+    @FXML private TableView<MyElement> elementTable, testTable;
+    private static final String XML_PATH = "src/xml/pages/";
+    private static final String [] COLUMN_ATTRIBUTES = {"pageURL", "elementType", "elementID", "elementName", "elementClass", "elementXPath", "input"};
+    private ObservableList<MyElement> elementList, testList;
+    private ArrayList<TableColumn<MyElement, String>> elementColumns = new ArrayList<>();
+    private ArrayList<TableColumn<MyElement, String>> testColumns = new ArrayList<>();
+
+    private Caretaker caretaker = new Caretaker();
+    private ElementOriginator originator = new ElementOriginator();
 
     public CreateTestController() {
     }
@@ -37,98 +45,102 @@ public class CreateTestController implements Initializable, IController {
         return "CreateTestController";
     }
 
-    private void setUp() {
-        elTypeTest.setSortable(false);
-        elIdTest.setSortable(false);
-        elNameTest.setSortable(false);
-        elClassTest.setSortable(false);
-        elXPath.setSortable(false);
-        elInput.setSortable(false);
-    }
-
     public void clearTable() {
         testTable.getItems().clear();
-    }
-
-    private void updateElementTable() {
-        page.setCellValueFactory(new PropertyValueFactory<>("pageURL"));
-        type.setCellValueFactory(new PropertyValueFactory<>("elementType"));
-        id.setCellValueFactory(new PropertyValueFactory<>("elementID"));
-        name.setCellValueFactory(new PropertyValueFactory<>("elementName"));
-        className.setCellValueFactory(new PropertyValueFactory<>("elementClass"));
-    }
-
-    private void updateTestTable() {
-        elPageTest.setCellValueFactory(new PropertyValueFactory<>("pageURL"));
-        elTypeTest.setCellValueFactory(new PropertyValueFactory<>("elementType"));
-        elIdTest.setCellValueFactory(new PropertyValueFactory<>("elementID"));
-        elNameTest.setCellValueFactory(new PropertyValueFactory<>("elementName"));
-        elClassTest.setCellValueFactory(new PropertyValueFactory<>("elementClass"));
-        elXPath.setCellValueFactory(new PropertyValueFactory<>("elementXPath"));
-        elInput.setCellValueFactory(new PropertyValueFactory<>("input"));
-    }
-
-    private void addListeners(ObservableList<MyElement> eList, ObservableList<MyElement> tList) {
-        elementTable.setOnMousePressed(event -> {
-            if(event.getClickCount() == 2) {
-                testTable.getItems().add(new MyElement(eList.get(elementTable.getFocusModel().getFocusedCell().getRow())));
-                testTable.setItems(tList);
-            }});
-
-        addElement.setOnMousePressed(event -> {
-            testTable.getItems().add(new MyElement());
-            testTable.setItems(tList);
-        });
-
-        testTable.setOnMousePressed(event -> {
-            if(event.getClickCount() == 2) {
-                int num = testTable.getFocusModel().getFocusedCell().getRow();
-                testTable.getItems().remove(num);
-            }});
-    }
-
-    @FXML
-    private void saveTest() {
-        String name = testName.getText().equals("") ? "Default" : testName.getText().replaceAll(" ","");
-        new XMLTestCreator().createTest(name, testTable.getItems());
-        testName.clear();
-    }
-
-    private void editCells() {
-        testTable.setEditable(true);
-        elTypeTest.setCellFactory(TextFieldTableCell.forTableColumn());
-        elTypeTest.setOnEditCommit(e -> e.getTableView().getItems().get(e.getTablePosition().getRow()).setElementType(e.getNewValue()));
-        elIdTest.setCellFactory(TextFieldTableCell.forTableColumn());
-        elIdTest.setOnEditCommit(e -> e.getTableView().getItems().get(e.getTablePosition().getRow()).setElementID(e.getNewValue()));
-        elNameTest.setCellFactory(TextFieldTableCell.forTableColumn());
-        elNameTest.setOnEditCommit(e -> e.getTableView().getItems().get(e.getTablePosition().getRow()).setElementName(e.getNewValue()));
-        elClassTest.setCellFactory(TextFieldTableCell.forTableColumn());
-        elClassTest.setOnEditCommit(e -> e.getTableView().getItems().get(e.getTablePosition().getRow()).setElementClass(e.getNewValue()));
-        elXPath.setCellFactory(TextFieldTableCell.forTableColumn());
-        elXPath.setOnEditCommit(e -> e.getTableView().getItems().get(e.getTablePosition().getRow()).setElementXPath(e.getNewValue()));
-        elInput.setCellFactory(TextFieldTableCell.forTableColumn());
-        elInput.setOnEditCommit(e -> e.getTableView().getItems().get(e.getTablePosition().getRow()).setInput(e.getNewValue()));
     }
 
     private File [] getFiles(String path) {
         return new File(path).listFiles();
     }
 
+    @FXML
+    private void createTest() {
+        if(testList.size() > 0) {
+            String name = testName.getText();
+            testName.clear();
+            new XMLTestCreator().createTest(name.equals("") ? "Default": name, testList);
+        }
+    }
+
+    @FXML
+    private void restore() {
+
+        try {
+            originator.restore(caretaker.getMemento(testList.size()-1));
+            ElementMemento elementMemento = (ElementMemento)  caretaker.getMemento(testList.size()-1);
+            testTable.setItems(elementMemento.getState());
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ObservableList<MyElement> elementList = FXCollections.observableArrayList();
-        ObservableList<MyElement> testList = FXCollections.observableArrayList();
-        editCells();
-        setUp();
-        updateElementTable();
-        updateTestTable();
-        addListeners(elementList, testList);
+        elementList = FXCollections.observableArrayList();
+        testList = FXCollections.observableArrayList();
+
+        for (String COLUMN_ATTRIBUTE : COLUMN_ATTRIBUTES) {
+            TableColumn<MyElement, String> eCol = new TableColumn<>(COLUMN_ATTRIBUTE.toUpperCase());
+            TableColumn<MyElement, String> tCol = new TableColumn<>(COLUMN_ATTRIBUTE.toUpperCase());
+            eCol.setCellValueFactory(new PropertyValueFactory<>(COLUMN_ATTRIBUTE));
+            tCol.setCellValueFactory(new PropertyValueFactory<>(COLUMN_ATTRIBUTE));
+            elementColumns.add(eCol);
+            testColumns.add(tCol);
+        }
 
         for(File f: getFiles(XML_PATH))
             elementList.addAll(new XMLParser().parse(XML_PATH + f.getName()));
 
         elementTable.setItems(elementList);
         testTable.setItems(testList);
+
+        for(int i = 0; i < COLUMN_ATTRIBUTES.length; i++) {
+            if(i < 5) elementTable.getColumns().add(elementColumns.get(i));
+            testTable.getColumns().add(testColumns.get(i));
+            testColumns.get(i).setSortable(false);
+        }
+        addListeners();
+        editCells();
+    }
+
+    private void editCells() {
+        testTable.setEditable(true);
+        for(int i = 1; i < COLUMN_ATTRIBUTES.length; i++)
+            testColumns.get(i).setCellFactory(TextFieldTableCell.forTableColumn());
+        testColumns.get(1).setOnEditCommit(e -> e.getTableView().getItems().get(e.getTablePosition().getRow()).setElementType(e.getNewValue()));
+        testColumns.get(2).setOnEditCommit(e -> e.getTableView().getItems().get(e.getTablePosition().getRow()).setElementID(e.getNewValue()));
+        testColumns.get(3).setOnEditCommit(e -> e.getTableView().getItems().get(e.getTablePosition().getRow()).setElementName(e.getNewValue()));
+        testColumns.get(4).setOnEditCommit(e -> e.getTableView().getItems().get(e.getTablePosition().getRow()).setElementClass(e.getNewValue()));
+        testColumns.get(5).setOnEditCommit(e -> e.getTableView().getItems().get(e.getTablePosition().getRow()).setElementXPath(e.getNewValue()));
+        testColumns.get(6).setOnEditCommit(e -> e.getTableView().getItems().get(e.getTablePosition().getRow()).setInput(e.getNewValue()));
+    }
+
+    private void addListeners() {
+        elementTable.setOnMousePressed(e -> {
+            if(e.getClickCount() == 2) {
+                try {
+                    MyElement cloneObject = elementList.get(elementTable.getFocusModel().getFocusedCell().getRow()).clone();
+                    testTable.getItems().add(cloneObject);
+                    testTable.setItems(testList);
+
+                    originator.setState(testList);
+                    caretaker.addMemento(originator.createMemento());
+                }
+                catch (CloneNotSupportedException e1) {
+                    e1.printStackTrace();
+                }
+            }});
+
+        testTable.setOnMousePressed(event -> {
+            if(event.getClickCount() == 2)
+                testTable.getItems().remove(testTable.getFocusModel().getFocusedCell().getRow());
+        });
+
+        addElement.setOnMousePressed(event -> {
+            testTable.getItems().add(new MyElement());
+            testTable.setItems(testList);
+        });
     }
 
     @Override

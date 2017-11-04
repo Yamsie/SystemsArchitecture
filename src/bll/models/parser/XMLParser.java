@@ -19,13 +19,18 @@ public class XMLParser {
             List<Element> elementList = classElement.getChildren();
 
             for (Element e : elementList) {
-                myElements.add(new MyElement(
+                MyElement myElement = new MyElement(
                         e.getChild("home").getValue(),
                         e.getChild("type").getValue(),
                         e.getChild("id").getText(),
                         e.getChild("name").getText(),
-                        e.getChild("class").getText()
-                ));
+                        e.getChild("class").getText());
+
+                if(e.getChildren().size() > 5) {
+                    myElement.setElementXPath(e.getChild("xpath").getText());
+                    myElement.setInput(e.getChild("input").getText());
+                }
+                myElements.add(myElement);
             }
         }
 
