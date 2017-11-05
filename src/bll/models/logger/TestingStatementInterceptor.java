@@ -11,7 +11,7 @@ public class TestingStatementInterceptor implements Interceptor{
             statement = true;
         else
             statement = false;
-        System.out.println("before : Testing Statement Interceptor");
+
     }
 
 

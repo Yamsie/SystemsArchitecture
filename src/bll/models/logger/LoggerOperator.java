@@ -21,6 +21,12 @@ public class LoggerOperator {
         readFile();
     }
 
+    public String getLastResult(){
+        String result = "";
+        int size = data.size();
+        result = data.get(size - 1);
+        return result;
+    }
     public String[] getRow(int id) {
         String[] row = readFileRow(id);
         return row;
@@ -32,6 +38,15 @@ public class LoggerOperator {
 
     public void addData(String info) {
         data.add(info);
+        writeData(data);
+    }
+
+    public void deleteData(String info){
+        for(int i = 0; i < data.size(); ++i){
+            if(info.equals(data.get(i))){
+                data.remove(i);
+            }
+        }
         writeData(data);
     }
 
@@ -47,7 +62,6 @@ public class LoggerOperator {
                 complete = true;
             }
         }
-
         return index;
     }
 

@@ -9,8 +9,9 @@ public class DateInterceptor implements Interceptor{
 
     @Override
     public void operation(Action action) {
-        System.out.println("before : Create Date");
-        action.setDate(CurrentTime());
+        if(action.getDate().equals("null")){
+            action.setDate(CurrentTime());
+        }
         statement = true;
     }
 
@@ -31,7 +32,7 @@ public class DateInterceptor implements Interceptor{
     }
 
     public String CurrentTime(){
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd,HH:mm:ss,");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd,HH:mm:ss");
         return df.format(new Date());
     }
 }

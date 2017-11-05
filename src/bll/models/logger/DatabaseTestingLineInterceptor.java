@@ -7,7 +7,6 @@ public class DatabaseTestingLineInterceptor implements Interceptor{
     @Override
     public void operation(Action action) {
         checkDatabaseTestingLineInterceptor(action.getDatabaseTestingLine());
-        System.out.println("before : Checking Database Testing Line");
     }
 
     @Override

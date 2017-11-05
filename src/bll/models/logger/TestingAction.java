@@ -7,7 +7,7 @@ public class TestingAction implements Action {      //Context Object
 
     @Override // Create the result of Interceptor and return the result to logger
     public String execute() {
-        return date + databaseTestingLine + "," + testingStatement;
+        return date + "," + databaseTestingLine + "," + testingStatement;
     }
 
     public String getDate() {

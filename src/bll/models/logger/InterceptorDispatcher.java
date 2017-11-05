@@ -10,6 +10,8 @@ public class InterceptorDispatcher{
 
     private List<Interceptor> interceptors = new ArrayList<Interceptor>();
 
+    private List<Integer> interceptorOperationOrder = new ArrayList<>();
+
     public Action getAction() {
         return action;
     }
@@ -26,8 +28,19 @@ public class InterceptorDispatcher{
         this.interceptors.remove(i);
     }
 
-    public String invoke() {
+    public List<Integer> getInterceptorOperationOrder(){
+        return interceptorOperationOrder;
+    }
+    public String getInterceptorPriorityList(){
+        String priorityOrder = "";
+        for(Interceptor i: interceptors){
+            priorityOrder += i.getPriority() + " ";
+        }
+        return priorityOrder;
+    }
 
+
+    public String invoke() {
         // TODO Auto-generated method stub
         String result = "";
         int maxPriority;
@@ -37,6 +50,7 @@ public class InterceptorDispatcher{
                 if(maxPriority == this.interceptors.get(i).getPriority()){
                     interceptors.get(i).operation(this.action);
                     interceptors.get(i).checkOperation(this.action);
+                    interceptorOperationOrder.add(i);
                     removeInterceptor(i);
                 }
             }

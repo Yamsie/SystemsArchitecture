@@ -1,5 +1,6 @@
 package bll.models.logger;
 
+
 public class test {
     public static void test(){
         LoggerOperator operator = new LoggerOperator("src/bll/models/logger/log.txt");
