@@ -1,4 +1,3 @@
-id,url,element,name,input
-1,google.com,textBox,Test Google Search,hello
-1,google.com,btn,Test Google Search,null
-2,facebook.com,loginBox,Facebook Login,world
+id,name,path,input
+1,UL Search,src/xml/tests/ULSearch.xml,"hello"
+2,UL Button Press,src/xml/tests/ULButtonPress.xml,null

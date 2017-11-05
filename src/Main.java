@@ -10,6 +10,7 @@ import dal.datamanipulation.dataoperations.DeleteOperation;
 import dal.datamanipulation.dataoperations.InsertOperation;
 import dal.datamanipulation.dataoperations.SelectOperation;
 import javafx.application.Application;
+import ui.controllers.MainMenuController;
 import ui.controllers.NewTestScenarioController;
 import ui.controllers.TestWebPageController;
 import ui.controllers.TestSelectionController;
@@ -19,7 +20,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        //Application.launch(MainMenuView.class, args);
+        Application.launch(MainMenuController.class, args);
         //ConcreteViewCreator vc = new ConcreteViewCreator();
         //I_View view = vc.createView("MainWindowView");
         //view.runView(this.getScene());
@@ -41,14 +42,26 @@ public class Main {
         //    System.out.println(data.get(i));
         //}
 
+        /*
         I_QueryBuilder queryBuilder = new QueryBuilder();
+<<<<<<< Updated upstream
         //queryBuilder.setDataOperation(new DeleteOperation());
         //queryBuilder.setTargetFile(new TableTestCases());
         //queryBuilder.addClause(new WhereClause("element", "textBox"));
+=======
+        queryBuilder.setDataOperation(new SelectOperation("*"));
+        queryBuilder.setTargetFile(new TableTestCases());
+        //queryBuilder.addClause(new WhereClause("id", "1"));
+        queryBuilder.addClause(new WhereClause("id", "2"));
+
+        Query query = queryBuilder.getResult();
+        List<String> data = new ArrayList<>(query.getResult());
+>>>>>>> Stashed changes
 
         //Query query = queryBuilder.getResult();
         //List<String> data = new ArrayList<>(query.getResult());
 
+<<<<<<< Updated upstream
         queryBuilder.setDataOperation(new InsertOperation("5", "linkedin.com", "testing", "LinkedIn", "world", "hello"));
         queryBuilder.setTargetFile(new TableTestCases());
         queryBuilder.doQuery();
@@ -56,6 +69,14 @@ public class Main {
         //for (int i = 0; i < data.size(); i++) {
         //    System.out.println(data.get(i));
         //}
+
+=======
+        query.getResult();
+
+        for (int i = 0; i < data.size(); i++) {
+            System.out.println(data.get(i));
+        }
+        */
 
        // new WebParser().parse("https://www.facebook.com/");
         //Application.launch(ParsePageView.class, args);

@@ -24,7 +24,6 @@ public class MyElement implements Cloneable
     public MyElement clone() throws CloneNotSupportedException {
         return (MyElement) super.clone();
     }
-
     public String getInput() {
         return input;
     }
