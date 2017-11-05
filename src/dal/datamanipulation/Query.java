@@ -46,7 +46,6 @@ public class Query {
             */
             target.setDataCapsule(dataOperation.getRawData());
         }
-
     }
 
     public void compileQuery() {

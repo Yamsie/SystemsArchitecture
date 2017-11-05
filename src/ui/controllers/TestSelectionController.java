@@ -42,7 +42,7 @@ public class TestSelectionController implements Initializable, IController{
         I_QueryBuilder queryBuilder = new QueryBuilder();
         queryBuilder.setDataOperation(new SelectOperation("name"));
         queryBuilder.setTargetFile(new TableTestCases());
-
+        queryBuilder.doQuery();
         Query query = queryBuilder.getResult();
         List<String> data = query.getResult();
         ArrayList<String> values = new ArrayList<>();
@@ -58,73 +58,21 @@ public class TestSelectionController implements Initializable, IController{
         }
 
     @FXML
-    protected void handleSubmitButtonAction() {
-        //(int id, String url, String element, String input, String name) {
+    protected void handleRunButtonAction() {
         I_QueryBuilder queryBuilder = new QueryBuilder();
-        queryBuilder.setDataOperation(new SelectOperation("id"));
+        queryBuilder.setDataOperation(new SelectOperation("*"));
         queryBuilder.setTargetFile(new TableTestCases());
-        queryBuilder.addClause(new WhereClause("name", this.selected));
+        queryBuilder.addClause(new WhereClause("name", selected));
+        queryBuilder.doQuery();
         Query query = queryBuilder.getResult();
         List<String> data = query.getResult();
 
-        I_QueryBuilder queryBuilder2 = new QueryBuilder();
-        queryBuilder2.setDataOperation(new SelectOperation("url"));
-        queryBuilder2.setTargetFile(new TableTestCases());
-        queryBuilder2.addClause(new WhereClause("name", this.selected));
-        Query query2 = queryBuilder2.getResult();
-        List<String> data2 = query2.getResult();
+        //all data returned is in data.get(0), should be separated out into diff indexes
+        //for(int i =0; i < data.size(); i++){
+        //    System.out.println(data.get(i)); }
 
-        I_QueryBuilder queryBuilder3 = new QueryBuilder();
-        queryBuilder3.setDataOperation(new SelectOperation("element"));
-        queryBuilder3.setTargetFile(new TableTestCases());
-        queryBuilder3.addClause(new WhereClause("name", this.selected));
-        Query query3 = queryBuilder3.getResult();
-        List<String> data3 = query3.getResult();
-
-        I_QueryBuilder queryBuilder4 = new QueryBuilder();
-        queryBuilder4.setDataOperation(new SelectOperation("input"));
-        queryBuilder4.setTargetFile(new TableTestCases());
-        queryBuilder4.addClause(new WhereClause("name", this.selected));
-        Query query4 = queryBuilder4.getResult();
-        List<String> data4 = query4.getResult();
-
-        int id = Integer.parseInt(data.get(0));
-        String url = data2.get(0);
-        String element = data3.get(0);
-        String input = data4.get(0);
-
-        TestCase tc = new TestCase(id, url, element, input, this.selected);
-        tc.runTest();
-
-    }
-
-    public void handleRunTest(){
-
-        I_QueryBuilder queryBuilder = new QueryBuilder();
-        queryBuilder.setDataOperation(new SelectOperation("url"));
-        queryBuilder.setTargetFile(new TableTestCases());
-        queryBuilder.addClause(new WhereClause("name", this.selected));
-
-        Query query = queryBuilder.getResult();
-        List<String> data = query.getResult();
         TestCase tc = new TestCase(data);
         tc.runTest();
-        String site = "https://www." + data.get(0);
-
-        System.setProperty("webdriver.gecko.driver", "./geckodriver.exe"); // driver name and location
-        System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, "/dev/null"); // directs driver log to null device to be discarded (Doesn't show weird messages in cmd prompt)
-        WebDriver driver = new FirefoxDriver(); // Create instance of the webdriver, optional can pass a profile
-        driver.get(site); // open browser with page
-        System.out.println("Page title is: " + driver.getTitle()); // get page title
-        try
-        {
-            Thread.sleep(3000); // Pause for 3 seconds, not recommended only for example
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        driver.close(); // Stop and close the browser
     }
 
     public void setSelected(String s){ this.selected = s; }
@@ -143,6 +91,7 @@ public class TestSelectionController implements Initializable, IController{
         }
         catch(Exception ex){
             System.out.println("Exception caught in TestSelectionController changeScene()");
+            ex.printStackTrace();
         }
     }
 }

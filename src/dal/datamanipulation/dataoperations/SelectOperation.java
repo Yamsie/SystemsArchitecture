@@ -10,8 +10,8 @@ public class SelectOperation extends DataOperation implements I_Visitable{
     private String[] columns;
 
     public SelectOperation(String...columns) {
-            this.columns = columns;
-            super.setReadOnly(true);
+        this.columns = columns;
+        super.setReadOnly(true);
     }
 
     public void doSelect() {

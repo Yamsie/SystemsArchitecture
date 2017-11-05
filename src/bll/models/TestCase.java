@@ -1,58 +1,41 @@
 package bll.models;
 
 import bll.models.parser.MyElement;
+import bll.models.parser.XMLParser;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
-
+import org.openqa.selenium.WebElement;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class TestCase {
-    //1,google.com,textBox,"Test Google Search","hello"
+
     private int id;
-    private String url;
-    private String element="";
-    private MyElement e;
-    private String input;
     private String name;
-
-    public TestCase(int id, String url, String element, String input, String name) {
-        this.id = id;
-        this.url = url;
-        this.element = element;
-        this.input = input;
-        this.name = name;
-    }
-
-    public TestCase(String[] data) {
-        this.id = Integer.parseInt(data[0]);
-        this.url = data[1];
-        this.element = data[2];
-        this.input = data[3];
-        this.name = data[4];
-    }
+    private String xml;
+    private String input;
+    private List<MyElement> elements;
 
     public TestCase(List<String> data) {
-        this.id = Integer.parseInt(data.get(0));
-        this.url = data.get(1);
-        this.element = data.get(2);
-        this.input = data.get(3);
-        this.name = data.get(4);
+        //splitting data at the comma, all in data.get(0), separates fine
+        String[] ar = data.get(0).split(",");
+        //for(int i =0; i < ar.length; i++){
+          //  System.out.println(ar[i]); }
+        this.id = Integer.parseInt(ar[0]);
+        this.name = ar[1];
+        this.xml = ar[2];
+        this.input = ar[3];
+        setElements();
     }
 
-    /*public TestCase(String name){
-        I_QueryBuilder queryBuilder = new QueryBuilder();
-        queryBuilder.setDataOperation(new SelectOperation("url"));
-        queryBuilder.setTargetFile(new TableTestCases());
-        queryBuilder.addClause(new WhereClause("name", name));
-
-        Query query = queryBuilder.getResult();
-        List<String> data = query.getResult();
-
-        for(int i =0; i < data.size(); i ++){
-            System.out.println(data.get(i));
-        }
+    /*public TestCase(List<String> data) {
+        this.id = Integer.parseInt(data.get(0));
+        this.name = data.get(1);
+        this.xml = data.get(2);
+        this.input = data.get(3);
+        setElements();
     }*/
 
     public int getId() {
@@ -61,22 +44,6 @@ public class TestCase {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getTextBox() {
-        return element;
-    }
-
-    public void setTextBox(String textBox) {
-        this.element = textBox;
     }
 
     public String getInput() {
@@ -95,19 +62,32 @@ public class TestCase {
         this.name = name;
     }
 
-    public void runTest(){
-        System.out.println("run test method line 99");
-        WebDriver driver = new FirefoxDriver();
-        String site = "https://" + this.url;
-        driver.get(site);
+    public void setElements(){
+        XMLParser parser = new XMLParser();
+        elements = parser.parse(this.xml);
+    }
 
-       /*WebElement element = driver.findElement(By.id(this.e.getElementID()));
-        WebElement element = driver.findElement(By.id(element));
-        System.out.println(this.e.getElementID());
-        element.click();
-        element.sendKeys(this.input);
-        System.out.println(this.input);
-        element.submit();*/
-        System.out.println("Page title is: " + driver.getTitle());
+    public void runTest(){
+
+        try{
+            WebDriver driver = new FirefoxDriver();
+            for(MyElement e : elements) {
+                System.out.println(e.getElementName());
+                driver.get(e.getPageURL());
+                driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); //makes driver wait until page is fully loaded
+                WebElement element = driver.findElement(By.id(e.getElementID()));
+                //System.out.println(e.getElementID());
+                //element.click();
+                /*if(e.getElementType().equals("input")) {
+                    element.sendKeys(this.input);
+                    System.out.println(this.input);
+                }*/
+                //element.submit();
+            }
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
+        //driver.close();
     }
 }

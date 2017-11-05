@@ -1,12 +1,28 @@
 package bll.models;
 
 import bll.models.parser.MyElement;
+import dal.TableTestCases;
+import dal.datamanipulation.I_QueryBuilder;
+import dal.datamanipulation.Query;
+import dal.datamanipulation.QueryBuilder;
+import dal.datamanipulation.dataclauses.WhereClause;
+import dal.datamanipulation.dataoperations.InsertOperation;
+import dal.datamanipulation.dataoperations.SelectOperation;
 import javafx.collections.ObservableList;
+import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import java.io.File;
+import java.util.List;
 
 public class XMLTestCreator {
     private Element [] elementArray = new Element[7];
@@ -53,6 +69,28 @@ public class XMLTestCreator {
         }
 
         catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void writeTest(String nameOfTest, Document document) {
+        try {
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
+            DOMSource source = new DOMSource(document);
+            StreamResult result = new StreamResult(new File("src/xml/tests/" + nameOfTest + ".xml"));
+            transformer.transform(source, result);
+
+            //writing new test to text file - not built into query builder yet, do manually for now
+            /*I_QueryBuilder queryBuilder = new QueryBuilder();
+            queryBuilder.setDataOperation(new InsertOperation());
+            queryBuilder.setTargetFile(new TableTestCases());
+            Query query = queryBuilder.getResult();
+            List<String> data = query.getResult();*/
+        } catch (TransformerException | DOMException e) {
             e.printStackTrace();
         }
     }

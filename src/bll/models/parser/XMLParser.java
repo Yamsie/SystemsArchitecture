@@ -20,16 +20,16 @@ public class XMLParser {
 
             for (Element e : elementList) {
                 MyElement myElement = new MyElement(
-                        e.getChild("home").getValue(),
+                        e.getChild("homepage").getValue(),
                         e.getChild("type").getValue(),
                         e.getChild("id").getText(),
                         e.getChild("name").getText(),
                         e.getChild("class").getText());
 
-                if(e.getChildren().size() > 5) {
-                    myElement.setElementXPath(e.getChild("xpath").getText());
-                    myElement.setInput(e.getChild("input").getText());
-                }
+                //if(e.getChildren().size() > 5) {
+                  //  myElement.setElementXPath(e.getChild("xpath").getText());
+                    //myElement.setInput(e.getChild("input").getText());
+                //}
                 myElements.add(myElement);
             }
         }

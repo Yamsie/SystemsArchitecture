@@ -35,8 +35,8 @@ public class CreateTestController implements Initializable, IController {
     private ArrayList<TableColumn<MyElement, String>> elementColumns = new ArrayList<>();
     private ArrayList<TableColumn<MyElement, String>> testColumns = new ArrayList<>();
 
-    private Caretaker caretaker = new Caretaker();
-    private ElementOriginator originator = new ElementOriginator();
+    //private Caretaker caretaker = new Caretaker();
+    //private ElementOriginator originator = new ElementOriginator();
 
     public CreateTestController() {
     }
@@ -64,7 +64,7 @@ public class CreateTestController implements Initializable, IController {
 
     @FXML
     private void restore() {
-
+        /*
         try {
             originator.restore(caretaker.getMemento(testList.size()-1));
             ElementMemento elementMemento = (ElementMemento)  caretaker.getMemento(testList.size()-1);
@@ -73,6 +73,7 @@ public class CreateTestController implements Initializable, IController {
         catch(Exception e) {
             e.printStackTrace();
         }
+        */
     }
 
     @Override
@@ -124,8 +125,8 @@ public class CreateTestController implements Initializable, IController {
                     testTable.getItems().add(cloneObject);
                     testTable.setItems(testList);
 
-                    originator.setState(testList);
-                    caretaker.addMemento(originator.createMemento());
+                    //originator.setState(testList);
+                    //caretaker.addMemento(originator.createMemento());
                 }
                 catch (CloneNotSupportedException e1) {
                     e1.printStackTrace();
