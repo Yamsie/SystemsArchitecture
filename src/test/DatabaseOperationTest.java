@@ -1,10 +1,10 @@
-package bll.models.logger_JUnit_Testing;
+package test;
 
 import bll.models.logger.LoggerOperator;
 import org.junit.Test;
 import static junit.framework.TestCase.fail;
 import static org.junit.Assert.assertTrue;
-
+//JUnit testing for logger
 public class DatabaseOperationTest {
     LoggerOperator operator = new LoggerOperator("src/bll/models/logger/log.txt");
 
