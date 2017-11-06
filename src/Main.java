@@ -1,6 +1,7 @@
 import bll.models.NewTestScenarioModel;
 import bll.models.parser.WebParser;
 import bll.models.parser.XMLParser;
+import dal.TablePlaceHolder;
 import dal.TableTestCases;
 import dal.datamanipulation.I_QueryBuilder;
 import dal.datamanipulation.Query;
@@ -9,6 +10,7 @@ import dal.datamanipulation.dataclauses.WhereClause;
 import dal.datamanipulation.dataoperations.DeleteOperation;
 import dal.datamanipulation.dataoperations.InsertOperation;
 import dal.datamanipulation.dataoperations.SelectOperation;
+import dal.datamanipulation.dataoperations.UpdateOperation;
 import javafx.application.Application;
 import ui.controllers.MainMenuController;
 import ui.controllers.NewTestScenarioController;
@@ -20,7 +22,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        Application.launch(MainMenuController.class, args);
+        //Application.launch(MainMenuController.class, args);
         //ConcreteViewCreator vc = new ConcreteViewCreator();
         //I_View view = vc.createView("MainWindowView");
         //view.runView(this.getScene());
@@ -30,13 +32,22 @@ public class Main {
         //TestSelectionController controller = new TestSelectionController();
         //controller.launch(args);
 
-        //I_QueryBuilder queryBuilder = new QueryBuilder();
+        I_QueryBuilder queryBuilder = new QueryBuilder();
+        queryBuilder.setDataOperation(new UpdateOperation("url", "limerick", "element", "moyross"));
+        queryBuilder.setTargetFile(new TablePlaceHolder());
+        queryBuilder.addClause(new WhereClause("id", "1"));
+        queryBuilder.doQuery();
+        Query query = queryBuilder.getResult();
+
         //queryBuilder.setDataOperation(new SelectOperation("id", "element"));
         //queryBuilder.setTargetFile(new TableTestCases());
         //queryBuilder.addClause(new WhereClause("id", "2"));
+        //queryBuilder.doQuery();
 ////
         //Query query = queryBuilder.getResult();
         //List<String> data = query.getResult();
+
+
 //
         //for (int i = 0; i < data.size(); i++) {
         //    System.out.println(data.get(i));

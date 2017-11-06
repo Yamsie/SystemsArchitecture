@@ -37,13 +37,6 @@ public class Query {
         List<String> temp = new ArrayList<>(target.getDataCapsule().getData());
 
         if(!dataOperation.getReadOnly()) { // Here as a placeholder - can't figure out how to integrate deletion. Lots of refactoring expected after more consideration
-            /*for(int j = 0; j < dataOperation.getDataCapsule().getData().size(); j++) {
-                if(target.getDataCapsule().getData().contains(dataOperation.getDataCapsule().getData().get(j))) {
-                    temp.remove(dataOperation.getDataCapsule().getData().get(j));
-                }
-            }
-            target.setDataCapsule(new DataCapsule(temp, target.getDataCapsule().getColumns()));
-            */
             target.setDataCapsule(dataOperation.getRawData());
         }
     }
