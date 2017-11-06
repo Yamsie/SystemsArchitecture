@@ -1,4 +1,4 @@
-package bll.models.logger_JUnit_Testing;
+package test;
 
 import bll.models.logger.LoggerOperator;
 import org.junit.Test;
