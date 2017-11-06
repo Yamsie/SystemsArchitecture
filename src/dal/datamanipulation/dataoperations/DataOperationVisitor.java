@@ -17,6 +17,6 @@ public class DataOperationVisitor implements I_Visitor {
     }
 
     public void visit(UpdateOperation update) {
-
+        update.doUpdate();
     }
 }
