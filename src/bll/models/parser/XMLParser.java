@@ -20,7 +20,7 @@ public class XMLParser {
 
             for (Element e : elementList) {
                 MyElement myElement = new MyElement(
-                        e.getChild("homepage").getValue(),
+                        e.getChild("home").getValue(),
                         e.getChild("type").getValue(),
                         e.getChild("id").getText(),
                         e.getChild("name").getText(),
