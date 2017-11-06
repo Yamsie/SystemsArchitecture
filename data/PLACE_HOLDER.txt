@@ -1,6 +1,0 @@
-id,url,element,name,input
-1,limerick,moyross,Test Google Search,hello
-1,limerick,moyross,Test Google Search,null
-2,amazon,loginBox,Facebook Login,world
-3,linkedin,testing,LinkedIn,world
-3,linkedin,testing,LinkedIn,world

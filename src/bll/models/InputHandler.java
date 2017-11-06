@@ -14,16 +14,20 @@ public class InputHandler implements IElementHandler {
     public String getType(){ return "input"; }
 
     public String execute(MyElement element, WebDriver driver){
-        String loggerMessage = "Success: test for element "+element.getElementName()+" been successful";
+        String loggerMessage = "Success: test for input element "+element.getElementName()+" been successful";
+        driver.get(element.getPageURL());
         try{
+            Thread.sleep(10000); //sleep, allow page to load
             WebElement e = driver.findElement(By.id(element.getElementID()));
-            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); //makes driver wait until page is fully loaded
             String in = element.getInput();
+            System.out.println("input is "+in);
+            e.click();
             e.clear();
             e.sendKeys(in);
+            e.submit();
         }
         catch(Exception ex){
-            loggerMessage = "Fail: test for element "+element.getElementName()+" has failed" + ex.getStackTrace();
+            loggerMessage = "Fail: test for input element "+element.getElementName()+" has failed" + ex.getStackTrace();
         }
         return loggerMessage;
     }

@@ -25,9 +25,8 @@ public class XMLParser {
                         e.getChild("id").getText(),
                         e.getChild("name").getText(),
                         e.getChild("class").getText());
-
                 if(e.getChildren().size() > 5) {
-                  myElement.setElementXPath(e.getChild("xpath").getText());
+                  //myElement.setElementXPath(e.getChild("xpath").getText());
                   myElement.setInput(e.getChild("input").getText());
                 }
                 myElements.add(myElement);

@@ -31,8 +31,6 @@ public class TestSelectionController implements Initializable, IController{
 
     @FXML
     private ListView list;
-    @FXML
-    private Button run;
     private String selected = "";
 
     public TestSelectionController () { }

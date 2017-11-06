@@ -14,14 +14,16 @@ public class ButtonHandler implements IElementHandler{
     public String getType(){ return "button"; }
 
     public String execute(MyElement element, WebDriver driver){
-        String loggerMessage = "Success: test for element "+element.getElementName()+" been successful";
+        String loggerMessage = "Success: test for button element "+element.getElementName()+" been successful";
+        driver.get(element.getPageURL());
         try{
+            Thread.sleep(10000); //sleep, allow page to load
             WebElement e = driver.findElement(By.id(element.getElementID()));
             driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); //makes driver wait until page is fully loaded
             e.click();
         }
         catch(Exception ex){
-            loggerMessage = "Fail: test for element "+element.getElementName()+" has failed" + ex.getStackTrace();
+            loggerMessage = "Fail: test for button element "+element.getElementName()+" has failed" + ex.getStackTrace();
         }
         return loggerMessage;
     }

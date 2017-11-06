@@ -13,7 +13,7 @@ public class TestCase {
     private int id;
     private String name;
     private String xml;
-    private String input;
+    //private String input;
     private List<MyElement> elements;
     private List<IElementHandler> handlers;
 
@@ -26,7 +26,6 @@ public class TestCase {
         this.id = Integer.parseInt(ar[0]);
         this.name = ar[1];
         this.xml = ar[2];
-        this.input = ar[3];
         setElements();
         setHandlers();
     }
@@ -47,13 +46,9 @@ public class TestCase {
         this.id = id;
     }
 
-    public String getInput() {
-        return input;
-    }
+    //public String getInput() {return input;}
 
-    public void setInput(String input) {
-        this.input = input;
-    }
+    //public void setInput(String input) {this.input = input;}
 
     public String getName() {
         return name;
@@ -96,11 +91,7 @@ public class TestCase {
                 String message = handler.execute(e, driver);
                 System.out.println(message);
             }
-                /*System.out.println(e.getElementName());
-                driver.get(e.getPageURL());
-                driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); //makes driver wait until page is fully loaded
-                WebElement element = driver.findElement(By.id(e.getElementID()));
-            }*/driver.close();
+            driver.close();
         }
         catch(Exception ex){
             ex.printStackTrace();
