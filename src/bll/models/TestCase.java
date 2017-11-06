@@ -2,16 +2,11 @@ package bll.models;
 
 import bll.models.parser.MyElement;
 import bll.models.parser.XMLParser;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 public class TestCase {
 
@@ -20,9 +15,10 @@ public class TestCase {
     private String xml;
     private String input;
     private List<MyElement> elements;
-    private ArrayList<IElementHandler> handlers;
+    private List<IElementHandler> handlers;
 
     public TestCase(List<String> data) {
+        handlers = new ArrayList<>();
         //splitting data at the comma, all in data.get(0), separates fine
         String[] ar = data.get(0).split(",");
         //for(int i =0; i < ar.length; i++){
@@ -67,20 +63,17 @@ public class TestCase {
         this.name = name;
     }
 
-    public ArrayList<IElementHandler> getHandlers() { return this.handlers; }
+    public List<IElementHandler> getHandlers() { return this.handlers; }
 
     public void setHandlers()
     {
-        for(MyElement e : elements) {
-            String type = e.getElementType();
-            handlers.add(new ButtonHandler());
-            handlers.add(new InputHandler());
-        }
+        this.handlers.add(new ButtonHandler());
+        this.handlers.add(new InputHandler());
     }
 
     public void setElements(){
         XMLParser parser = new XMLParser();
-        elements = parser.parse(this.xml);
+        this.elements = parser.parse(this.xml);
     }
 
     public IElementHandler lookupHandlerBy(String name){
@@ -92,28 +85,21 @@ public class TestCase {
         return eh;
     }
 
-    public void runTest(){
-
+    public void runTest()
+    {
+        System.setProperty("webdriver.gecko.driver", "./geckodriver.exe"); // driver name and location
+        System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, "/dev/null");
         try{
             WebDriver driver = new FirefoxDriver();
             for(MyElement e : elements) {
                 IElementHandler handler = lookupHandlerBy(e.getElementType());
-                handler.execute(e, driver);
+                String message = handler.execute(e, driver);
+                System.out.println(message);
             }
                 /*System.out.println(e.getElementName());
                 driver.get(e.getPageURL());
                 driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); //makes driver wait until page is fully loaded
                 WebElement element = driver.findElement(By.id(e.getElementID()));
-                //System.out.println(e.getElementID());
-                //element.click();
-                if(e.getElementType().equals("input"))
-                    element.sendKeys(this.input);
-                else if(e.getElementType().equals("button"))
-                    element.sendKeys(this.input);
-                else if(e.getElementType().equals("button"))
-                    element.sendKeys(this.input);
-                else
-                    element.sendKeys(this.input);
             }*/driver.close();
         }
         catch(Exception ex){

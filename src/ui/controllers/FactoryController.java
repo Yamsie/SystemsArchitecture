@@ -1,13 +1,15 @@
 package ui.controllers;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class FactoryController{
 
-    private ArrayList<IController> handlers;
+    private List<IController> handlers;
 
     public FactoryController(){
-        this.handlers = setHandlers();
+        handlers = new ArrayList<>();
+        setHandlers();
     }
 
     public IController createController(String name) {
@@ -15,14 +17,12 @@ public class FactoryController{
         return c;
     }
 
-    public ArrayList setHandlers(){
-        ArrayList h = new ArrayList<IController>();
-        h.add(new TestWebPageController());
-        h.add(new NewTestScenarioController());
-        h.add(new TestSelectionController());
-        h.add(new ParsePageController());
-        h.add(new CreateTestController());
-        return h;
+    public void setHandlers(){
+        this.handlers.add(new TestWebPageController());
+        this.handlers.add(new NewTestScenarioController());
+        this.handlers.add(new TestSelectionController());
+        this.handlers.add(new ParsePageController());
+        this.handlers.add(new CreateTestController());
     }
 
     public IController getController(String n){
