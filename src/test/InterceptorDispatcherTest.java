@@ -4,7 +4,7 @@ import org.junit.Test;
 import java.util.List;
 import static junit.framework.TestCase.fail;
 import static org.junit.Assert.assertTrue;
-
+//JUnit testing
 public class InterceptorDispatcherTest {
     private Interceptor dateInterceptor = new DateInterceptor();
     private Interceptor databaseInterceptor = new DatabaseTestingLineInterceptor();
