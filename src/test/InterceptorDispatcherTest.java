@@ -6,9 +6,9 @@ import static junit.framework.TestCase.fail;
 import static org.junit.Assert.assertTrue;
 //JUnit testing for logger
 public class InterceptorDispatcherTest {
-    private Interceptor dateInterceptor = new DateInterceptor();
-    private Interceptor databaseInterceptor = new DatabaseTestingLineInterceptor();
-    private Interceptor statementInterceptor = new TestingStatementInterceptor();
+    private I_Interceptor dateInterceptor = new DateInterceptor();
+    private I_Interceptor databaseInterceptor = new DatabaseTestingLineInterceptor();
+    private I_Interceptor statementInterceptor = new TestingStatementInterceptor();
     private InterceptorDispatcher actionInvocation = new InterceptorDispatcher();
 
     @Test
@@ -16,7 +16,7 @@ public class InterceptorDispatcherTest {
         actionInvocation.addInterceptor(statementInterceptor);
         actionInvocation.addInterceptor(databaseInterceptor);
         actionInvocation.addInterceptor(dateInterceptor);
-        Action action = new TestingAction();
+        I_Action action = new TestingAction();
         action.setDate("yyyy-MM-dd,HH:mm:ss");
         action.setDatabaseTestingLine("JUnit_Testing_Line");
         action.setTestingStatement("JUnit_Result");
@@ -28,10 +28,10 @@ public class InterceptorDispatcherTest {
         int third_Interceptor = (Integer)order.get(2);
         try {
             assertTrue("", first_Interceptor >= second_Interceptor && second_Interceptor >= third_Interceptor);
-            System.out.println("Interceptor Dispatcher Test Pass [TestInvoke]!\nThe Dispatcher was successfully invoked interceptors by each priority!");
+            System.out.println("I_Interceptor Dispatcher Test Pass [TestInvoke]!\nThe Dispatcher was successfully invoked interceptors by each priority!");
         }
         catch (AssertionError e) {
-            System.out.println("Interceptor Dispatcher Test Fail [TestInvoke]!\nThe Dispatcher was not successfully invoked interceptors by each priority!");
+            System.out.println("I_Interceptor Dispatcher Test Fail [TestInvoke]!\nThe Dispatcher was not successfully invoked interceptors by each priority!");
             fail();
         }
         System.out.println();
@@ -42,7 +42,7 @@ public class InterceptorDispatcherTest {
         actionInvocation.addInterceptor(statementInterceptor);
         actionInvocation.addInterceptor(databaseInterceptor);
         actionInvocation.addInterceptor(dateInterceptor);
-        Action action = new TestingAction();
+        I_Action action = new TestingAction();
         action.setDate("yyyy-MM-dd,HH:mm:ss");
         action.setDatabaseTestingLine("JUnit_Testing_Line");
         action.setTestingStatement("JUnit_Result");
@@ -57,10 +57,10 @@ public class InterceptorDispatcherTest {
 
         try {
             assertTrue("", result_part1 && result_part2 && result_part3 && result_part4);
-            System.out.println("Interceptor Dispatcher Test Pass [TestLoggerResultForm]!\nThe Logger was successfully created logger result form!");
+            System.out.println("I_Interceptor Dispatcher Test Pass [TestLoggerResultForm]!\nThe Logger was successfully created logger result form!");
         }
         catch (AssertionError e) {
-            System.out.println("Interceptor Dispatcher Test Fail [TestLoggerResultForm]!\nThe Dispatcher was not successfully created logger result form!");
+            System.out.println("I_Interceptor Dispatcher Test Fail [TestLoggerResultForm]!\nThe Dispatcher was not successfully created logger result form!");
             fail();
         }
         System.out.println();

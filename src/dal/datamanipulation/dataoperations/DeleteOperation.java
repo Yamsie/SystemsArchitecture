@@ -1,13 +1,10 @@
 package dal.datamanipulation.dataoperations;
 
-import dal.datamanipulation.DataCapsule;
-
-import java.util.ArrayList;
-import java.util.List;
+import dal.I_Visitor;
 
 public class DeleteOperation extends DataOperation {
 
-    public void doDelete() {
+    protected void doDelete() {
 
         for (int i  = 0; i < super.getWhereData().getData().size(); i++) {
             if (super.getRawData().getData().contains(super.getWhereData().getData().get(i))) {

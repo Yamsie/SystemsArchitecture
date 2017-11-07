@@ -14,7 +14,7 @@ public class TestCase {
     private String name;
     private String xml;
     private List<MyElement> elements;
-    private List<IElementHandler> handlers;
+    private List<I_ElementHandler> handlers;
 
     public TestCase(List<String> data) {
         handlers = new ArrayList<>();
@@ -57,7 +57,7 @@ public class TestCase {
         this.name = name;
     }
 
-    public List<IElementHandler> getHandlers() { return this.handlers; }
+    public List<I_ElementHandler> getHandlers() { return this.handlers; }
 
     public void setHandlers()
     {
@@ -70,8 +70,8 @@ public class TestCase {
         this.elements = parser.parse(this.xml);
     }
 
-    public IElementHandler lookupHandlerBy(String name){
-        IElementHandler eh = null;
+    public I_ElementHandler lookupHandlerBy(String name){
+        I_ElementHandler eh = null;
         for(int i = 0; i < handlers.size() && eh == null; i++) {
             if (handlers.get(i).getType().equals(name))
                 eh = handlers.get(i);
@@ -86,7 +86,7 @@ public class TestCase {
         try{
             WebDriver driver = new FirefoxDriver();
             for(MyElement e : elements) {
-                IElementHandler handler = lookupHandlerBy(e.getElementType());
+                I_ElementHandler handler = lookupHandlerBy(e.getElementType());
                 String message = handler.execute(e, driver);
                 System.out.println(message);
             }

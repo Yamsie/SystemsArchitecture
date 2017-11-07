@@ -1,16 +1,16 @@
 package bll.models.logger;
 
-public class DatabaseTestingLineInterceptor implements Interceptor{
+public class DatabaseTestingLineInterceptor implements I_Interceptor {
     boolean statement = false;
     int priority = 2;
 
     @Override
-    public void operation(Action action) {
+    public void operation(I_Action action) {
         checkDatabaseTestingLineInterceptor(action.getDatabaseTestingLine());
     }
 
     @Override
-    public void checkOperation(Action action) {
+    public void checkOperation(I_Action action) {
         // TODO Auto-generated method stub
         if(statement == true){
             System.out.println("Checking Database Testing Line is existed!");

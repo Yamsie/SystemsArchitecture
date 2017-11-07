@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.concurrent.TimeUnit;
 
-public class InputHandler implements IElementHandler {
+public class InputHandler implements I_ElementHandler {
 
     public InputHandler() { }
 

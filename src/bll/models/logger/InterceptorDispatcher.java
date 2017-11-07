@@ -6,21 +6,21 @@ import java.util.List;
 
 public class InterceptorDispatcher{
 
-    private Action action;
+    private I_Action action;
 
-    private List<Interceptor> interceptors = new ArrayList<Interceptor>();
+    private List<I_Interceptor> interceptors = new ArrayList<I_Interceptor>();
 
     private List<Integer> interceptorOperationOrder = new ArrayList<>();
 
-    public Action getAction() {
+    public I_Action getAction() {
         return action;
     }
 
-    public void setAction(Action action) {
+    public void setAction(I_Action action) {
         this.action = action;
     }
 
-    public void addInterceptor(Interceptor interceptors) {
+    public void addInterceptor(I_Interceptor interceptors) {
         this.interceptors.add(interceptors);
     }
 
@@ -33,7 +33,7 @@ public class InterceptorDispatcher{
     }
     public String getInterceptorPriorityList(){
         String priorityOrder = "";
-        for(Interceptor i: interceptors){
+        for(I_Interceptor i: interceptors){
             priorityOrder += i.getPriority() + " ";
         }
         return priorityOrder;

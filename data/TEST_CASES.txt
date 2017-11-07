@@ -1,4 +1,1 @@
-id,name,path
-1,UL Search,src/xml/tests/ULSearch.xml
-2,UL Button Press,src/xml/tests/ULButtonPress.xml
-3,test1,src/xml/tests/test1.xml
+id,name,path,input

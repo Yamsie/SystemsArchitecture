@@ -1,9 +1,9 @@
 package bll.models;
 
 import dal.TableTestCases;
-import dal.datamanipulation.I_QueryBuilder;
-import dal.datamanipulation.Query;
-import dal.datamanipulation.QueryBuilder;
+import dal.I_QueryBuilder;
+import dal.Query;
+import dal.QueryBuilder;
 import dal.datamanipulation.dataclauses.WhereClause;
 import dal.datamanipulation.dataoperations.SelectOperation;
 
@@ -20,7 +20,7 @@ public class TestModel {
 
     public List<String> selectOperation(String cols) {
         queryBuilder.setDataOperation(new SelectOperation(cols));
-        queryBuilder.setTargetFile(new TableTestCases());
+        queryBuilder.setTargetFile(TableTestCases.getInstance());
         queryBuilder.doQuery();
         query = queryBuilder.getResult();
         return query.getResult();
@@ -28,7 +28,7 @@ public class TestModel {
 
     public List<String> selectWithWhereOperation(String cols, String where1, String where2) {
         queryBuilder.setDataOperation(new SelectOperation(cols));
-        queryBuilder.setTargetFile(new TableTestCases());
+        queryBuilder.setTargetFile(TableTestCases.getInstance());
         queryBuilder.addClause(new WhereClause(where1, where2));
         queryBuilder.doQuery();
         query = queryBuilder.getResult();

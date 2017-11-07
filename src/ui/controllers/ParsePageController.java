@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ParsePageController implements Initializable, IController {
+public class ParsePageController implements Initializable, I_Controller {
 
     @FXML private TextField pageName;
     @FXML private TextField pageURL;

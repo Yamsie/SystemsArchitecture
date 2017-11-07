@@ -5,15 +5,15 @@ import java.util.List;
 
 public class FactoryController{
 
-    private List<IController> handlers;
+    private List<I_Controller> handlers;
 
     public FactoryController(){
         handlers = new ArrayList<>();
         setHandlers();
     }
 
-    public IController createController(String name) {
-        IController c = getController(name);
+    public I_Controller createController(String name) {
+        I_Controller c = getController(name);
         return c;
     }
 
@@ -24,8 +24,8 @@ public class FactoryController{
         this.handlers.add(new CreateTestController());
     }
 
-    public IController getController(String n){
-        IController c = null;
+    public I_Controller getController(String n){
+        I_Controller c = null;
         for(int i = 0; i < handlers.size() && c == null; i++) {
             if (handlers.get(i).getName().equals(n))
                 c = handlers.get(i);
