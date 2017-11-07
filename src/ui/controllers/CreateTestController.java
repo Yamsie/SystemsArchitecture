@@ -1,6 +1,7 @@
 package ui.controllers;
 
 import bll.models.Caretaker;
+import bll.models.DataOriginator;
 import bll.models.XMLTestCreator;
 import bll.models.parser.MyElement;
 import bll.models.parser.XMLParser;
@@ -34,11 +35,13 @@ public class CreateTestController implements Initializable, IController {
     private ObservableList<MyElement> elementList, testList;
     private ArrayList<TableColumn<MyElement, String>> elementColumns = new ArrayList<>();
     private ArrayList<TableColumn<MyElement, String>> testColumns = new ArrayList<>();
-
     private Caretaker caretaker = new Caretaker();
-    //private ElementOriginator originator = new ElementOriginator();
+    private DataOriginator originator = new DataOriginator();
 
     public CreateTestController() {
+        elementList = FXCollections.observableArrayList();
+        testList = FXCollections.observableArrayList();
+        caretaker.setDataOriginator(originator);
     }
 
     public String getName() {
@@ -62,23 +65,9 @@ public class CreateTestController implements Initializable, IController {
         }
     }
 
-    @FXML
-    private void restore() {
-
-        try {
-            //originator.restore(caretaker.getMemento(testList.size()-1));
-           // ElementMemento elementMemento = (ElementMemento)  caretaker.getMemento(testList.size()-1);
-            //testTable.setItems(elementMemento.getState());
-        }
-        catch(Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        elementList = FXCollections.observableArrayList();
-        testList = FXCollections.observableArrayList();
 
         for (String COLUMN_ATTRIBUTE : COLUMN_ATTRIBUTES) {
             TableColumn<MyElement, String> eCol = new TableColumn<>(COLUMN_ATTRIBUTE.toUpperCase());
@@ -116,16 +105,56 @@ public class CreateTestController implements Initializable, IController {
         testColumns.get(6).setOnEditCommit(e -> e.getTableView().getItems().get(e.getTablePosition().getRow()).setInput(e.getNewValue()));
     }
 
+    @FXML
+    private void restore() {
+        try {
+            if(caretaker.getMementoStackSize() != 0){
+                caretaker.undoOperation();
+                if(caretaker.getMementoStackSize() != 0){
+                    testList = updateTestList(caretaker.getDataValue());
+                    testTable.setItems(testList);
+                }
+                else{
+                    testList.remove(0,testList.size());
+                    testTable.setItems(testList);
+                }
+            }
+            else {
+                testList.remove(0,testList.size());
+                testTable.setItems(testList);
+            }
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public ObservableList<MyElement> updateTestList(ArrayList<MyElement> undoOperation){
+        ObservableList<MyElement> temp = FXCollections.observableArrayList();
+        if(undoOperation.size()!=0){
+            for(int i = 0; i < undoOperation.size(); ++i){
+                temp.add(undoOperation.get(i));
+            }
+        }
+        return temp;
+    }
+
+    public ArrayList<MyElement> translateIntoArrayList(ObservableList<MyElement> testList){
+        ArrayList<MyElement> temp = new ArrayList<>();
+        for(int i = 0; i < testList.size(); ++i){
+            temp.add(testList.get(i));
+        }
+        return temp;
+    }
+
     private void addListeners() {
         elementTable.setOnMousePressed(e -> {
             if(e.getClickCount() == 2) {
                 try {
                     MyElement cloneObject = elementList.get(elementTable.getFocusModel().getFocusedCell().getRow()).clone();
-                    testTable.getItems().add(cloneObject);
+                    testList.add(cloneObject);
                     testTable.setItems(testList);
-
-                    //originator.setState(testList);
-                   // caretaker.addMemento(originator.createMemento());
+                    caretaker.setOriginatorValue(translateIntoArrayList(testList));
                 }
                 catch (CloneNotSupportedException e1) {
                     e1.printStackTrace();

@@ -1,47 +1,47 @@
 package bll.models;
 
+import bll.models.parser.MyElement;
+
+import java.util.ArrayList;
+
 public class DataOriginator implements I_Originator {
 
-    private String text;
+    private ArrayList<MyElement> testList;
 
     public DataOriginator() {
 
     }
 
-    public DataOriginator(String text) {
-        this.text = text;
+    public void setList(ArrayList<MyElement> testList) {
+        this.testList = testList;
     }
 
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public String getText() {
-        return text;
+    public ArrayList<MyElement> getList() {
+        return testList;
     }
 
     public void restore(I_Memento m) {
         Memento memento = (Memento) m;
-        this.text = memento.getState();
+        this.testList = memento.getState();
     }
 
 
     public I_Memento createMemento() {
         Memento memento = new Memento();
-        memento.setState(text);
+        memento.setState(testList);
         return memento;
     }
 }
 
 class Memento implements I_Memento {
 
-    private String state;
+    private ArrayList<MyElement> state;
 
-    public String getState() {
+    public ArrayList<MyElement> getState() {
         return state;
     }
 
-    public void setState(String state) {
+    public void setState(ArrayList<MyElement> state) {
         this.state = state;
     }
 }
