@@ -12,10 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
@@ -30,6 +27,7 @@ public class CreateTestController implements Initializable, IController {
     @FXML private Button addElement;
     @FXML private TextField testName;
     @FXML private TableView<MyElement> elementTable, testTable;
+    @FXML private Label nameMessage;
     private static final String XML_PATH = "src/xml/pages/";
     private static final String [] COLUMN_ATTRIBUTES = {"pageURL", "elementType", "elementID", "elementName", "elementClass", "elementXPath", "input"};
     private ObservableList<MyElement> elementList, testList;
@@ -60,8 +58,16 @@ public class CreateTestController implements Initializable, IController {
     private void createTest() {
         if(testList.size() > 0) {
             String name = testName.getText();
-            testName.clear();
-            new XMLTestCreator().createTest(name.equals("") ? "Default": name, testList);
+            boolean uniqueName = model.checkUniqueName(name);
+            if(uniqueName== true) {
+                model.insertOperation(testName.getText(), XML_PATH + name);
+                testName.clear();
+                new XMLTestCreator().createTest(name.equals("") ? "Default" : name, testList);
+            }
+            else{
+                testName.clear();
+                nameMessage.setVisible(true);
+            }
         }
     }
 
@@ -82,6 +88,7 @@ public class CreateTestController implements Initializable, IController {
     public void initialize(URL location, ResourceBundle resources) {
         elementList = FXCollections.observableArrayList();
         testList = FXCollections.observableArrayList();
+        nameMessage.setVisible(false);
 
         for (String COLUMN_ATTRIBUTE : COLUMN_ATTRIBUTES) {
             TableColumn<MyElement, String> eCol = new TableColumn<>(COLUMN_ATTRIBUTE.toUpperCase());
@@ -126,7 +133,6 @@ public class CreateTestController implements Initializable, IController {
                     MyElement cloneObject = elementList.get(elementTable.getFocusModel().getFocusedCell().getRow()).clone();
                     testTable.getItems().add(cloneObject);
                     testTable.setItems(testList);
-
                     //originator.setState(testList);
                    // caretaker.addMemento(originator.createMemento());
                 }
