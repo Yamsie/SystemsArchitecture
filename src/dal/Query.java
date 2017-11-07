@@ -1,6 +1,5 @@
-package dal.datamanipulation;
+package dal;
 
-import dal.DataManager;
 import dal.datamanipulation.dataclauses.I_DataClause;
 import dal.datamanipulation.dataoperations.DataOperation;
 import dal.datamanipulation.dataoperations.DataOperationVisitor;
@@ -36,7 +35,7 @@ public class Query {
 
         List<String> temp = new ArrayList<>(target.getDataCapsule().getData());
 
-        if(!dataOperation.getReadOnly()) { // Here as a placeholder - can't figure out how to integrate deletion. Lots of refactoring expected after more consideration
+        if(!dataOperation.getReadOnly()) {
             target.setDataCapsule(dataOperation.getRawData());
         }
     }

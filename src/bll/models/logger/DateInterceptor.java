@@ -3,12 +3,12 @@ package bll.models.logger;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class DateInterceptor implements Interceptor{
+public class DateInterceptor implements I_Interceptor {
     boolean statement = false;
     int priority = 3;
 
     @Override
-    public void operation(Action action) {
+    public void operation(I_Action action) {
         if(action.getDate().equals("null")){
             action.setDate(CurrentTime());
         }
@@ -16,7 +16,7 @@ public class DateInterceptor implements Interceptor{
     }
 
     @Override
-    public void checkOperation(Action action) {
+    public void checkOperation(I_Action action) {
         // TODO Auto-generated method stub
         if(action.getDate() != null){
             System.out.println("Create current date succeed!");

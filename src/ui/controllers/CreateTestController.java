@@ -22,7 +22,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class CreateTestController implements Initializable, IController {
+public class CreateTestController implements Initializable, I_Controller {
 
     @FXML private Button addElement;
     @FXML private TextField testName;

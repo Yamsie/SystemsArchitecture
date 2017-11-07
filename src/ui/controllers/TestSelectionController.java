@@ -2,33 +2,23 @@ package ui.controllers;
 
 import bll.models.TestCase;
 import bll.models.TestModel;
-import dal.TableTestCases;
-import dal.datamanipulation.I_QueryBuilder;
-import dal.datamanipulation.Query;
-import dal.datamanipulation.QueryBuilder;
-import dal.datamanipulation.dataclauses.WhereClause;
-import dal.datamanipulation.dataoperations.SelectOperation;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class TestSelectionController implements Initializable, IController{
+public class TestSelectionController implements Initializable, I_Controller {
 
     @FXML
     private ListView list;

@@ -1,9 +1,8 @@
 package dal.datamanipulation.dataoperations;
 
-import dal.datamanipulation.DataCapsule;
-
-import javax.xml.crypto.Data;
-import java.util.List;
+import dal.DataCapsule;
+import dal.I_Visitable;
+import dal.I_Visitor;
 
 public class DataOperation implements I_Visitable {
 

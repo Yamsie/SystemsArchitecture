@@ -1,6 +1,5 @@
-package dal.datamanipulation;
+package dal;
 
-import dal.DataManager;
 import dal.datamanipulation.dataclauses.I_DataClause;
 import dal.datamanipulation.dataoperations.DataOperation;
 

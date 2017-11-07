@@ -1,4 +1,4 @@
-package dal.datamanipulation;
+package dal;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package dal.datamanipulation.dataoperations;
+package dal;
 
 public interface I_Visitable {
 

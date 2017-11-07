@@ -1,24 +1,12 @@
 package bll.models;
 
-import dal.DataManager;
 import dal.TableTestCases;
-import dal.datamanipulation.I_QueryBuilder;
-import dal.datamanipulation.Query;
-import dal.datamanipulation.QueryBuilder;
-import dal.datamanipulation.dataclauses.WhereClause;
+import dal.I_QueryBuilder;
+import dal.Query;
+import dal.QueryBuilder;
 import dal.datamanipulation.dataoperations.SelectOperation;
-import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import ui.controllers.NewTestScenarioController;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class NewTestScenarioModel {

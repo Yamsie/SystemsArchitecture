@@ -3,7 +3,6 @@ package ui.controllers;
 
 import bll.models.*;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 import javafx.fxml.FXMLLoader;
@@ -17,7 +16,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.*;
 
-public class NewTestScenarioController implements IController, Initializable {
+public class NewTestScenarioController implements I_Controller, Initializable {
 
 
 

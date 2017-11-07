@@ -1,11 +1,12 @@
 package dal.datamanipulation.dataoperations;
 
-import java.lang.reflect.Array;
+import dal.I_Visitable;
+import dal.I_Visitor;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-public class SelectOperation extends DataOperation implements I_Visitable{
+public class SelectOperation extends DataOperation implements I_Visitable {
 
     private String[] columns;
 

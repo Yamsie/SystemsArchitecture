@@ -2,7 +2,7 @@ package ui.controllers;
 
 import javafx.stage.Stage;
 
-public interface IController {
+public interface I_Controller {
     String getName();
     void changeScene(Stage stage);
 }
