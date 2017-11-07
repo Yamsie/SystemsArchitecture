@@ -18,7 +18,6 @@ public class FactoryController{
     }
 
     public void setHandlers(){
-        this.handlers.add(new TestWebPageController());
         this.handlers.add(new NewTestScenarioController());
         this.handlers.add(new TestSelectionController());
         this.handlers.add(new ParsePageController());

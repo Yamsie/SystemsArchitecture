@@ -1,6 +1,7 @@
 package ui.controllers;
 
 import bll.models.Caretaker;
+import bll.models.TestModel;
 import bll.models.XMLTestCreator;
 import bll.models.parser.MyElement;
 import bll.models.parser.XMLParser;
@@ -34,11 +35,13 @@ public class CreateTestController implements Initializable, IController {
     private ObservableList<MyElement> elementList, testList;
     private ArrayList<TableColumn<MyElement, String>> elementColumns = new ArrayList<>();
     private ArrayList<TableColumn<MyElement, String>> testColumns = new ArrayList<>();
+    private TestModel model; //all queryBuilder or txt file stuff should be put into a method in TestModel - to be more MVC
 
     private Caretaker caretaker = new Caretaker();
     //private ElementOriginator originator = new ElementOriginator();
 
     public CreateTestController() {
+        model = new TestModel();
     }
 
     public String getName() {

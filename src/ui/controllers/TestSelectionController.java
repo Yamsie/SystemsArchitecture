@@ -1,6 +1,7 @@
 package ui.controllers;
 
 import bll.models.TestCase;
+import bll.models.TestModel;
 import dal.TableTestCases;
 import dal.datamanipulation.I_QueryBuilder;
 import dal.datamanipulation.Query;
@@ -32,19 +33,24 @@ public class TestSelectionController implements Initializable, IController{
     @FXML
     private ListView list;
     private String selected = "";
+    private TestModel model;
 
-    public TestSelectionController () { }
+    public TestSelectionController () {
+        model = new TestModel();
+    }
 
     public void initialize(URL location, ResourceBundle resources) {
-
+        String cols = "name";
+        List<String> data = model.selectOperation(cols);
+        /*
         I_QueryBuilder queryBuilder = new QueryBuilder();
         queryBuilder.setDataOperation(new SelectOperation("name"));
         queryBuilder.setTargetFile(new TableTestCases());
         queryBuilder.doQuery();
         Query query = queryBuilder.getResult();
-        List<String> data = query.getResult();
-        ArrayList<String> values = new ArrayList<>();
+        List<String> data = query.getResult();*/
 
+        ArrayList<String> values = new ArrayList<>();
         for (int i = 0; i < data.size(); i++) {
             values.add(data.get(i));
         }
@@ -57,13 +63,15 @@ public class TestSelectionController implements Initializable, IController{
 
     @FXML
     protected void handleRunButtonAction() {
+        /*
         I_QueryBuilder queryBuilder = new QueryBuilder();
         queryBuilder.setDataOperation(new SelectOperation("*"));
         queryBuilder.setTargetFile(new TableTestCases());
         queryBuilder.addClause(new WhereClause("name", selected));
         queryBuilder.doQuery();
-        Query query = queryBuilder.getResult();
-        List<String> data = query.getResult();
+        Query query = queryBuilder.getResult();*/
+        String cols = "*", where1="name";
+        List<String> data = model.selectWithWhereOperation(cols, where1, selected);
 
         //all data returned is in data.get(0), should be separated out into diff indexes
         //for(int i =0; i < data.size(); i++){

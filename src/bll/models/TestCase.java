@@ -13,7 +13,6 @@ public class TestCase {
     private int id;
     private String name;
     private String xml;
-    //private String input;
     private List<MyElement> elements;
     private List<IElementHandler> handlers;
 
