@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.controllers.CreateTestController">
+<GridPane xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.controllers.CreateTestController">
   <AnchorPane cache="true" cacheHint="SCALE" depthTest="ENABLE" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="689.0" prefWidth="796.0">
       <TableView fx:id="elementTable" accessibleRole="IMAGE_VIEW" cache="true" cacheHint="SCALE" depthTest="ENABLE" layoutX="38.0" layoutY="32.0" prefHeight="237.0" prefWidth="703.0" AnchorPane.leftAnchor="38.0" />
       <TableView fx:id="testTable" cache="true" cacheHint="SCALE" depthTest="ENABLE" layoutX="38.0" layoutY="334.0" prefHeight="226.0" prefWidth="703.0" />
@@ -19,6 +19,7 @@
       <Button cache="true" cacheHint="SCALE" layoutX="504.0" layoutY="284.0" mnemonicParsing="false" onMouseClicked="#clearTable" text="Clear" />
       <Button fx:id="addElement" cache="true" cacheHint="SCALE" layoutX="332.0" layoutY="575.0" mnemonicParsing="false" text="Add Element" />
      <Button cache="true" cacheHint="SCALE" layoutX="558.0" layoutY="614.0" mnemonicParsing="false" onMouseClicked="#createTest" text="Save Test" />
+      <Label fx:id="nameMessage" cacheHint="SCALE" contentDisplay="CENTER" layoutX="164.0" layoutY="639.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="367.0" text="A test with this name already exists. Please choose a different name" />
   </AnchorPane>
    <columnConstraints>
       <ColumnConstraints />

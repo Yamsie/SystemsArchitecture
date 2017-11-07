@@ -5,6 +5,7 @@ import dal.I_QueryBuilder;
 import dal.Query;
 import dal.QueryBuilder;
 import dal.datamanipulation.dataclauses.WhereClause;
+import dal.datamanipulation.dataoperations.InsertOperation;
 import dal.datamanipulation.dataoperations.SelectOperation;
 
 import java.util.List;
@@ -33,5 +34,26 @@ public class TestModel {
         queryBuilder.doQuery();
         query = queryBuilder.getResult();
         return query.getResult();
+    }
+
+    public void insertOperation(String testName, String xmlPath){
+        //String i = "1"; //get largest id in file and and +1
+        queryBuilder.setDataOperation(new InsertOperation(testName, xmlPath));
+        queryBuilder.setTargetFile(new TableTestCases());
+        queryBuilder.doQuery();
+        query = queryBuilder.getResult();
+    }
+
+    public boolean checkUniqueName(String n){
+        queryBuilder.setDataOperation(new SelectOperation("name"));
+        queryBuilder.setTargetFile(new TableTestCases());
+        queryBuilder.addClause(new WhereClause("name", n));
+        queryBuilder.doQuery();
+        query = queryBuilder.getResult();
+        List<String> l = query.getResult();
+        if(l.size() == 0)
+            return true;
+        else
+            return false;
     }
 }
