@@ -1,7 +1,7 @@
 package dal.datamanipulation.dataoperations;
 
-import java.util.ArrayList;
-import java.util.List;
+import dal.I_Visitable;
+import dal.I_Visitor;
 
 public class InsertOperation extends DataOperation implements I_Visitable {
 

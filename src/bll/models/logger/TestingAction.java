@@ -1,11 +1,11 @@
 package bll.models.logger;
 
-public class TestingAction implements Action {      //Context Object
+public class TestingAction implements I_Action {      //Context Object
     String date = null;
     String databaseTestingLine = null;
     String testingStatement = null;
 
-    @Override // Create the result of Interceptor and return the result to logger
+    @Override // Create the result of I_Interceptor and return the result to logger
     public String execute() {
         return date + "," + databaseTestingLine + "," + testingStatement;
     }

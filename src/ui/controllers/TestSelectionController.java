@@ -1,52 +1,46 @@
 package ui.controllers;
 
 import bll.models.TestCase;
-import dal.TableTestCases;
-import dal.datamanipulation.I_QueryBuilder;
-import dal.datamanipulation.Query;
-import dal.datamanipulation.QueryBuilder;
-import dal.datamanipulation.dataclauses.WhereClause;
-import dal.datamanipulation.dataoperations.SelectOperation;
+import bll.models.TestModel;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class TestSelectionController implements Initializable, IController{
+public class TestSelectionController implements Initializable, I_Controller {
 
     @FXML
     private ListView list;
-    @FXML
-    private Button run;
     private String selected = "";
+    private TestModel model;
 
-    public TestSelectionController () { }
+    public TestSelectionController () {
+        model = new TestModel();
+    }
 
     public void initialize(URL location, ResourceBundle resources) {
-
+        String cols = "name";
+        List<String> data = model.selectOperation(cols);
+        /*
         I_QueryBuilder queryBuilder = new QueryBuilder();
         queryBuilder.setDataOperation(new SelectOperation("name"));
         queryBuilder.setTargetFile(new TableTestCases());
         queryBuilder.doQuery();
         Query query = queryBuilder.getResult();
-        List<String> data = query.getResult();
-        ArrayList<String> values = new ArrayList<>();
+        List<String> data = query.getResult();*/
 
+        ArrayList<String> values = new ArrayList<>();
         for (int i = 0; i < data.size(); i++) {
             values.add(data.get(i));
         }
@@ -59,13 +53,15 @@ public class TestSelectionController implements Initializable, IController{
 
     @FXML
     protected void handleRunButtonAction() {
+        /*
         I_QueryBuilder queryBuilder = new QueryBuilder();
         queryBuilder.setDataOperation(new SelectOperation("*"));
         queryBuilder.setTargetFile(new TableTestCases());
         queryBuilder.addClause(new WhereClause("name", selected));
         queryBuilder.doQuery();
-        Query query = queryBuilder.getResult();
-        List<String> data = query.getResult();
+        Query query = queryBuilder.getResult();*/
+        String cols = "*", where1="name";
+        List<String> data = model.selectWithWhereOperation(cols, where1, selected);
 
         //all data returned is in data.get(0), should be separated out into diff indexes
         //for(int i =0; i < data.size(); i++){

@@ -1,13 +1,6 @@
 package bll.models;
 
 import bll.models.parser.MyElement;
-import dal.TableTestCases;
-import dal.datamanipulation.I_QueryBuilder;
-import dal.datamanipulation.Query;
-import dal.datamanipulation.QueryBuilder;
-import dal.datamanipulation.dataclauses.WhereClause;
-import dal.datamanipulation.dataoperations.InsertOperation;
-import dal.datamanipulation.dataoperations.SelectOperation;
 import javafx.collections.ObservableList;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
@@ -22,7 +15,6 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
-import java.util.List;
 
 public class XMLTestCreator {
     private Element [] elementArray = new Element[7];

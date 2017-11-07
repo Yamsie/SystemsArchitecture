@@ -9,16 +9,15 @@ import java.util.Scanner;
 
 public class TableTestCases extends DataManager {
 
-    private static TableTestCases instance = null;
-
-    public static TableTestCases getInstance() {
-        if(instance == null) {
-            instance = new TableTestCases();
-        }
-        return instance;
+    private static class SingletonHolder {
+        private static final TableTestCases INSTANCE = new TableTestCases();
     }
 
-    public TableTestCases() {
+    public static TableTestCases getInstance() {
+        return SingletonHolder.INSTANCE;
+    }
+
+    private TableTestCases() {
         super.setTarget(new File("data/TEST_CASES.txt"));
         super.readData();
     }

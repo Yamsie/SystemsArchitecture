@@ -1,11 +1,11 @@
 package bll.models.logger;
 
-public class TestingStatementInterceptor implements Interceptor{
+public class TestingStatementInterceptor implements I_Interceptor {
     Boolean statement = false;
     int priority = 1;
 
     @Override
-    public void operation(Action action) {
+    public void operation(I_Action action) {
         boolean temp = checkTestingResult(action.getTestingStatement());
         if(temp)
             statement = true;
@@ -16,7 +16,7 @@ public class TestingStatementInterceptor implements Interceptor{
 
 
     @Override
-    public void checkOperation(Action action) {
+    public void checkOperation(I_Action action) {
         // TODO Auto-generated method stub
         if(statement == true){
             System.out.println("This testing have valued result!");

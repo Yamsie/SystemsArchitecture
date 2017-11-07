@@ -3,7 +3,6 @@ package ui.controllers;
 
 import bll.models.*;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 import javafx.fxml.FXMLLoader;
@@ -17,14 +16,14 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.*;
 
-public class NewTestScenarioController implements IController, Initializable {
+public class NewTestScenarioController implements I_Controller, Initializable {
 
 
 
-    @FXML private Button addTestInput;
+    //@FXML private Button addTestInput;
     @FXML private TextArea textArea;
     @FXML private TextField newItem;
-    @FXML private Button addItemBtn;
+    //@FXML private Button addItemBtn;
 
     private NewTestScenarioModel model;
     private ObservableList<TestCase> data;
@@ -41,7 +40,7 @@ public class NewTestScenarioController implements IController, Initializable {
     }
 
     @FXML
-    public void addTest(ActionEvent actionEvent) {
+    public void addTest() {
 
     }
 
@@ -79,7 +78,7 @@ public class NewTestScenarioController implements IController, Initializable {
         setTextAreaText();
     }
 
-    public void addItemHandler(ActionEvent actionEvent) {
+    public void addItemHandler() {
         sb.append(newItem.getText());
         sb.append("\n");
         originator = new DataOriginator(sb.toString());
@@ -93,7 +92,7 @@ public class NewTestScenarioController implements IController, Initializable {
         textArea.setText(sb.toString());
     }
 
-    public void undoAddItemHandler(ActionEvent actionEvent) {
+    public void undoAddItemHandler() {
         try {
             originator = originators.pop();
             originator.restore(mementos.pop());

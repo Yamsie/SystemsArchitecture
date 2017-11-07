@@ -1,7 +1,5 @@
 package dal;
 
-import dal.datamanipulation.DataCapsule;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
