@@ -51,7 +51,9 @@ public class CreateTestController implements Initializable, I_Controller {
     }
 
     public void clearTable() {
-        testTable.getItems().clear();
+        testList.remove(0,testList.size());
+        testTable.setItems(testList);
+        caretaker.setOriginatorValue(translateIntoArrayList(testList));
     }
 
     private File [] getFiles(String path) {

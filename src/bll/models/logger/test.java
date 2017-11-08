@@ -12,6 +12,8 @@ public class test {
         actionInvocation.addInterceptor(databaseInterceptor);
         actionInvocation.addInterceptor(statementInterceptor);
         I_Action action = new TestingAction();
+        action.setDatabaseTestingLine("Testing elements information here"); //String here, for set testing line
+        action.setTestingStatement("Succeed"); // String here, statement Succeed or Failed
         actionInvocation.setAction(action);
         String result = actionInvocation.invoke();
         operator.addData(result + "\n");
