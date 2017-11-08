@@ -64,7 +64,7 @@ public class CreateTestController implements Initializable, I_Controller {
             String name = testName.getText();
             boolean unique = model.checkUniqueName(name);
             if(unique == true) {
-                testName.clear();
+                testName.clear(); //clear
                 new XMLTestCreator().createTest(name.equals("") ? "Default" : name, testList);
                 nameMessage.setText("Test has been saved.");
                 model.insertOperation(name, XML_TEST_PATH + name + ".xml");
