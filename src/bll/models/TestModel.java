@@ -10,8 +10,6 @@ import dal.datamanipulation.dataoperations.SelectOperation;
 
 import java.util.List;
 
-import static dal.TableTestCases.getInstance;
-
 public class TestModel {
     I_QueryBuilder queryBuilder;
     Query query;
@@ -23,7 +21,7 @@ public class TestModel {
 
     public List<String> selectOperation(String cols) {
         queryBuilder.setDataOperation(new SelectOperation(cols));
-        queryBuilder.setTargetFile(getInstance());
+        queryBuilder.setTargetFile(new TableTestCases());
         queryBuilder.doQuery();
         query = queryBuilder.getResult();
         return query.getResult();
@@ -31,7 +29,7 @@ public class TestModel {
 
     public List<String> selectWithWhereOperation(String cols, String where1, String where2) {
         queryBuilder.setDataOperation(new SelectOperation(cols));
-        queryBuilder.setTargetFile(getInstance());
+        queryBuilder.setTargetFile(new TableTestCases());
         queryBuilder.addClause(new WhereClause(where1, where2));
         queryBuilder.doQuery();
         query = queryBuilder.getResult();
@@ -41,16 +39,14 @@ public class TestModel {
     public void insertOperation(String testName, String xmlPath){
         //String i = "1"; //get largest id in file and and +1
         queryBuilder.setDataOperation(new InsertOperation(testName, xmlPath));
-        queryBuilder.setTargetFile(TableTestCases.getInstance());
+        queryBuilder.setTargetFile(new TableTestCases());
         queryBuilder.doQuery();
         query = queryBuilder.getResult();
     }
 
     public boolean checkUniqueName(String n){
-        query = null;
-        queryBuilder = null;
         queryBuilder.setDataOperation(new SelectOperation("name"));
-        queryBuilder.setTargetFile(TableTestCases.getInstance());
+        queryBuilder.setTargetFile(new TableTestCases());
         queryBuilder.addClause(new WhereClause("name", n));
         queryBuilder.doQuery();
         query = queryBuilder.getResult();

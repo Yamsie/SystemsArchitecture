@@ -4,3 +4,5 @@ UL Button Press,src/xml/tests/ULButtonPress.xml
 test1,src/xml/tests/test1.xml
 tets3,src/xml/pages/
 fukyvkyuvuy,src/xml/pages/
+book,src/xml/pages/book
+helloooooooooooooooooo,src/xml/pages/helloooooooooooooooooo

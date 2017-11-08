@@ -45,7 +45,7 @@ public class Query {
     }
 
     public List<String> getResult() {
-        return dataOperation.getRawData().getData();
+        return dataOperation.getWhereData().getData();
     }
 
     private void doClauses() {

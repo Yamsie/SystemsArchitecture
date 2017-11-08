@@ -10,7 +10,7 @@ public abstract class DataManager {
     private File file;
     private DataCapsule dataCapsule;
 
-    void readData() {
+    protected void readData() {
         try(Scanner in = new Scanner(file)) {
             String[] columns = in.nextLine().split(","); //get columns, move on to first line with data
             List<String> data = new ArrayList<>();
@@ -27,7 +27,7 @@ public abstract class DataManager {
         }
     }
 
-    void writeData() {
+    protected void writeData() {
         try(BufferedWriter out = new BufferedWriter(new FileWriter(file))) {
 
             for(int i = 0; i < dataCapsule.getColumns().length; i++) {
@@ -64,7 +64,7 @@ public abstract class DataManager {
         return file;
     }
 
-    void setTarget(File file) {
+    protected void setTarget(File file) {
         this.file = file;
     }
 
