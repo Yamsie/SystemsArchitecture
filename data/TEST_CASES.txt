@@ -1,1 +1,2 @@
 name,path
+GoogleHelloWorld,rsc/xml/tests/GoogleHelloWorld.xml

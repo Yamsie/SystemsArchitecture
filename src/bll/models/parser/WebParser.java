@@ -29,7 +29,7 @@ public class WebParser
         try
         {
             org.jsoup.nodes.Document document = Jsoup.connect(file).get();
-            Elements elements = document.body().select("a, input[type=text], input[type=radio], textarea, button, span");
+            Elements elements = document.body().select("a, input[type=text], input[type=radio], input[type=checkbox], textarea, button, span");
             for(Element e: elements)
             {
                 list.add(new MyElement(

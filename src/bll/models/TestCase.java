@@ -69,6 +69,7 @@ public class TestCase {
                 String message = handler.execute(e, driver);
                 System.out.println(message);
             }
+            Thread.sleep(Integer.parseInt(Settings.getInstance().getProperty("TIME_OUT")));
             driver.close();
         }
         catch(Exception ex){

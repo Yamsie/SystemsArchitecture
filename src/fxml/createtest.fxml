@@ -5,9 +5,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
 
 <GridPane xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.controllers.CreateTestController">
   <AnchorPane cache="true" cacheHint="SCALE" depthTest="ENABLE" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="689.0" prefWidth="796.0">
@@ -21,10 +19,4 @@
      <Button cache="true" cacheHint="SCALE" layoutX="558.0" layoutY="614.0" mnemonicParsing="false" onMouseClicked="#createTest" text="Save Test" />
       <Label fx:id="nameMessage" cacheHint="SCALE" contentDisplay="CENTER" layoutX="164.0" layoutY="639.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="367.0"/>
   </AnchorPane>
-   <columnConstraints>
-      <ColumnConstraints />
-   </columnConstraints>
-   <rowConstraints>
-      <RowConstraints />
-   </rowConstraints>
 </GridPane>

@@ -5,8 +5,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.util.concurrent.TimeUnit;
-
 public class InputHandler implements I_ElementHandler {
 
     public InputHandler() { }
@@ -16,8 +14,9 @@ public class InputHandler implements I_ElementHandler {
     public String execute(MyElement element, WebDriver driver){
         String loggerMessage = "Success: test for input element "+element.getElementName()+" been successful";
         driver.get(element.getPageURL());
-        try{
-            Thread.sleep(10000); //sleep, allow page to load
+        try
+        {
+            Thread.sleep(Integer.parseInt(Settings.getInstance().getProperty("TIME_OUT"))); //sleep, allow page to load
             WebElement e = driver.findElement(By.id(element.getElementID()));
             String in = element.getInput();
             System.out.println("input is "+in);
@@ -26,7 +25,8 @@ public class InputHandler implements I_ElementHandler {
             e.sendKeys(in);
             e.submit();
         }
-        catch(Exception ex){
+        catch(Exception ex)
+        {
             loggerMessage = "Fail: test for input element "+element.getElementName()+" has failed" + ex.getStackTrace();
         }
         return loggerMessage;
