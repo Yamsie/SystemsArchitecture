@@ -5,11 +5,13 @@ import bll.models.TestModel;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
@@ -20,8 +22,8 @@ import java.util.ResourceBundle;
 
 public class TestSelectionController implements Initializable, I_Controller {
 
-    @FXML
-    private ListView list;
+    @FXML private ListView list;
+    @FXML private Button mainMenuBtn;
     private String selected = "";
     private TestModel model;
 
@@ -89,6 +91,11 @@ public class TestSelectionController implements Initializable, I_Controller {
             System.out.println("Exception caught in TestSelectionController changeScene()");
             ex.printStackTrace();
         }
+    }
+
+    public void mainMenuBtnHandler() {
+        I_Controller c = SingletonFactory.getFactoryInstance().createController("MainMenuController");
+        c.changeScene((Stage) mainMenuBtn.getScene().getWindow());
     }
 }
 
