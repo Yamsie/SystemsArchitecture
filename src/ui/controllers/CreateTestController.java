@@ -30,6 +30,7 @@ public class CreateTestController implements Initializable, I_Controller {
     @FXML private TableView<MyElement> elementTable, testTable;
     @FXML private Label nameMessage;
     private static final String XML_PATH = "src/xml/pages/";
+    private static final String XML_TEST_PATH = "src/xml/tests/";
     private static final String [] COLUMN_ATTRIBUTES = {"pageURL", "elementType", "elementID", "elementName", "elementClass", "elementXPath", "input"};
     private ObservableList<MyElement> elementList, testList;
     private ArrayList<TableColumn<MyElement, String>> elementColumns = new ArrayList<>();
@@ -68,7 +69,7 @@ public class CreateTestController implements Initializable, I_Controller {
                 testName.clear();
                 new XMLTestCreator().createTest(name.equals("") ? "Default" : name, testList);
                 nameMessage.setText("Test has been saved.");
-                model.insertOperation(name, XML_PATH+name);
+                model.insertOperation(name, XML_TEST_PATH + name + ".xml");
             }
             else {
                 testName.clear();
