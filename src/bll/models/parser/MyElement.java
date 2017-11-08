@@ -21,6 +21,10 @@ public class MyElement implements Cloneable
         this.elementClass = elementClass;
     }
 
+    public void setPageURL(String pageURL) {
+        this.pageURL = pageURL;
+    }
+
     public MyElement clone() throws CloneNotSupportedException {
         return (MyElement) super.clone();
     }

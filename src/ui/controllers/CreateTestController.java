@@ -116,10 +116,9 @@ public class CreateTestController implements Initializable, I_Controller {
     private void editCells()
     {
         testTable.setEditable(true);
-        for(int i = 1; i < COLUMN_ATTRIBUTES.length; i++)
-        {
+        for(int i = 0; i < COLUMN_ATTRIBUTES.length; i++)
             testColumns.get(i).setCellFactory(TextFieldTableCell.forTableColumn());
-        }
+        testColumns.get(0).setOnEditCommit(e -> e.getTableView().getItems().get(e.getTablePosition().getRow()).setPageURL(e.getNewValue()));
         testColumns.get(1).setOnEditCommit(e -> e.getTableView().getItems().get(e.getTablePosition().getRow()).setElementType(e.getNewValue()));
         testColumns.get(2).setOnEditCommit(e -> e.getTableView().getItems().get(e.getTablePosition().getRow()).setElementID(e.getNewValue()));
         testColumns.get(3).setOnEditCommit(e -> e.getTableView().getItems().get(e.getTablePosition().getRow()).setElementName(e.getNewValue()));
