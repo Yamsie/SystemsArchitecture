@@ -2,6 +2,8 @@ package bll.models.dataformatter;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
+
+import bll.models.Settings;
 import bll.models.XMLWriter;
 import bll.models.parser.MyElement;
 import org.w3c.dom.Document;
@@ -9,19 +11,22 @@ import org.w3c.dom.Element;
 import java.util.ArrayList;
 import java.util.List;
 
-public class XMLFormatter implements I_DataFormatter {
-
+public class XMLFormatter implements I_DataFormatter
+{
     private String rootName;
     private List<MyElement> list = new ArrayList<>();
 
-    public void convertFile(String rootName, List<MyElement> list) {
+    public void convertFile(String rootName, List<MyElement> list)
+    {
         this.list = list;
         this.rootName = rootName;
         createDocument();
     }
 
-    private void createDocument() {
-        try {
+    private void createDocument()
+    {
+        try
+        {
             DocumentBuilderFactory xml_factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = xml_factory.newDocumentBuilder();
             Document document = docBuilder.newDocument();
@@ -29,14 +34,15 @@ public class XMLFormatter implements I_DataFormatter {
             document.appendChild(rootElement);
             createElements(document, rootElement);
         }
-        catch (Exception e) {
+        catch (Exception e)
+        {
             e.printStackTrace();
         }
     }
 
-    private void createElements(Document document, Element rootElement) {
+    private void createElements(Document document, Element rootElement)
+    {
         Element element, id, elementName, elementClass, elementType, elementHomeURL;
-
         for (MyElement el : list)
         {
             if(el.isEmpty()) continue;
@@ -60,6 +66,6 @@ public class XMLFormatter implements I_DataFormatter {
             element.appendChild(elementClass);
             rootElement.appendChild(element);
         }
-        XMLWriter.writeTest(rootName, "src/xml/pages/", document);
+        XMLWriter.writeTest(rootName, Settings.getInstance().getProperty("XML_PATH"), document);
     }
 }
