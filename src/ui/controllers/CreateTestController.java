@@ -2,6 +2,7 @@ package ui.controllers;
 
 import bll.models.Caretaker;
 import bll.models.DataOriginator;
+import bll.models.TestModel;
 import bll.models.XMLTestCreator;
 import bll.models.parser.MyElement;
 import bll.models.parser.XMLParser;
@@ -12,10 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
@@ -25,11 +23,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class CreateTestController implements Initializable, IController {
+public class CreateTestController implements Initializable, I_Controller {
 
     @FXML private Button addElement;
     @FXML private TextField testName;
     @FXML private TableView<MyElement> elementTable, testTable;
+    @FXML private Label nameMessage;
     private static final String XML_PATH = "src/xml/pages/";
     private static final String [] COLUMN_ATTRIBUTES = {"pageURL", "elementType", "elementID", "elementName", "elementClass", "elementXPath", "input"};
     private ObservableList<MyElement> elementList, testList;
@@ -37,11 +36,13 @@ public class CreateTestController implements Initializable, IController {
     private ArrayList<TableColumn<MyElement, String>> testColumns = new ArrayList<>();
     private Caretaker caretaker = new Caretaker();
     private DataOriginator originator = new DataOriginator();
+    private TestModel model;
 
     public CreateTestController() {
         elementList = FXCollections.observableArrayList();
         testList = FXCollections.observableArrayList();
         caretaker.setDataOriginator(originator);
+        model = new TestModel();
     }
 
     public String getName() {
@@ -60,8 +61,17 @@ public class CreateTestController implements Initializable, IController {
     private void createTest() {
         if(testList.size() > 0) {
             String name = testName.getText();
-            testName.clear();
-            new XMLTestCreator().createTest(name.equals("") ? "Default": name, testList);
+            boolean unique = model.checkUniqueName(name);
+            if(unique == true) {
+                testName.clear();
+                new XMLTestCreator().createTest(name.equals("") ? "Default" : name, testList);
+                nameMessage.setText("Test has been saved.");
+                model.insertOperation(name, XML_PATH+name);
+            }
+            else {
+                testName.clear();
+                nameMessage.setText("A test with this name already exists. Please choose a different name");
+            }
         }
     }
 

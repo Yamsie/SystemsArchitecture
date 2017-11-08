@@ -25,6 +25,7 @@ public class ButtonHandler implements I_ElementHandler {
         catch(Exception ex){
             loggerMessage = "Fail: test for button element "+element.getElementName()+" has failed" + ex.getStackTrace();
         }
+        System.out.println(loggerMessage);
         return loggerMessage;
     }
 }

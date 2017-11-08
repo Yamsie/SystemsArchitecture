@@ -10,7 +10,6 @@ import java.util.List;
 
 public class TestCase {
 
-    private int id;
     private String name;
     private String xml;
     private List<MyElement> elements;
@@ -22,9 +21,8 @@ public class TestCase {
         String[] ar = data.get(0).split(",");
         //for(int i =0; i < ar.length; i++){
           //  System.out.println(ar[i]); }
-        this.id = Integer.parseInt(ar[0]);
-        this.name = ar[1];
-        this.xml = ar[2];
+        this.name = ar[0];
+        this.xml = ar[1];
         setElements();
         setHandlers();
     }
@@ -36,18 +34,6 @@ public class TestCase {
         this.input = data.get(3);
         setElements();
     }*/
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    //public String getInput() {return input;}
-
-    //public void setInput(String input) {this.input = input;}
 
     public String getName() {
         return name;
