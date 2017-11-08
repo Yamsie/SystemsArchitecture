@@ -1,4 +1,1 @@
 name,path
-GoogleHelloWorld,src/xml/tests/GoogleHelloWorld.xml
-Test,src/xml/tests/Test.xml
-Default,src/xml/tests/Default.xml
