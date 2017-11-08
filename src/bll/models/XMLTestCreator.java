@@ -2,35 +2,29 @@ package bll.models;
 
 import bll.models.parser.MyElement;
 import javafx.collections.ObservableList;
-import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-import java.io.File;
 
-public class XMLTestCreator {
+public class XMLTestCreator
+{
     private Element [] elementArray = new Element[7];
     private DocumentBuilderFactory xmlFactory = DocumentBuilderFactory.newInstance();
 
-    public XMLTestCreator() {
-    }
+    public XMLTestCreator() {}
 
-    public void createTest(String nameOfTest, ObservableList<MyElement> arrayList) {
-        try {
+    public void createTest(String nameOfTest, ObservableList<MyElement> arrayList)
+    {
+        try
+        {
             DocumentBuilder docBuilder = xmlFactory.newDocumentBuilder();
             Document document = docBuilder.newDocument();
             Element root = document.createElement("test");
             document.appendChild(root);
-
-            for(MyElement e: arrayList) {
+            for(MyElement e: arrayList)
+            {
                 Element element = document.createElement("element");
                 root.appendChild(element);
                 elementArray[0] = document.createElement("home");
@@ -57,32 +51,10 @@ public class XMLTestCreator {
                 for (Element el : elementArray)
                     element.appendChild(el);
             }
-            XMLWriter.writeTest(nameOfTest, "src/xml/tests/", document);
+            XMLWriter.writeTest(nameOfTest, Settings.getInstance().getProperty("XML_TEST_PATH"), document);
         }
-
-        catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void writeTest(String nameOfTest, Document document) {
-        try {
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer = transformerFactory.newTransformer();
-            transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
-            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
-            DOMSource source = new DOMSource(document);
-            StreamResult result = new StreamResult(new File("src/xml/tests/" + nameOfTest + ".xml"));
-            transformer.transform(source, result);
-
-            //writing new test to text file - not built into query builder yet, do manually for now
-            /*I_QueryBuilder queryBuilder = new QueryBuilder();
-            queryBuilder.setDataOperation(new InsertOperation());
-            queryBuilder.setTargetFile(new TableTestCases());
-            Query query = queryBuilder.getResult();
-            List<String> data = query.getResult();*/
-        } catch (TransformerException | DOMException e) {
+        catch (ParserConfigurationException e)
+        {
             e.printStackTrace();
         }
     }

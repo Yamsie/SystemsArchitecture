@@ -1,2 +1,2 @@
 name,path
-FBTest,src/xml/tests/FBTest.xml
+GoogleHelloWorld,rsc/xml/tests/GoogleHelloWorld.xml

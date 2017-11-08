@@ -27,14 +27,6 @@ public class TestCase {
         setHandlers();
     }
 
-    /*public TestCase(List<String> data) {
-        this.id = Integer.parseInt(data.get(0));
-        this.name = data.get(1);
-        this.xml = data.get(2);
-        this.input = data.get(3);
-        setElements();
-    }*/
-
     public String getName() {
         return name;
     }
@@ -71,11 +63,13 @@ public class TestCase {
         System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, "/dev/null");
         try{
             WebDriver driver = new FirefoxDriver();
-            for(MyElement e : elements) {
+            for(MyElement e : elements)
+            {
                 I_ElementHandler handler = lookupHandlerBy(e.getElementType());
                 String message = handler.execute(e, driver);
                 System.out.println(message);
             }
+            Thread.sleep(Integer.parseInt(Settings.getInstance().getProperty("TIME_OUT")));
             driver.close();
         }
         catch(Exception ex){

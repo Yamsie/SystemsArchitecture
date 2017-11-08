@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test>
+    <element>
+        <home>https://www.google.ie/</home>
+        <type>input</type>
+        <id>lst-ib</id>
+        <class>lst lst-tbb sbibps</class>
+        <name>q</name>
+        <xpath/>
+        <input>Hello World</input>
+    </element>
+</test>

@@ -9,28 +9,32 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-public class WebParser {
+public class WebParser
+{
     private I_DataFormatter fileFormat;
 
-    public WebParser() {
+    public WebParser()
+    {
         this.fileFormat = new XMLFormatter();
     }
 
-    public void setFileFormat(I_DataFormatter fileFormat) {
+    public void setFileFormat(I_DataFormatter fileFormat)
+    {
         this.fileFormat = fileFormat;
     }
 
-    public void parse(String nameOfFile, String file) {
+    public void parse(String nameOfFile, String file)
+    {
         List<MyElement> list = new ArrayList<>();
-
-        try {
+        try
+        {
             org.jsoup.nodes.Document document = Jsoup.connect(file).get();
-            Elements elements = document.body().select("a, input, button, textarea, td, span, tr");
-
-            for(Element e: elements) {
+            Elements elements = document.body().select("a, input[type=text], input[type=radio], input[type=checkbox], textarea, button, span");
+            for(Element e: elements)
+            {
                 list.add(new MyElement(
                         file,
-                        e.nodeName(),
+                        e.attr("type").matches("(radio|checkbox)") ? "button" : e.nodeName(),
                         e.attr("id"),
                         e.attr("name"),
                         e.attr("class")
@@ -38,7 +42,8 @@ public class WebParser {
             }
             fileFormat.convertFile(nameOfFile, list);
         }
-        catch(IOException e) {
+        catch(IOException e)
+        {
             e.printStackTrace();
         }
     }
