@@ -61,5 +61,12 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="jdom2-2.0.5 (2)" level="project" />
+    <orderEntry type="library" name="jdom2-2.0.5-sources " level="project" />
+    <orderEntry type="library" name="json-lib-2.4-jdk15 " level="project" />
+    <orderEntry type="library" name="json-simple-1.1.1 " level="project" />
+    <orderEntry type="library" name="jsoup-1.10.3 " level="project" />
+    <orderEntry type="library" name="scenebuilder-9.0.0-all " level="project" />
+    <orderEntry type="library" name="selenium-server-standalone-3.6.0 " level="project" />
   </component>
 </module>
