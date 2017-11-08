@@ -8,16 +8,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class TableTestCases extends DataManager {
-
-    private static class SingletonHolder {
-        private static final TableTestCases INSTANCE = new TableTestCases();
-    }
-
-    public static TableTestCases getInstance() {
-        return SingletonHolder.INSTANCE;
-    }
-
-    private TableTestCases() {
+    public TableTestCases() {
         super.setTarget(new File("data/TEST_CASES.txt"));
         super.readData();
     }

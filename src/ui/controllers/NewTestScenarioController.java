@@ -72,7 +72,7 @@ public class NewTestScenarioController implements I_Controller, Initializable {
             }
         }
 
-        originator = new DataOriginator(sb.toString());
+        //originator = new DataOriginator(sb.toString());
         originators.push(originator);
         mementos.push(originator.createMemento());
         setTextAreaText();
@@ -81,7 +81,7 @@ public class NewTestScenarioController implements I_Controller, Initializable {
     public void addItemHandler() {
         sb.append(newItem.getText());
         sb.append("\n");
-        originator = new DataOriginator(sb.toString());
+        //originator = new DataOriginator(sb.toString());
         originators.push(originator);
         mementos.push(originator.createMemento());
         newItem.clear();
@@ -96,7 +96,7 @@ public class NewTestScenarioController implements I_Controller, Initializable {
         try {
             originator = originators.pop();
             originator.restore(mementos.pop());
-            sb = new StringBuilder(originators.peek().getText());
+            //sb = new StringBuilder(originators.peek().getText());
         }
         catch(EmptyStackException e) {
             System.err.println("Stack is empty");

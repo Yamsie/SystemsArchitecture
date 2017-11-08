@@ -27,35 +27,35 @@ public class NewTestScenarioModel {
 
         I_QueryBuilder queryBuilder = new QueryBuilder();
         queryBuilder.setDataOperation(new SelectOperation("id"));
-        queryBuilder.setTargetFile(TableTestCases.getInstance());
+        queryBuilder.setTargetFile(new TableTestCases());
 
         Query query = queryBuilder.getResult();
         columns.add(query.getResult());
 
         queryBuilder = new QueryBuilder();
         queryBuilder.setDataOperation(new SelectOperation("url"));
-        queryBuilder.setTargetFile(TableTestCases.getInstance());
+        queryBuilder.setTargetFile(new TableTestCases());
 
         query = queryBuilder.getResult();
         columns.add(query.getResult());
 
         queryBuilder = new QueryBuilder();
         queryBuilder.setDataOperation(new SelectOperation("element"));
-        queryBuilder.setTargetFile(TableTestCases.getInstance());
+        queryBuilder.setTargetFile(new TableTestCases());
 
         query = queryBuilder.getResult();
         columns.add(query.getResult());
 
         queryBuilder = new QueryBuilder();
         queryBuilder.setDataOperation(new SelectOperation("name"));
-        queryBuilder.setTargetFile(TableTestCases.getInstance());
+        queryBuilder.setTargetFile(new TableTestCases());
 
         query = queryBuilder.getResult();
         columns.add(query.getResult());
 
         queryBuilder = new QueryBuilder();
         queryBuilder.setDataOperation(new SelectOperation("input"));
-        queryBuilder.setTargetFile(TableTestCases.getInstance());
+        queryBuilder.setTargetFile(new TableTestCases());
 
         query = queryBuilder.getResult();
         columns.add(query.getResult());

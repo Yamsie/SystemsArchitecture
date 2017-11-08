@@ -21,7 +21,7 @@ public class TestModel {
 
     public List<String> selectOperation(String cols) {
         queryBuilder.setDataOperation(new SelectOperation(cols));
-        queryBuilder.setTargetFile(TableTestCases.getInstance());
+        queryBuilder.setTargetFile(new TableTestCases());
         queryBuilder.doQuery();
         query = queryBuilder.getResult();
         return query.getResult();
@@ -29,7 +29,7 @@ public class TestModel {
 
     public List<String> selectWithWhereOperation(String cols, String where1, String where2) {
         queryBuilder.setDataOperation(new SelectOperation(cols));
-        queryBuilder.setTargetFile(TableTestCases.getInstance());
+        queryBuilder.setTargetFile(new TableTestCases());
         queryBuilder.addClause(new WhereClause(where1, where2));
         queryBuilder.doQuery();
         query = queryBuilder.getResult();
