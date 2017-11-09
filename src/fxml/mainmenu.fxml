@@ -20,7 +20,7 @@
             <RowConstraints maxHeight="100.0" minHeight="100.0" prefHeight="100.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="testselection" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleTestSelection" prefHeight="100.0" prefWidth="600.0" snapToPixel="false" text="Run Test" GridPane.rowIndex="2">
+            <Button fx:id="testselection" mnemonicParsing="false" onAction="#handleTestSelection" prefHeight="100.0" prefWidth="600.0" text="Run Test" GridPane.rowIndex="2">
              <font>
                  <Font size="20.0" />
              </font>
@@ -30,7 +30,7 @@
                      <Font size="20.0" />
                  </font>
              </Button>
-            <Button fx:id="exitApplication" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleExit" prefHeight="100.0" prefWidth="600.0" text="Exit" GridPane.rowIndex="3">
+            <Button fx:id="exitApplication" mnemonicParsing="false" onAction="#handleExit" prefHeight="100.0" prefWidth="600.0" text="Exit" GridPane.rowIndex="3">
                <font>
                   <Font size="20.0" />
                </font>

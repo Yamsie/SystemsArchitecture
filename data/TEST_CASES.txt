@@ -1,5 +1,3 @@
 name,path
-GoogleHelloWorld,rsc/xml/tests/GoogleHelloWorld.xml
-Default,rsc/xml/tests/Default.xml
-gftre,rsc/xml/tests/gftre.xml
-Test,rsc/xml/tests/Test.xml
+fFDS,rsc/xml/tests/fFDS.xml
+Test123,rsc/xml/tests/Test123.xml

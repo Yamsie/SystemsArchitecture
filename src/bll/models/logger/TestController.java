@@ -1,6 +1,6 @@
 package bll.models.logger;
 
-
+import bll.models.Settings;
 import bll.models.TestCase;
 
 public class TestController {
@@ -12,8 +12,9 @@ public class TestController {
     private InterceptorDispatcher actionInvocation;
     private I_Action action;
 
-    public TestController(){
-        operator = new LoggerOperator("src/bll/models/logger/log.txt");
+    public TestController()
+    {
+        operator = new LoggerOperator(Settings.getInstance().getProperty("LOG_FILE"));
         dateInterceptor = new DateInterceptor();
         databaseInterceptor = new DatabaseTestingLineInterceptor();
         statementInterceptor = new TestingStatementInterceptor();

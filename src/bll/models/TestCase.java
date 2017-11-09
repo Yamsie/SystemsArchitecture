@@ -62,9 +62,9 @@ public class TestCase {
         System.setProperty("webdriver.gecko.driver", "./geckodriver.exe"); // driver name and location
         System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, "/dev/null");
         String message = "";
-
         try{
             WebDriver driver = new FirefoxDriver();
+            driver.get(elements.get(0).getPageURL());
             for(MyElement e : elements)
             {
                 I_ElementHandler handler = lookupHandlerBy(e.getElementType());

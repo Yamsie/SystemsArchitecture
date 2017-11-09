@@ -85,6 +85,9 @@ public class CreateTestController implements Initializable, I_Controller {
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
+        XMLParser xmlParser = new XMLParser();
+        MyJSONParser jsonParser = new MyJSONParser();
+
         for (String COLUMN_ATTRIBUTE : COLUMN_ATTRIBUTES)
         {
             TableColumn<MyElement, String> eCol = new TableColumn<>(COLUMN_ATTRIBUTE.toUpperCase());
@@ -96,11 +99,10 @@ public class CreateTestController implements Initializable, I_Controller {
         }
 
         for(File f: getFiles(Settings.getInstance().getProperty("XML_PATH")))
-            elementList.addAll(new XMLParser().parse(Settings.getInstance().getProperty("XML_PATH") + f.getName()));
+            elementList.addAll(xmlParser.parse(Settings.getInstance().getProperty("XML_PATH") + f.getName()));
 
         for(File f: getFiles(Settings.getInstance().getProperty("JSON_PATH")))
-            elementList.addAll(new MyJSONParser().parse(Settings.getInstance().getProperty("JSON_PATH") + f.getName()));
-
+            elementList.addAll(jsonParser.parse(Settings.getInstance().getProperty("JSON_PATH") + f.getName()));
 
         elementTable.setItems(elementList);
         testTable.setItems(testList);
