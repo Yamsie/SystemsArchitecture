@@ -2,6 +2,7 @@ package ui.controllers;
 
 import bll.models.*;
 import bll.models.parser.MyElement;
+import bll.models.parser.MyJSONParser;
 import bll.models.parser.XMLParser;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -95,9 +96,11 @@ public class CreateTestController implements Initializable, I_Controller {
         }
 
         for(File f: getFiles(Settings.getInstance().getProperty("XML_PATH")))
-        {
             elementList.addAll(new XMLParser().parse(Settings.getInstance().getProperty("XML_PATH") + f.getName()));
-        }
+
+        for(File f: getFiles(Settings.getInstance().getProperty("JSON_PATH")))
+            elementList.addAll(new MyJSONParser().parse(Settings.getInstance().getProperty("JSON_PATH") + f.getName()));
+
 
         elementTable.setItems(elementList);
         testTable.setItems(testList);
@@ -129,31 +132,25 @@ public class CreateTestController implements Initializable, I_Controller {
     @FXML
     private void restore()
     {
-        try
+
+        if(caretaker.getMementoStackSize() != 0)
         {
+            caretaker.undoOperation();
             if(caretaker.getMementoStackSize() != 0)
             {
-                caretaker.undoOperation();
-                if(caretaker.getMementoStackSize() != 0)
-                {
-                    testList = updateTestList(caretaker.getDataValue());
-                    testTable.setItems(testList);
-                }
-                else
-                {
-                    testList.remove(0,testList.size());
-                    testTable.setItems(testList);
-                }
+                testList = updateTestList(caretaker.getDataValue());
+                testTable.setItems(testList);
             }
             else
             {
-                testList.remove(0,testList.size());
-                testTable.setItems(testList);
+                    testList.remove(0,testList.size());
+                    testTable.setItems(testList);
             }
         }
-        catch(Exception e)
+        else
         {
-            e.printStackTrace();
+            testList.remove(0,testList.size());
+            testTable.setItems(testList);
         }
     }
 

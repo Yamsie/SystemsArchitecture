@@ -14,18 +14,17 @@ public class JSONFormatter implements I_DataFormatter
     @Override
     public void convertFile(String rootElement, List<MyElement> list)
     {
-        JSONObject obj;
         JSONArray jsonArray = new JSONArray();
         for (MyElement el : list)
         {
             if(el.isEmpty()) continue;
-            obj = new JSONObject();
+            JSONObject obj = new JSONObject();
             obj.put("home", el.getPageURL());
-            obj.put("element", el.getElementType());
+            obj.put("type", el.getElementType());
             obj.put("id", el.getElementID());
             obj.put("name", el.getElementName());
             obj.put("class", el.getElementClass());
-            jsonArray.add(obj.toJSONString());
+            jsonArray.add(obj);
         }
         try (FileWriter file = new FileWriter(Settings.getInstance().getProperty("JSON_PATH") + rootElement + ".json"))
         {

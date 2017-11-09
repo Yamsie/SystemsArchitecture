@@ -23,7 +23,7 @@ public class WebParser
         this.fileFormat = fileFormat;
     }
 
-    public void parse(String nameOfFile, String file)
+    public boolean parse(String nameOfFile, String file)
     {
         List<MyElement> list = new ArrayList<>();
         try
@@ -46,5 +46,7 @@ public class WebParser
         {
             e.printStackTrace();
         }
+
+        return list.size() != 0;
     }
 }

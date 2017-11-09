@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -24,13 +25,18 @@ public class MainMenuController extends Application implements Initializable, I_
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/mainmenu.fxml"));
-        //right after this line the constructor is called again
-        Scene scene = new Scene(root);
-        primaryStage.setTitle("Main Menu");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+    public void start(Stage primaryStage) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/mainmenu.fxml"));
+            //right after this line the constructor is called again
+            Scene scene = new Scene(root);
+            primaryStage.setTitle("Main Menu");
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        }
+        catch(IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @FXML
@@ -74,7 +80,7 @@ public class MainMenuController extends Application implements Initializable, I_
             stage.show();
         }
         catch(Exception ex){
-            System.out.println("Exception caught in MainMenuController changeScene()");
+            ex.printStackTrace();
         }
     }
 }

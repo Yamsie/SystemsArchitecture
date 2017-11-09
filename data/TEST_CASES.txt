@@ -1,2 +1,5 @@
 name,path
 GoogleHelloWorld,rsc/xml/tests/GoogleHelloWorld.xml
+Default,rsc/xml/tests/Default.xml
+gftre,rsc/xml/tests/gftre.xml
+Test,rsc/xml/tests/Test.xml
