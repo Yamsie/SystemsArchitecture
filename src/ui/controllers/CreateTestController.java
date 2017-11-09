@@ -5,6 +5,7 @@ import bll.models.parser.MyElement;
 import bll.models.parser.XMLParser;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -26,6 +27,7 @@ public class CreateTestController implements Initializable, I_Controller {
     @FXML private TextField testName;
     @FXML private TableView<MyElement> elementTable, testTable;
     @FXML private Label nameMessage;
+    @FXML private Button mainMenuBtn;
     private static final String XML_PATH = "src/xml/pages/";
     private static final String XML_TEST_PATH = "src/xml/tests/";
     private static final String [] COLUMN_ATTRIBUTES = {"pageURL", "elementType", "elementID", "elementName", "elementClass", "elementXPath", "input"};
@@ -220,5 +222,10 @@ public class CreateTestController implements Initializable, I_Controller {
         {
             e.printStackTrace();
         }
+    }
+
+    public void mainMenuBtnHandler() {
+        I_Controller c = SingletonFactory.getFactoryInstance().createController("MainMenuController");
+        c.changeScene((Stage) mainMenuBtn.getScene().getWindow());
     }
 }
