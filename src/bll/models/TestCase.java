@@ -57,16 +57,18 @@ public class TestCase {
         return eh;
     }
 
-    public void runTest()
+    public String runTest()
     {
         System.setProperty("webdriver.gecko.driver", "./geckodriver.exe"); // driver name and location
         System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, "/dev/null");
+        String message = "";
+
         try{
             WebDriver driver = new FirefoxDriver();
             for(MyElement e : elements)
             {
                 I_ElementHandler handler = lookupHandlerBy(e.getElementType());
-                String message = handler.execute(e, driver);
+                message += handler.execute(e, driver);
                 System.out.println(message);
             }
             Thread.sleep(Integer.parseInt(Settings.getInstance().getProperty("TIME_OUT")));
@@ -75,5 +77,6 @@ public class TestCase {
         catch(Exception ex){
             ex.printStackTrace();
         }
+        return message;
     }
 }

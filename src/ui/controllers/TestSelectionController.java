@@ -2,6 +2,7 @@ package ui.controllers;
 
 import bll.models.TestCase;
 import bll.models.TestModel;
+import bll.models.logger.TestController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -27,22 +28,17 @@ public class TestSelectionController implements Initializable, I_Controller {
     @FXML private Button mainMenuBtn;
     private String selected = "";
     private TestModel model;
+    private TestController testController;
+
 
     public TestSelectionController () {
         model = new TestModel();
+        testController = new TestController();
     }
 
     public void initialize(URL location, ResourceBundle resources) {
         String cols = "name";
         List<String> data = model.selectOperation(cols);
-        /*
-        I_QueryBuilder queryBuilder = new QueryBuilder();
-        queryBuilder.setDataOperation(new SelectOperation("name"));
-        queryBuilder.setTargetFile(new TableTestCases());
-        queryBuilder.doQuery();
-        Query query = queryBuilder.getResult();
-        List<String> data = query.getResult();*/
-
         ArrayList<String> values = new ArrayList<>();
         for (int i = 0; i < data.size(); i++) {
             values.add(data.get(i));
@@ -56,22 +52,9 @@ public class TestSelectionController implements Initializable, I_Controller {
 
     @FXML
     protected void handleRunButtonAction() {
-        /*
-        I_QueryBuilder queryBuilder = new QueryBuilder();
-        queryBuilder.setDataOperation(new SelectOperation("*"));
-        queryBuilder.setTargetFile(new TableTestCases());
-        queryBuilder.addClause(new WhereClause("name", selected));
-        queryBuilder.doQuery();
-        Query query = queryBuilder.getResult();*/
         String cols = "*", where1="name";
         List<String> data = model.selectWithWhereOperation(cols, where1, selected);
-
-        //all data returned is in data.get(0), should be separated out into diff indexes
-        //for(int i =0; i < data.size(); i++){
-        //    System.out.println(data.get(i)); }
-
-        TestCase tc = new TestCase(data);
-        tc.runTest();
+        testController.run(new TestCase(data));
     }
 
     public void setSelected(String s){ this.selected = s; }
