@@ -32,14 +32,6 @@ public class TestSelectionController implements Initializable, I_Controller {
     public void initialize(URL location, ResourceBundle resources) {
         String cols = "name";
         List<String> data = model.selectOperation(cols);
-        /*
-        I_QueryBuilder queryBuilder = new QueryBuilder();
-        queryBuilder.setDataOperation(new SelectOperation("name"));
-        queryBuilder.setTargetFile(new TableTestCases());
-        queryBuilder.doQuery();
-        Query query = queryBuilder.getResult();
-        List<String> data = query.getResult();*/
-
         ArrayList<String> values = new ArrayList<>();
         for (int i = 0; i < data.size(); i++) {
             values.add(data.get(i));
@@ -53,20 +45,8 @@ public class TestSelectionController implements Initializable, I_Controller {
 
     @FXML
     protected void handleRunButtonAction() {
-        /*
-        I_QueryBuilder queryBuilder = new QueryBuilder();
-        queryBuilder.setDataOperation(new SelectOperation("*"));
-        queryBuilder.setTargetFile(new TableTestCases());
-        queryBuilder.addClause(new WhereClause("name", selected));
-        queryBuilder.doQuery();
-        Query query = queryBuilder.getResult();*/
         String cols = "*", where1="name";
         List<String> data = model.selectWithWhereOperation(cols, where1, selected);
-
-        //all data returned is in data.get(0), should be separated out into diff indexes
-        //for(int i =0; i < data.size(); i++){
-        //    System.out.println(data.get(i)); }
-
         TestCase tc = new TestCase(data);
         tc.runTest();
     }
