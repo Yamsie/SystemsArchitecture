@@ -1,5 +1,9 @@
 package bll.models;
 
+import bll.models.handlers.AHandler;
+import bll.models.handlers.ButtonHandler;
+import bll.models.handlers.I_ElementHandler;
+import bll.models.handlers.InputHandler;
 import bll.models.parser.MyElement;
 import bll.models.parser.XMLParser;
 import org.openqa.selenium.WebDriver;
@@ -41,6 +45,7 @@ public class TestCase {
     {
         this.handlers.add(new ButtonHandler());
         this.handlers.add(new InputHandler());
+        this.handlers.add(new AHandler());
     }
 
     public void setElements(){
@@ -64,7 +69,7 @@ public class TestCase {
         String message = "";
         try{
             WebDriver driver = new FirefoxDriver();
-            driver.get(elements.get(0).getPageURL());
+            driver.get(elements.get(0).getPageURL()); //all elements will be for the same page
             for(MyElement e : elements)
             {
                 I_ElementHandler handler = lookupHandlerBy(e.getElementType());

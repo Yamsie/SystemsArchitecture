@@ -19,21 +19,20 @@ public class TestController {
         databaseInterceptor = new DatabaseTestingLineInterceptor();
         statementInterceptor = new TestingStatementInterceptor();
         actionInvocation = new InterceptorDispatcher();
+        action = new TestingAction();
         InterceptorDispatcher actionInvocation = new InterceptorDispatcher();
         actionInvocation.addInterceptor(dateInterceptor);
         actionInvocation.addInterceptor(databaseInterceptor);
         actionInvocation.addInterceptor(statementInterceptor);
-        action = new TestingAction();
     }
 
     public void run(TestCase tc){
         String logMessage = tc.runTest();
+        action.setDatabaseTestingLine("Test name " + tc.getName()); //String here, for set testing line
         action.setTestingStatement(logMessage);
         actionInvocation.setAction(action);
         String result = actionInvocation.invoke();
-        operator.addData(logMessage + "\n");
+        operator.addData(result + "\n");
         //System.out.println(result);
     }
 }
-
-

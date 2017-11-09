@@ -1,4 +1,4 @@
-package bll.models;
+package bll.models.handlers;
 
 import bll.models.parser.MyElement;
 import org.openqa.selenium.WebDriver;
