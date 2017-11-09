@@ -62,12 +62,13 @@ public class TestCase {
         System.setProperty("webdriver.gecko.driver", "./geckodriver.exe"); // driver name and location
         System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, "/dev/null");
         String message = "";
+
         try{
             WebDriver driver = new FirefoxDriver();
             for(MyElement e : elements)
             {
                 I_ElementHandler handler = lookupHandlerBy(e.getElementType());
-                message += handler.execute(e, driver) + "\n";
+                message += handler.execute(e, driver);
                 System.out.println(message);
             }
             Thread.sleep(Integer.parseInt(Settings.getInstance().getProperty("TIME_OUT")));

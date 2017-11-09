@@ -2,6 +2,7 @@ package ui.controllers;
 
 import bll.models.TestCase;
 import bll.models.TestModel;
+import bll.models.logger.TestController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -26,9 +27,12 @@ public class TestSelectionController implements Initializable, I_Controller {
     @FXML private Button mainMenuBtn;
     private String selected = "";
     private TestModel model;
+    private TestController testController;
+
 
     public TestSelectionController () {
         model = new TestModel();
+        testController = new TestController();
     }
 
     public void initialize(URL location, ResourceBundle resources) {
@@ -49,8 +53,7 @@ public class TestSelectionController implements Initializable, I_Controller {
     protected void handleRunButtonAction() {
         String cols = "*", where1="name";
         List<String> data = model.selectWithWhereOperation(cols, where1, selected);
-        TestCase tc = new TestCase(data);
-        tc.runTest();
+        testController.run(new TestCase(data));
     }
 
     public void setSelected(String s){ this.selected = s; }
