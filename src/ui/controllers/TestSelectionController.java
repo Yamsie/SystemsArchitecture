@@ -15,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -87,8 +88,7 @@ public class TestSelectionController implements Initializable, I_Controller {
             st.setScene(scene);
             st.show();
         }
-        catch(Exception ex){
-            System.out.println("Exception caught in TestSelectionController changeScene()");
+        catch(IOException ex){
             ex.printStackTrace();
         }
     }

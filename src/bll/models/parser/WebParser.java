@@ -1,10 +1,12 @@
 package bll.models.parser;
 
 import java.io.IOException;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 import bll.models.dataformatter.I_DataFormatter;
 import bll.models.dataformatter.XMLFormatter;
+import org.apache.bcel.classfile.Unknown;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -23,7 +25,7 @@ public class WebParser
         this.fileFormat = fileFormat;
     }
 
-    public void parse(String nameOfFile, String file)
+    public boolean parse(String nameOfFile, String file)
     {
         List<MyElement> list = new ArrayList<>();
         try
@@ -46,5 +48,10 @@ public class WebParser
         {
             e.printStackTrace();
         }
+
+        if(list.size() == 0)
+            return false;
+        else
+            return true;
     }
 }

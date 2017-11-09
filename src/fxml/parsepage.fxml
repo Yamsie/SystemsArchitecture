@@ -10,8 +10,9 @@
       <Label layoutX="93.0" layoutY="88.0" text="Parse URL " />
       <Label layoutX="93.0" layoutY="37.0" prefHeight="17.0" prefWidth="103.0" text="Name" />
       <TextField fx:id="pageName" layoutX="213.0" layoutY="33.0" prefHeight="25.0" prefWidth="295.0" />
-      <TextField fx:id="pageURL" layoutX="213.0" layoutY="83.0" prefHeight="26.0" prefWidth="295.0" />
+      <TextField fx:id="pageURL" layoutX="213.0" layoutY="83.0" prefHeight="26.0" prefWidth="295.0" text="https://" />
       <Button layoutX="268.0" layoutY="188.0" mnemonicParsing="false" onMouseClicked="#parsePage" text="Parse" />
    <ChoiceBox fx:id="options" layoutX="216.0" layoutY="133.0" onAction="#changeFormat" prefWidth="150.0" />
    <Button fx:id="mainMenuBtn" mnemonicParsing="false" onAction="#mainMenuBtnHandler" text="Main Menu" />
+   <Label fx:id="testResult" layoutX="234.0" layoutY="229.0" prefHeight="18.0" prefWidth="114.0" textAlignment="CENTER" />
 </AnchorPane>

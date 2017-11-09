@@ -7,15 +7,17 @@ import bll.models.parser.WebParser;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.ResourceBundle;
 
 public class ParsePageController implements Initializable, I_Controller {
@@ -24,6 +26,7 @@ public class ParsePageController implements Initializable, I_Controller {
     @FXML private TextField pageURL;
     @FXML private ChoiceBox<String> options;
     @FXML private Button mainMenuBtn;
+    @FXML private Label testResult;
     private WebParser parser;
     private I_DataFormatter [] formatter = {new XMLFormatter(), new JSONFormatter()};
 
@@ -39,7 +42,15 @@ public class ParsePageController implements Initializable, I_Controller {
 
     @FXML
     protected void parsePage() {
-        parser.parse(pageName.getText(), pageURL.getText());
+        if (parser.parse(pageName.getText(), pageURL.getText())) {
+            testResult.setTextFill(Color.GREEN);
+            testResult.setAlignment(Pos.CENTER);
+            testResult.setText("Successful");
+        } else {
+            testResult.setTextFill(Color.RED);
+            testResult.setAlignment(Pos.CENTER);
+            testResult.setText("Unsuccessful");
+        }
     }
 
 
@@ -62,8 +73,8 @@ public class ParsePageController implements Initializable, I_Controller {
             st.setScene(scene);
             st.show();
         }
-        catch(Exception ex){
-            System.out.println("Exception caught in ParsePageController changeScene()");
+        catch(IOException ex){
+            ex.printStackTrace();
         }
     }
 

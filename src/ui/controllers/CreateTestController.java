@@ -132,32 +132,28 @@ public class CreateTestController implements Initializable, I_Controller {
     @FXML
     private void restore()
     {
-        try
+
+        if(caretaker.getMementoStackSize() != 0)
         {
+            caretaker.undoOperation();
             if(caretaker.getMementoStackSize() != 0)
             {
-                caretaker.undoOperation();
-                if(caretaker.getMementoStackSize() != 0)
-                {
-                    testList = updateTestList(caretaker.getDataValue());
-                    testTable.setItems(testList);
-                }
-                else
-                {
-                    testList.remove(0,testList.size());
-                    testTable.setItems(testList);
-                }
+                testList = updateTestList(caretaker.getDataValue());
+                testTable.setItems(testList);
             }
             else
             {
-                testList.remove(0,testList.size());
-                testTable.setItems(testList);
+                    testList.remove(0,testList.size());
+                    testTable.setItems(testList);
             }
         }
-        catch(Exception e)
+        else
         {
-            e.printStackTrace();
+            testList.remove(0,testList.size());
+            testTable.setItems(testList);
         }
+
+
     }
 
     public ObservableList<MyElement> updateTestList(ArrayList<MyElement> undoOperation)
