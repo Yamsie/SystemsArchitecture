@@ -4,11 +4,11 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.Pane?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller = "ui.controllers.TestSelectionController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.controllers.TestSelectionController">
    <children>
-      <ListView layoutX="46.0" layoutY="60.0" prefHeight="200.0" prefWidth="200.0" fx:id = "list" />
-      <Button fx:id = "run" layoutX="246.0" layoutY="304.0" mnemonicParsing="false" text="Run this test" onAction="#handleRunButtonAction" />
+      <ListView fx:id="list" layoutX="46.0" layoutY="60.0" prefHeight="200.0" prefWidth="200.0" />
+      <Button fx:id="run" layoutX="246.0" layoutY="304.0" mnemonicParsing="false" onAction="#handleRunButtonAction" text="Run this test" />
+      <Button fx:id="mainMenuBtn" mnemonicParsing="false" onAction="#mainMenuBtnHandler" text="Main Menu" />
 
    </children>
 </Pane>

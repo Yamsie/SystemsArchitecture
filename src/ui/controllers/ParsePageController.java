@@ -9,10 +9,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -21,6 +23,7 @@ public class ParsePageController implements Initializable, I_Controller {
     @FXML private TextField pageName;
     @FXML private TextField pageURL;
     @FXML private ChoiceBox<String> options;
+    @FXML private Button mainMenuBtn;
     private WebParser parser;
     private I_DataFormatter [] formatter = {new XMLFormatter(), new JSONFormatter()};
 
@@ -62,5 +65,10 @@ public class ParsePageController implements Initializable, I_Controller {
         catch(Exception ex){
             System.out.println("Exception caught in ParsePageController changeScene()");
         }
+    }
+
+    public void mainMenuBtnHandler() {
+        I_Controller c = SingletonFactory.getFactoryInstance().createController("MainMenuController");
+        c.changeScene((Stage) mainMenuBtn.getScene().getWindow());
     }
 }

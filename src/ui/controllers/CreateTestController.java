@@ -26,6 +26,7 @@ public class CreateTestController implements Initializable, I_Controller {
     @FXML private TextField testName;
     @FXML private TableView<MyElement> elementTable, testTable;
     @FXML private Label nameMessage;
+    @FXML private Button mainMenuBtn;
     private static final String [] COLUMN_ATTRIBUTES = {"pageURL", "elementType", "elementID", "elementName", "elementClass", "elementXPath", "input"};
     private ObservableList<MyElement> elementList, testList;
     private ArrayList<TableColumn<MyElement, String>> elementColumns = new ArrayList<>();
@@ -218,5 +219,10 @@ public class CreateTestController implements Initializable, I_Controller {
         {
             e.printStackTrace();
         }
+    }
+
+    public void mainMenuBtnHandler() {
+        I_Controller c = SingletonFactory.getFactoryInstance().createController("MainMenuController");
+        c.changeScene((Stage) mainMenuBtn.getScene().getWindow());
     }
 }
