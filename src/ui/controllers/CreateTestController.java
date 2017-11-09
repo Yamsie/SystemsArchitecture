@@ -26,20 +26,18 @@ public class CreateTestController implements Initializable, I_Controller {
     @FXML private TextField testName;
     @FXML private TableView<MyElement> elementTable, testTable;
     @FXML private Label nameMessage;
-    private static final String XML_PATH = "src/xml/pages/";
-    private static final String XML_TEST_PATH = "src/xml/tests/";
     private static final String [] COLUMN_ATTRIBUTES = {"pageURL", "elementType", "elementID", "elementName", "elementClass", "elementXPath", "input"};
     private ObservableList<MyElement> elementList, testList;
     private ArrayList<TableColumn<MyElement, String>> elementColumns = new ArrayList<>();
     private ArrayList<TableColumn<MyElement, String>> testColumns = new ArrayList<>();
     private Caretaker caretaker = new Caretaker();
-    private DataOriginator originator = new DataOriginator();
     private TestModel model;
 
     public CreateTestController()
     {
         elementList = FXCollections.observableArrayList();
         testList = FXCollections.observableArrayList();
+        DataOriginator originator = new DataOriginator();
         caretaker.setDataOriginator(originator);
         model = new TestModel();
     }
