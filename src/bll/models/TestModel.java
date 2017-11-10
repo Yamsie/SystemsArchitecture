@@ -51,9 +51,6 @@ public class TestModel {
         queryBuilder.doQuery();
         query = queryBuilder.getResult();
         List<String> list = query.getResult();
-        for(String l : list){
-            System.out.println(l);
-        }
         if(list.size() == 0)
             return true;
         else

@@ -13,7 +13,7 @@ public class ButtonHandler implements I_ElementHandler {
     public String getType(){ return "button"; }
 
     public String execute(MyElement element, WebDriver driver){
-        String loggerMessage = "Success: test for button element "+element.getElementName()+" been successful";
+        String loggerMessage = " Success: test for button element "+element.getElementName()+" been successful.";
         //driver.get(element.getPageURL());
         try{
             Thread.sleep(Integer.parseInt(Settings.getInstance().getProperty("TIME_OUT"))); //sleep, allow page to load
@@ -21,7 +21,7 @@ public class ButtonHandler implements I_ElementHandler {
             e.click();
         }
         catch(Exception ex){
-            loggerMessage = "Fail: test for button element "+element.getElementName()+" has failed" + ex.getStackTrace();
+            loggerMessage = " Fail: test for button element "+element.getElementName()+" has failed. Stack trace : " + ex.getStackTrace();
         }
         System.out.println(loggerMessage);
         return loggerMessage;

@@ -13,7 +13,7 @@ public class InputHandler implements I_ElementHandler {
     public String getType(){ return "input"; }
 
     public String execute(MyElement element, WebDriver driver){
-        String loggerMessage = "Success: test for input element "+element.getElementName()+" been successful";
+        String loggerMessage = " Success: test for input element "+element.getElementName()+" been successful.";
         //driver.get(element.getPageURL());
         try
         {
@@ -26,7 +26,7 @@ public class InputHandler implements I_ElementHandler {
         }
         catch(Exception ex)
         {
-            loggerMessage = "Fail: test for input element "+element.getElementName()+" has failed" + ex.getStackTrace();
+            loggerMessage = " Fail: test for input element "+element.getElementName()+" has failed. Stack trace : " + ex.getStackTrace();
         }
         return loggerMessage;
     }

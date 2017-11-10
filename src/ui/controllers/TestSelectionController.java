@@ -1,5 +1,6 @@
 package ui.controllers;
 
+import bll.models.ControllerSingleton;
 import bll.models.TestCase;
 import bll.models.TestModel;
 import bll.models.logger.TestController;
@@ -32,7 +33,7 @@ public class TestSelectionController implements Initializable, I_Controller {
 
     public TestSelectionController () {
         model = new TestModel();
-        testController = new TestController();
+        testController = ControllerSingleton.getInstance();
     }
 
     public void initialize(URL location, ResourceBundle resources) {

@@ -37,8 +37,9 @@ public class LoggerOperator {
     }
 
     public void addData(String info) {
-        data.add(info);
-        writeData(data);
+        //data.add(info);
+        //writeData(data);
+        writeData(info);
     }
 
     public void deleteData(String info){
@@ -47,7 +48,7 @@ public class LoggerOperator {
                 data.remove(i);
             }
         }
-        writeData(data);
+        //writeData(data);
     }
 
     public int getColumnIndex(String column) {
@@ -103,12 +104,10 @@ public class LoggerOperator {
         }
     }
 
-    protected void writeData(List<String> newData) {
+    protected void writeData(String newData) {
         try {
-            FileWriter writer = new FileWriter(filename);
-            for (String str : newData) {
-                writer.write(str + "\n");
-            }
+            FileWriter writer = new FileWriter(filename, true);
+            writer.write(newData + "\n");
             writer.close();
         } catch (IOException e) {
         }

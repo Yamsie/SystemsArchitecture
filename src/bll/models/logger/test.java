@@ -1,4 +1,4 @@
-package bll.models.logger;
+/*package bll.models.logger;
 
 import bll.models.Settings;
 
@@ -20,4 +20,4 @@ public class test {
         operator.addData(result + "\n");
         System.out.println("I_Action result:" + result);
     }
-}
+}*/

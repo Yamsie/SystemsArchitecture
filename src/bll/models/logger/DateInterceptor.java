@@ -9,7 +9,7 @@ public class DateInterceptor implements I_Interceptor {
 
     @Override
     public void operation(I_Action action) {
-        if(action.getDate().equals("null")){
+        if(action.getDate()== null){
             action.setDate(CurrentTime());
         }
         statement = true;
