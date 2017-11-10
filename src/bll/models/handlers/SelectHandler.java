@@ -5,25 +5,25 @@ import bll.models.parser.MyElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
-public class AHandler implements I_ElementHandler {
+public class SelectHandler implements I_ElementHandler {
 
-    public AHandler() { }
+    public SelectHandler() { }
 
-    public String getType(){ return "a"; }
+    public String getType(){ return "select"; }
 
     public String execute(MyElement element, WebDriver driver){
-        String loggerMessage = " Success: test for link element "+element.getElementName()+" been successful.";
-        driver.get(element.getPageURL());
+        String loggerMessage = " Success: test for select element "+element.getElementName()+" been successful.";
         try
         {
             Thread.sleep(Integer.parseInt(Settings.getInstance().getProperty("TIME_OUT"))); //sleep, allow page to load
-            WebElement e = checkElement(driver,  element);
-            e.click();
+            Select e = new Select(checkElement(driver,  element));
+            e.selectByVisibleText(element.getInput());
         }
         catch(Exception ex)
         {
-            loggerMessage = " Fail: test for link element "+element.getElementName()+" has failed. Stack trace : " + ex.getStackTrace();
+            loggerMessage = " Fail: test for select element "+element.getElementName()+" has failed. Stack trace : " + ex.getStackTrace();
         }
         return loggerMessage;
     }

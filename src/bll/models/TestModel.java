@@ -69,32 +69,4 @@ public class TestModel {
     public static String [] getAttributes() {
        return COLUMN_ATTRIBUTES;
     }
-
-    public void editCells(TableView< MyElement > testTable, ArrayList<TableColumn<MyElement, String>> testColumns) {
-        testTable.setEditable(true);
-        for(int i = 0; i < TestModel.getAttributes().length; i++)
-            testColumns.get(i).setCellFactory(TextFieldTableCell.forTableColumn());
-
-        testColumns.get(0).setOnEditCommit(e ->
-                e.getTableView().getItems().get(e.getTablePosition().getRow()).setPageURL(e.getNewValue())
-        );
-        testColumns.get(1).setOnEditCommit(e ->
-                e.getTableView().getItems().get(e.getTablePosition().getRow()).setElementType(e.getNewValue())
-        );
-        testColumns.get(2).setOnEditCommit(e ->
-                e.getTableView().getItems().get(e.getTablePosition().getRow()).setElementID(e.getNewValue())
-        );
-        testColumns.get(3).setOnEditCommit(e ->
-                e.getTableView().getItems().get(e.getTablePosition().getRow()).setElementName(e.getNewValue())
-        );
-        testColumns.get(4).setOnEditCommit(e ->
-                e.getTableView().getItems().get(e.getTablePosition().getRow()).setElementClass(e.getNewValue())
-        );
-        testColumns.get(5).setOnEditCommit(e ->
-                e.getTableView().getItems().get(e.getTablePosition().getRow()).setElementXPath(e.getNewValue())
-        );
-        testColumns.get(6).setOnEditCommit(e ->
-                e.getTableView().getItems().get(e.getTablePosition().getRow()).setInput(e.getNewValue())
-        );
-    }
 }

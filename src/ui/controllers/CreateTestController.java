@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
@@ -111,7 +112,27 @@ public class CreateTestController implements Initializable, I_Controller {
             testColumns.get(i).setSortable(false);
         }
         addListeners();
-        model.editCells(testTable, testColumns);
+        editCells();
+    }
+
+    private void editCells() {
+        testTable.setEditable(true);
+        for(int i = 0; i < TestModel.getAttributes().length; i++)
+            testColumns.get(i).setCellFactory(TextFieldTableCell.forTableColumn());
+        testColumns.get(0).setOnEditCommit(e ->
+                e.getTableView().getItems().get(e.getTablePosition().getRow()).setPageURL(e.getNewValue()));
+        testColumns.get(1).setOnEditCommit(e ->
+                e.getTableView().getItems().get(e.getTablePosition().getRow()).setElementType(e.getNewValue()));
+        testColumns.get(2).setOnEditCommit(e ->
+                e.getTableView().getItems().get(e.getTablePosition().getRow()).setElementID(e.getNewValue()));
+        testColumns.get(3).setOnEditCommit(e ->
+                e.getTableView().getItems().get(e.getTablePosition().getRow()).setElementName(e.getNewValue()));
+        testColumns.get(4).setOnEditCommit(e ->
+                e.getTableView().getItems().get(e.getTablePosition().getRow()).setElementClass(e.getNewValue()));
+        testColumns.get(5).setOnEditCommit(e ->
+                e.getTableView().getItems().get(e.getTablePosition().getRow()).setElementXPath(e.getNewValue()));
+        testColumns.get(6).setOnEditCommit(e ->
+                e.getTableView().getItems().get(e.getTablePosition().getRow()).setInput(e.getNewValue()));
     }
 
     @FXML

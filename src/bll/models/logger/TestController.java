@@ -12,15 +12,13 @@ public class TestController {
     private InterceptorDispatcher actionInvocation;
     private I_Action action;
 
-    public TestController()
-    {
+    public TestController() {
         operator = new LoggerOperator(Settings.getInstance().getProperty("LOG_FILE"));
         dateInterceptor = new DateInterceptor();
         databaseInterceptor = new DatabaseTestingLineInterceptor();
         statementInterceptor = new TestingStatementInterceptor();
         actionInvocation = new InterceptorDispatcher();
         action = new TestingAction();
-        InterceptorDispatcher actionInvocation = new InterceptorDispatcher();
         actionInvocation.addInterceptor(dateInterceptor);
         actionInvocation.addInterceptor(databaseInterceptor);
         actionInvocation.addInterceptor(statementInterceptor);
@@ -28,11 +26,13 @@ public class TestController {
 
     public void run(TestCase tc){
         String logMessage = tc.runTest();
-        action.setDatabaseTestingLine("Test name " + tc.getName()); //String here, for set testing line
+        //action.setDate();
+        action.setDatabaseTestingLine("test name is " + tc.getName()); //String here, for set testing line
         action.setTestingStatement(logMessage);
         actionInvocation.setAction(action);
         String result = actionInvocation.invoke();
-        operator.addData(result + "\n");
-        //System.out.println(result);
+        System.out.println("result is : " + result);
+        //operator.addData(result); - was adding to an array list and writing arraylist to file instead of writing string directly to file
+        operator.writeData(result);
     }
 }

@@ -1,9 +1,6 @@
 package bll.models;
 
-import bll.models.handlers.AHandler;
-import bll.models.handlers.ButtonHandler;
-import bll.models.handlers.I_ElementHandler;
-import bll.models.handlers.InputHandler;
+import bll.models.handlers.*;
 import bll.models.parser.MyElement;
 import bll.models.parser.XMLParser;
 import org.openqa.selenium.WebDriver;
@@ -20,10 +17,7 @@ public class TestCase {
 
     public TestCase(List<String> data) {
         handlers = new ArrayList<>();
-        //splitting data at the comma, all in data.get(0), separates fine
         String[] ar = data.get(0).split(",");
-        //for(int i =0; i < ar.length; i++){
-          //  System.out.println(ar[i]); }
         this.name = ar[0];
         this.xml = ar[1];
         setElements();
@@ -45,6 +39,8 @@ public class TestCase {
         this.handlers.add(new ButtonHandler());
         this.handlers.add(new InputHandler());
         this.handlers.add(new AHandler());
+        this.handlers.add(new TextAreaHandler());
+        this.handlers.add(new SelectHandler());
     }
 
     public void setElements(){
@@ -75,7 +71,6 @@ public class TestCase {
             {
                 I_ElementHandler handler = lookupHandlerBy(e.getElementType());
                 message += handler.execute(e, driver);
-                System.out.println(message);
             }
             Thread.sleep(Integer.parseInt(Settings.getInstance().getProperty("TIME_OUT")));
             driver.close();

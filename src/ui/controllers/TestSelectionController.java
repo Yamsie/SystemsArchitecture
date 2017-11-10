@@ -1,5 +1,6 @@
 package ui.controllers;
 
+import bll.models.ControllerSingleton;
 import bll.models.TestCase;
 import bll.models.TestModel;
 import bll.models.logger.TestController;
@@ -32,7 +33,7 @@ public class TestSelectionController implements Initializable, I_Controller {
 
     public TestSelectionController () {
         model = new TestModel();
-        testController = new TestController();
+        testController = ControllerSingleton.getInstance();
     }
 
     public void initialize(URL location, ResourceBundle resources) {
@@ -51,9 +52,11 @@ public class TestSelectionController implements Initializable, I_Controller {
 
     @FXML
     protected void handleRunButtonAction() {
+        List<String> data = null;
         String cols = "*", where1="name";
-        List<String> data = model.selectWithWhereOperation(cols, where1, selected);
+        data = model.selectWithWhereOperation(cols, where1, selected);
         testController.run(new TestCase(data));
+
     }
 
     public void setSelected(String s){ this.selected = s; }
