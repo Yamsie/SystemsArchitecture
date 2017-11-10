@@ -29,7 +29,7 @@ public class CreateTestController implements Initializable, I_Controller {
     @FXML private TableView<MyElement> elementTable, testTable;
     @FXML private Label nameMessage;
     @FXML private Button mainMenuBtn;
-    @FXML private ChoiceBox<String> loadtest;
+    @FXML private ChoiceBox<String> loadDropDown;
     private XMLParser xmlParser = new XMLParser();
     private TestModel model;
 
@@ -83,8 +83,8 @@ public class CreateTestController implements Initializable, I_Controller {
     }
 
     @FXML
-    public void loadTestFoo() {
-        if(loadtest.getValue().equals("Load Test"))
+    public void loadTest() {
+        if(loadDropDown.getValue().equals("Load Test"))
             testList.clear();
         else {
             testList.clear();
@@ -97,12 +97,12 @@ public class CreateTestController implements Initializable, I_Controller {
     public void initialize(URL location, ResourceBundle resources)
     {
         MyJSONParser jsonParser = new MyJSONParser();
-        loadtest.getItems().removeAll(loadtest.getItems());
-        loadtest.getItems().add("Load Test");
-        loadtest.getSelectionModel().select("Load Test");
+        loadDropDown.getItems().removeAll(loadDropDown.getItems());
+        loadDropDown.getItems().add("Load Test");
+        loadDropDown.getSelectionModel().select("Load Test");
 
         for(File f: getFiles(Settings.getInstance().getProperty("XML_TEST_PATH")))
-            loadtest.getItems().add(f.getName());
+            loadDropDown.getItems().add(f.getName());
 
         for (String COLUMN_ATTRIBUTE : TestModel.getAttributes())
         {

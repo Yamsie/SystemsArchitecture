@@ -22,7 +22,7 @@
       <Button cache="true" cacheHint="SCALE" layoutX="558.0" layoutY="614.0" mnemonicParsing="false" onMouseClicked="#createTest" text="Save Test" />
       <Label fx:id="nameMessage" cacheHint="SCALE" contentDisplay="CENTER" layoutX="164.0" layoutY="639.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="367.0" />
       <Button fx:id="mainMenuBtn" mnemonicParsing="false" onAction="#mainMenuBtnHandler" text="Main Menu" />
-      <ChoiceBox fx:id="loadtest" layoutX="307.0" layoutY="284.0" prefWidth="150.0" onAction="#loadTestFoo" />
+      <ChoiceBox fx:id="loadDropDown" layoutX="307.0" layoutY="284.0" prefWidth="150.0" onAction="#loadTest" />
   </AnchorPane>
    <columnConstraints>
       <ColumnConstraints />
