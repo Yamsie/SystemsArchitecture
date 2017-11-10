@@ -70,7 +70,7 @@ public class CreateTestController implements Initializable, I_Controller {
             if(model.checkUniqueName(name))
             {
                 testName.clear();
-                new XMLTestCreator().createTest(name, testList);
+                new XMLTestCreator().createTest(name.replaceAll(" ", ""), testList);
                 nameMessage.setText("Test has been saved.");
                 model.insertOperation(name, Settings.getInstance().getProperty("XML_TEST_PATH") + name + ".xml");
             }

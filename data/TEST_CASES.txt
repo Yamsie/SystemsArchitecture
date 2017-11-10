@@ -1,1 +1,3 @@
 name,path
+Hello World People,rsc/xml/tests/Hello World People.xml
+gfedgrd,rsc/xml/tests/gfedgrd.xml

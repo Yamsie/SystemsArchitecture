@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><test>
+    <element>
+        <home>https://www.facebook.com/</home>
+        <type>input</type>
+        <id>pass</id>
+        <class>inputtext</class>
+        <name>pass</name>
+        <xpath/>
+        <input/>
+    </element>
+    <element>
+        <home>https://www.facebook.com/</home>
+        <type>button</type>
+        <id>u_0_14</id>
+        <class>_42ft _5upp _5la0</class>
+        <name/>
+        <xpath/>
+        <input/>
+    </element>
+    <element>
+        <home>https://www.facebook.com/</home>
+        <type>input</type>
+        <id>u_0_9</id>
+        <class>inputtext _58mg _5dba _2ph-</class>
+        <name>firstname</name>
+        <xpath/>
+        <input/>
+    </element>
+    <element>
+        <home>https://www.facebook.com/</home>
+        <type>select</type>
+        <id>day</id>
+        <class>_5dba</class>
+        <name>birthday_day</name>
+        <xpath/>
+        <input/>
+    </element>
+    <element>
+        <home>https://www.facebook.com/</home>
+        <type>button</type>
+        <id>u_0_14</id>
+        <class>_42ft _5upp _5la0</class>
+        <name/>
+        <xpath/>
+        <input/>
+    </element>
+    <element>
+        <home>https://www.facebook.com/</home>
+        <type>a</type>
+        <id>birthday-help</id>
+        <class>mlm _58ms</class>
+        <name/>
+        <xpath/>
+        <input/>
+    </element>
+    <element>
+        <home>https://www.facebook.com/</home>
+        <type>a</type>
+        <id>u_0_t</id>
+        <class>_58my</class>
+        <name/>
+        <xpath/>
+        <input/>
+    </element>
+    <element>
+        <home>https://www.facebook.com/</home>
+        <type>input</type>
+        <id>u_0_l</id>
+        <class>inputtext _58mg _5dba _2ph-</class>
+        <name>reg_passwd__</name>
+        <xpath/>
+        <input/>
+    </element>
+</test>
