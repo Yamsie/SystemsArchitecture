@@ -73,7 +73,6 @@ public class Query {
     }
 
     private void doDataOperation() {
-        //List<String> newData = new ArrayList<>(target.getDataCapsule().getData());
         dataOperation.setWhereData(new DataCapsule(whereData, target.getDataCapsule().getColumns()));
         dataOperation.setRawData(new DataCapsule(rawData, target.getDataCapsule().getColumns()));
         DataOperationVisitor visitor = new DataOperationVisitor();

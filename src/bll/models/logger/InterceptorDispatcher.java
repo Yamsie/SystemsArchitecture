@@ -5,8 +5,7 @@ import java.util.List;
 // In this Dispatcher will use priority callback strategies
 
 public class InterceptorDispatcher{
-
-    private I_Action action;
+ private I_Action action;
 
     private List<I_Interceptor> interceptors = new ArrayList<I_Interceptor>();
 

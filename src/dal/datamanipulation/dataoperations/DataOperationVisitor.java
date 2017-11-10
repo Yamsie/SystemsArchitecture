@@ -7,7 +7,6 @@ public class DataOperationVisitor implements I_Visitor {
     public void visit(SelectOperation select) {
         select.doSelect();
     }
-
     public void visit(DeleteOperation delete) {
         delete.doDelete();
     }

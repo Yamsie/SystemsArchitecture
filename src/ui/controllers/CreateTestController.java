@@ -207,7 +207,7 @@ public class CreateTestController implements Initializable, I_Controller {
     {
         try
         {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxml/createtest.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/CreateTestView.fxml"));
             Scene scene = new Scene(root);
             st.setTitle("Create Test");
             st.setScene(scene);
