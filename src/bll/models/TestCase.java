@@ -40,7 +40,8 @@ public class TestCase {
         this.handlers.add(new ButtonHandler());
         this.handlers.add(new InputHandler());
         this.handlers.add(new AHandler());
-        this.handlers.add(new SpanHandler());
+        this.handlers.add(new TextareaHandler());
+        this.handlers.add(new SelectHandler());
     }
 
     public void setElements(){
