@@ -29,6 +29,8 @@ public class CreateTestController implements Initializable, I_Controller {
     @FXML private TableView<MyElement> elementTable, testTable;
     @FXML private Label nameMessage;
     @FXML private Button mainMenuBtn;
+    @FXML private ChoiceBox<String> loadtest;
+    private XMLParser xmlParser = new XMLParser();
     private TestModel model;
 
     private ObservableList<MyElement> elementList, testList;
@@ -80,11 +82,27 @@ public class CreateTestController implements Initializable, I_Controller {
         }
     }
 
+    @FXML
+    public void loadTestFoo() {
+        if(loadtest.getValue().equals("Load Test"))
+            testList.clear();
+        else {
+            testList.clear();
+            testList.addAll(xmlParser.parse(Settings.getInstance().getProperty("XML_TEST_PATH") + loadtest.getValue()));
+            testTable.setItems(testList);
+        }
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
-        XMLParser xmlParser = new XMLParser();
         MyJSONParser jsonParser = new MyJSONParser();
+        loadtest.getItems().removeAll(loadtest.getItems());
+        loadtest.getItems().add("Load Test");
+        loadtest.getSelectionModel().select("Load Test");
+
+        for(File f: getFiles(Settings.getInstance().getProperty("XML_TEST_PATH")))
+            loadtest.getItems().add(f.getName());
 
         for (String COLUMN_ATTRIBUTE : TestModel.getAttributes())
         {
