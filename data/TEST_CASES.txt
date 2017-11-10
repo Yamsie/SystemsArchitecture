@@ -1,3 +1,1 @@
 name,path
-fFDS,rsc/xml/tests/fFDS.xml
-Test123,rsc/xml/tests/Test123.xml

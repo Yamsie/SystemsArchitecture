@@ -30,8 +30,7 @@ public class Settings
     {
         try
         {
-            InputStream is = new FileInputStream("dataConfig.properties");
-            property.load(is);
+            property.load(new FileInputStream("dataConfig.properties"));
         }
 
         catch(Exception e)

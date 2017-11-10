@@ -29,12 +29,14 @@ public class WebParser
         try
         {
             org.jsoup.nodes.Document document = Jsoup.connect(file).get();
-            Elements elements = document.body().select("a, input[type=text], input[type=radio], input[type=checkbox], textarea, button, span");
+            Elements elements = document.body().select("a, input[type=submit], input[type=text], " +
+                    "select, input[type=radio], input[type=checkbox], textarea, button, span");
+
             for(Element e: elements)
             {
                 list.add(new MyElement(
                         file,
-                        e.attr("type").matches("(radio|checkbox)") ? "button" : e.nodeName(),
+                        e.attr("type").matches("(submit|radio|checkbox)") ? "button" : e.nodeName(),
                         e.attr("id"),
                         e.attr("name"),
                         e.attr("class")
