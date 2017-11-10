@@ -88,7 +88,7 @@ public class CreateTestController implements Initializable, I_Controller {
             testList.clear();
         else {
             testList.clear();
-            testList.addAll(xmlParser.parse(Settings.getInstance().getProperty("XML_TEST_PATH") + loadtest.getValue()));
+            testList.addAll(xmlParser.parse(Settings.getInstance().getProperty("XML_TEST_PATH") + loadDropDown.getValue()));
             testTable.setItems(testList);
         }
     }
