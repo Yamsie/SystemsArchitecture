@@ -1,5 +1,6 @@
 package bll.models;
 
+import bll.models.parser.MyElement;
 import dal.TableTestCases;
 import dal.I_QueryBuilder;
 import dal.Query;
@@ -7,12 +8,20 @@ import dal.QueryBuilder;
 import dal.datamanipulation.dataclauses.WhereClause;
 import dal.datamanipulation.dataoperations.InsertOperation;
 import dal.datamanipulation.dataoperations.SelectOperation;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.TextFieldTableCell;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TestModel {
-    I_QueryBuilder queryBuilder;
-    Query query;
+
+    private I_QueryBuilder queryBuilder;
+    private Query query;
+    private static final String [] COLUMN_ATTRIBUTES = {"pageURL", "elementType", "elementID",
+            "elementName", "elementClass", "elementXPath", "input"};
+
 
     public TestModel() {
         this.queryBuilder = new QueryBuilder();
@@ -54,9 +63,38 @@ public class TestModel {
         for(String l : list){
             System.out.println(l);
         }
-        if(list.size() == 0)
-            return true;
-        else
-            return false;
+        return list.size() == 0;
+    }
+
+    public static String [] getAttributes() {
+       return COLUMN_ATTRIBUTES;
+    }
+
+    public void editCells(TableView< MyElement > testTable, ArrayList<TableColumn<MyElement, String>> testColumns) {
+        testTable.setEditable(true);
+        for(int i = 0; i < TestModel.getAttributes().length; i++)
+            testColumns.get(i).setCellFactory(TextFieldTableCell.forTableColumn());
+
+        testColumns.get(0).setOnEditCommit(e ->
+                e.getTableView().getItems().get(e.getTablePosition().getRow()).setPageURL(e.getNewValue())
+        );
+        testColumns.get(1).setOnEditCommit(e ->
+                e.getTableView().getItems().get(e.getTablePosition().getRow()).setElementType(e.getNewValue())
+        );
+        testColumns.get(2).setOnEditCommit(e ->
+                e.getTableView().getItems().get(e.getTablePosition().getRow()).setElementID(e.getNewValue())
+        );
+        testColumns.get(3).setOnEditCommit(e ->
+                e.getTableView().getItems().get(e.getTablePosition().getRow()).setElementName(e.getNewValue())
+        );
+        testColumns.get(4).setOnEditCommit(e ->
+                e.getTableView().getItems().get(e.getTablePosition().getRow()).setElementClass(e.getNewValue())
+        );
+        testColumns.get(5).setOnEditCommit(e ->
+                e.getTableView().getItems().get(e.getTablePosition().getRow()).setElementXPath(e.getNewValue())
+        );
+        testColumns.get(6).setOnEditCommit(e ->
+                e.getTableView().getItems().get(e.getTablePosition().getRow()).setInput(e.getNewValue())
+        );
     }
 }

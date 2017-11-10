@@ -13,13 +13,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
 
 public class CreateTestController implements Initializable, I_Controller {
 
@@ -28,15 +28,15 @@ public class CreateTestController implements Initializable, I_Controller {
     @FXML private TableView<MyElement> elementTable, testTable;
     @FXML private Label nameMessage;
     @FXML private Button mainMenuBtn;
-    private static final String [] COLUMN_ATTRIBUTES = {"pageURL", "elementType", "elementID", "elementName", "elementClass", "elementXPath", "input"};
+    private TestModel model;
+
     private ObservableList<MyElement> elementList, testList;
     private ArrayList<TableColumn<MyElement, String>> elementColumns = new ArrayList<>();
     private ArrayList<TableColumn<MyElement, String>> testColumns = new ArrayList<>();
     private Caretaker caretaker = new Caretaker();
-    private TestModel model;
 
-    public CreateTestController()
-    {
+
+    public CreateTestController() {
         elementList = FXCollections.observableArrayList();
         testList = FXCollections.observableArrayList();
         DataOriginator originator = new DataOriginator();
@@ -44,20 +44,17 @@ public class CreateTestController implements Initializable, I_Controller {
         model = new TestModel();
     }
 
-    public String getName()
-    {
+    public String getName() {
         return "CreateTestController";
     }
 
-    public void clearTable()
-    {
+    public void clearTable() {
         testList.remove(0,testList.size());
         testTable.setItems(testList);
         caretaker.setOriginatorValue(translateIntoArrayList(testList));
     }
 
-    private File [] getFiles(String path)
-    {
+    private File [] getFiles(String path) {
         return new File(path).listFiles();
     }
 
@@ -74,8 +71,8 @@ public class CreateTestController implements Initializable, I_Controller {
                 nameMessage.setText("Test has been saved.");
                 model.insertOperation(name, Settings.getInstance().getProperty("XML_TEST_PATH") + name + ".xml");
             }
-            else
-            {
+
+            else {
                 testName.clear();
                 nameMessage.setText("A test with this name already exists. Please choose a different name");
             }
@@ -88,7 +85,7 @@ public class CreateTestController implements Initializable, I_Controller {
         XMLParser xmlParser = new XMLParser();
         MyJSONParser jsonParser = new MyJSONParser();
 
-        for (String COLUMN_ATTRIBUTE : COLUMN_ATTRIBUTES)
+        for (String COLUMN_ATTRIBUTE : TestModel.getAttributes())
         {
             TableColumn<MyElement, String> eCol = new TableColumn<>(COLUMN_ATTRIBUTE.toUpperCase());
             TableColumn<MyElement, String> tCol = new TableColumn<>(COLUMN_ATTRIBUTE.toUpperCase());
@@ -107,56 +104,36 @@ public class CreateTestController implements Initializable, I_Controller {
         elementTable.setItems(elementList);
         testTable.setItems(testList);
 
-        for(int i = 0; i < COLUMN_ATTRIBUTES.length; i++)
+        for(int i = 0; i < TestModel.getAttributes().length; i++)
         {
             if(i < 5) elementTable.getColumns().add(elementColumns.get(i));
             testTable.getColumns().add(testColumns.get(i));
             testColumns.get(i).setSortable(false);
         }
         addListeners();
-        editCells();
-    }
-
-    private void editCells()
-    {
-        testTable.setEditable(true);
-        for(int i = 0; i < COLUMN_ATTRIBUTES.length; i++)
-            testColumns.get(i).setCellFactory(TextFieldTableCell.forTableColumn());
-        testColumns.get(0).setOnEditCommit(e -> e.getTableView().getItems().get(e.getTablePosition().getRow()).setPageURL(e.getNewValue()));
-        testColumns.get(1).setOnEditCommit(e -> e.getTableView().getItems().get(e.getTablePosition().getRow()).setElementType(e.getNewValue()));
-        testColumns.get(2).setOnEditCommit(e -> e.getTableView().getItems().get(e.getTablePosition().getRow()).setElementID(e.getNewValue()));
-        testColumns.get(3).setOnEditCommit(e -> e.getTableView().getItems().get(e.getTablePosition().getRow()).setElementName(e.getNewValue()));
-        testColumns.get(4).setOnEditCommit(e -> e.getTableView().getItems().get(e.getTablePosition().getRow()).setElementClass(e.getNewValue()));
-        testColumns.get(5).setOnEditCommit(e -> e.getTableView().getItems().get(e.getTablePosition().getRow()).setElementXPath(e.getNewValue()));
-        testColumns.get(6).setOnEditCommit(e -> e.getTableView().getItems().get(e.getTablePosition().getRow()).setInput(e.getNewValue()));
+        model.editCells(testTable, testColumns);
     }
 
     @FXML
-    private void restore()
-    {
-
-        if(caretaker.getMementoStackSize() != 0)
-        {
+    private void restore() {
+        if(caretaker.getMementoStackSize() != 0) {
             caretaker.undoOperation();
-            if(caretaker.getMementoStackSize() != 0)
-            {
+            if(caretaker.getMementoStackSize() != 0) {
                 testList = updateTestList(caretaker.getDataValue());
                 testTable.setItems(testList);
             }
-            else
-            {
-                    testList.remove(0,testList.size());
-                    testTable.setItems(testList);
+            else {
+                testList.remove(0,testList.size());
+                testTable.setItems(testList);
             }
         }
-        else
-        {
+        else {
             testList.remove(0,testList.size());
             testTable.setItems(testList);
         }
     }
 
-    public ObservableList<MyElement> updateTestList(ArrayList<MyElement> undoOperation)
+    private ObservableList<MyElement> updateTestList(ArrayList<MyElement> undoOperation)
     {
         ObservableList<MyElement> temp = FXCollections.observableArrayList();
         if(undoOperation.size()!=0){
@@ -165,7 +142,7 @@ public class CreateTestController implements Initializable, I_Controller {
         return temp;
     }
 
-    public ArrayList<MyElement> translateIntoArrayList(ObservableList<MyElement> testList){
+    private ArrayList<MyElement> translateIntoArrayList(ObservableList<MyElement> testList){
         ArrayList<MyElement> temp = new ArrayList<>();
         temp.addAll(testList);
         return temp;
@@ -175,16 +152,13 @@ public class CreateTestController implements Initializable, I_Controller {
         elementTable.setOnMousePressed(e -> {
             if(e.getClickCount() == 2)
             {
-                try
-                {
-                    MyElement cloneObject = elementList.get(elementTable.getFocusModel().getFocusedCell().getRow()).clone();
-                    testList.add(cloneObject);
+                try {
+                    MyElement clone = elementList.get(elementTable.getFocusModel().getFocusedCell().getRow()).clone();
+                    testList.add(clone);
                     testTable.setItems(testList);
                     caretaker.setOriginatorValue(translateIntoArrayList(testList));
                 }
-
-                catch (CloneNotSupportedException e1)
-                {
+                catch (CloneNotSupportedException e1) {
                     e1.printStackTrace();
                 }
             }});
@@ -205,17 +179,15 @@ public class CreateTestController implements Initializable, I_Controller {
     @Override
     public void changeScene(Stage st)
     {
-        try
-        {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxml/createtest.fxml"));
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/CreateTestView.fxml"));
             Scene scene = new Scene(root);
             st.setTitle("Create Test");
             st.setScene(scene);
             st.show();
         }
 
-        catch (IOException e)
-        {
+        catch (IOException e) {
             e.printStackTrace();
         }
     }

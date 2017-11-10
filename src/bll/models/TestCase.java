@@ -8,7 +8,6 @@ import bll.models.parser.MyElement;
 import bll.models.parser.XMLParser;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,7 +68,9 @@ public class TestCase {
         String message = "";
         try{
             WebDriver driver = new FirefoxDriver();
+            driver.manage().window().maximize();
             driver.get(elements.get(0).getPageURL()); //all elements will be for the same page
+
             for(MyElement e : elements)
             {
                 I_ElementHandler handler = lookupHandlerBy(e.getElementType());

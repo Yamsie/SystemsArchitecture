@@ -12,12 +12,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.net.UnknownHostException;
 import java.util.ResourceBundle;
 
 public class ParsePageController implements Initializable, I_Controller {
@@ -67,7 +65,7 @@ public class ParsePageController implements Initializable, I_Controller {
 
     public void changeScene(Stage st){
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxml/parsepage.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/ParsePageView.fxml"));
             Scene scene = new Scene(root);
             st.setTitle(this.getName());
             st.setScene(scene);

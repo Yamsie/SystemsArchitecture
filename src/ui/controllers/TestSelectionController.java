@@ -6,7 +6,6 @@ import bll.models.logger.TestController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -65,7 +64,7 @@ public class TestSelectionController implements Initializable, I_Controller {
 
     public void changeScene(Stage st){
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxml/testselection.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/TestSelectionView.fxml"));
             Scene scene = new Scene(root);
             st.setTitle(this.getName());
             st.setScene(scene);

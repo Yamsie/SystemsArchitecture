@@ -27,7 +27,7 @@ public class MainMenuController extends Application implements Initializable, I_
     @Override
     public void start(Stage primaryStage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxml/mainmenu.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/MainMenuView.fxml"));
             //right after this line the constructor is called again
             Scene scene = new Scene(root);
             primaryStage.setTitle("Main Menu");
@@ -73,7 +73,7 @@ public class MainMenuController extends Application implements Initializable, I_
     @Override
     public void changeScene(Stage stage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxml/mainmenu.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/MainMenuView.fxml"));
             Scene scene = new Scene(root);
             stage.setTitle(this.getName());
             stage.setScene(scene);
