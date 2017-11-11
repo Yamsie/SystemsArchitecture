@@ -1,6 +1,5 @@
 package bll.models;
 
-import bll.models.parser.MyElement;
 import dal.TableTestCases;
 import dal.I_QueryBuilder;
 import dal.Query;
@@ -8,11 +7,7 @@ import dal.QueryBuilder;
 import dal.datamanipulation.dataclauses.WhereClause;
 import dal.datamanipulation.dataoperations.InsertOperation;
 import dal.datamanipulation.dataoperations.SelectOperation;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.TextFieldTableCell;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TestModel {
