@@ -29,6 +29,8 @@ public class CreateTestController implements Initializable, I_Controller {
     @FXML private TableView<MyElement> elementTable, testTable;
     @FXML private Label nameMessage;
     @FXML private Button mainMenuBtn;
+    @FXML private ChoiceBox<String> loadDropDown;
+    private XMLParser xmlParser = new XMLParser();
     private TestModel model;
 
     private ObservableList<MyElement> elementList, testList;
@@ -68,7 +70,7 @@ public class CreateTestController implements Initializable, I_Controller {
             if(model.checkUniqueName(name))
             {
                 testName.clear();
-                new XMLTestCreator().createTest(name, testList);
+                new XMLTestCreator().createTest(name.replaceAll(" ", ""), testList);
                 nameMessage.setText("Test has been saved.");
                 model.insertOperation(name, Settings.getInstance().getProperty("XML_TEST_PATH") + name + ".xml");
             }
@@ -80,11 +82,27 @@ public class CreateTestController implements Initializable, I_Controller {
         }
     }
 
+    @FXML
+    public void loadTest() {
+        if(loadDropDown.getValue().equals("Load Test"))
+            testList.clear();
+        else {
+            testList.clear();
+            testList.addAll(xmlParser.parse(Settings.getInstance().getProperty("XML_TEST_PATH") + loadDropDown.getValue()));
+            testTable.setItems(testList);
+        }
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
-        XMLParser xmlParser = new XMLParser();
         MyJSONParser jsonParser = new MyJSONParser();
+        loadDropDown.getItems().removeAll(loadDropDown.getItems());
+        loadDropDown.getItems().add("Load Test");
+        loadDropDown.getSelectionModel().select("Load Test");
+
+        for(File f: getFiles(Settings.getInstance().getProperty("XML_TEST_PATH")))
+            loadDropDown.getItems().add(f.getName());
 
         for (String COLUMN_ATTRIBUTE : TestModel.getAttributes())
         {

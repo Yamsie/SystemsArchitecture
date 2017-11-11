@@ -1,10 +1,10 @@
-/*package bll.models.logger;
+package bll.models.logger;
 
 import bll.models.Settings;
 
 public class test {
     public static void test(){
-        LoggerOperator operator = new LoggerOperator(Settings.getInstance().getProperty("LOG_FILE"));
+        LoggerOperator operator = new LoggerOperator("rsc/logger/log.txt");
         I_Interceptor dateInterceptor = new DateInterceptor();
         I_Interceptor databaseInterceptor = new DatabaseTestingLineInterceptor();
         I_Interceptor statementInterceptor = new TestingStatementInterceptor();
@@ -20,4 +20,4 @@ public class test {
         operator.addData(result + "\n");
         System.out.println("I_Action result:" + result);
     }
-}*/
+}

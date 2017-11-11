@@ -51,7 +51,6 @@ public class ParsePageController implements Initializable, I_Controller {
         }
     }
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         options.getItems().removeAll(options.getItems());

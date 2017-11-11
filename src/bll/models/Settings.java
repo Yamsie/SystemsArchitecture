@@ -33,7 +33,7 @@ public class Settings
             property.load(new FileInputStream("dataConfig.properties"));
         }
 
-        catch(Exception e)
+        catch(IOException e)
         {
             System.out.println(e);
         }

@@ -6,7 +6,7 @@ import static junit.framework.TestCase.fail;
 import static org.junit.Assert.assertTrue;
 //JUnit testing for logger
 public class DatabaseOperationTest {
-    LoggerOperator operator = new LoggerOperator("src/bll/models/logger/log.txt");
+    LoggerOperator operator = new LoggerOperator("rsc/logger/log.txt");
 
     @Test
     public void TestAddData(){
