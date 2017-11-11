@@ -1,6 +1,3 @@
 name,path
-Jason,rsc/xml/tests/Jason.xml
-qqq,rsc/xml/tests/qqq.xml
-12345,rsc/xml/tests/12345.xml
-666,rsc/xml/tests/666.xml
-777,rsc/xml/tests/777.xml
+Hello World People,rsc/xml/tests/Hello World People.xml
+gfedgrd,rsc/xml/tests/gfedgrd.xml
