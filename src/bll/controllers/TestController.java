@@ -34,6 +34,6 @@ public class TestController {
         String result = actionInvocation.invoke();
         System.out.println("result is : " + result);
         //operator.addData(result); - was adding to an array list and writing arraylist to file instead of writing string directly to file
-        //operator.writeData(result);
+        operator.addData(result);
     }
 }

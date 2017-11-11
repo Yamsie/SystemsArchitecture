@@ -1,9 +1,10 @@
 package ui.controllers;
 
+import bll.*;
 import bll.models.*;
-import bll.models.parser.MyElement;
-import bll.models.parser.MyJSONParser;
-import bll.models.parser.XMLParser;
+import bll.parser.MyElement;
+import bll.parser.MyJSONParser;
+import bll.parser.XMLParser;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

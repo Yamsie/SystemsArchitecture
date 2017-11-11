@@ -1,9 +1,9 @@
 package ui.controllers;
 
-import bll.models.dataformatter.I_DataFormatter;
-import bll.models.dataformatter.JSONFormatter;
-import bll.models.dataformatter.XMLFormatter;
-import bll.models.parser.WebParser;
+import bll.dataformatter.I_DataFormatter;
+import bll.dataformatter.JSONFormatter;
+import bll.dataformatter.XMLFormatter;
+import bll.parser.WebParser;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;

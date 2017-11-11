@@ -1,9 +1,9 @@
 package ui.controllers;
 
-import bll.models.ControllerSingleton;
-import bll.models.TestCase;
+import bll.controllers.ControllerSingleton;
+import bll.entityclasses.TestCase;
 import bll.models.TestModel;
-import bll.models.logger.TestController;
+import bll.controllers.TestController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
