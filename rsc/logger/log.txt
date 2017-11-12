@@ -1,9 +1,0 @@
-2017-11-11,09:02:31,Testing
-elements
-information
-here,Succeed
-2017-11-11,09:22:58,Testing
-elements
-information
-here,Succeed
-2017-11-12,16:09:43,test name is fbtest, Success: test for input element email been successful. Success: test for input element pass been successful. Success: test for button element  been successful.
