@@ -1,6 +1,6 @@
-package bll.models.logger;
+package bll.logger;
 
-import Settings;
+import bll.logger.*;
 
 public class test {
     public static void test(){

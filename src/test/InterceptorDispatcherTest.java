@@ -1,5 +1,5 @@
 package test;
-import bll.models.logger.*;
+import bll.logger.*;
 import org.junit.Test;
 import java.util.List;
 import static junit.framework.TestCase.fail;

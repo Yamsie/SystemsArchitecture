@@ -12,8 +12,8 @@ public class FactoryController{
         setHandlers();
     }
 
-    protected I_Controller createController(String name) {
-        I_Controller c = getController(name);
+    protected I_Controller getController(String name) {
+        I_Controller c = getControllerByName(name);
         return c;
     }
 
@@ -24,7 +24,7 @@ public class FactoryController{
         this.handlers.add(new MainMenuController());
     }
 
-    private I_Controller getController(String n){
+    private I_Controller getControllerByName(String n){
         I_Controller c = null;
         for(int i = 0; i < handlers.size() && c == null; i++) {
             if (handlers.get(i).getName().equals(n))

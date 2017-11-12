@@ -1,6 +1,6 @@
 package test;
 
-import bll.models.logger.LoggerOperator;
+import bll.logger.LoggerOperator;
 import org.junit.Test;
 import static junit.framework.TestCase.fail;
 import static org.junit.Assert.assertTrue;

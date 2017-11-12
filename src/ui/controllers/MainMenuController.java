@@ -44,19 +44,19 @@ public class MainMenuController extends Application implements Initializable, I_
 
     @FXML
     protected void handleCreateTest(){
-        I_Controller c = SingletonFactory.getFactoryInstance().createController("CreateTestController");
+        I_Controller c = SingletonFactory.getFactoryInstance().getController("CreateTestController");
         c.changeScene((Stage) exitApplication.getScene().getWindow());
     }
 
     @FXML
     protected void handleTestSelection(){
-        I_Controller c = SingletonFactory.getFactoryInstance().createController("TestSelectionController");
+        I_Controller c = SingletonFactory.getFactoryInstance().getController("TestSelectionController");
         c.changeScene((Stage) exitApplication.getScene().getWindow());
     }
 
     @FXML
     protected void handleParsePage(){
-        I_Controller c = SingletonFactory.getFactoryInstance().createController("ParsePageController");
+        I_Controller c = SingletonFactory.getFactoryInstance().getController("ParsePageController");
         c.changeScene((Stage) exitApplication.getScene().getWindow());
     }
 

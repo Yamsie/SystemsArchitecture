@@ -79,7 +79,7 @@ public class TestSelectionController implements Initializable, I_Controller {
     }
 
     public void mainMenuBtnHandler() {
-        I_Controller c = SingletonFactory.getFactoryInstance().createController("MainMenuController");
+        I_Controller c = SingletonFactory.getFactoryInstance().getController("MainMenuController");
         c.changeScene((Stage) mainMenuBtn.getScene().getWindow());
     }
 }
