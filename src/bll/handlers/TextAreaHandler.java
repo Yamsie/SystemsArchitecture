@@ -21,6 +21,7 @@ public class TextAreaHandler implements I_ElementHandler{
             e.click();
             e.clear();
             e.sendKeys(element.getInput());
+            e.submit();
         }
         catch(Exception ex)
         {

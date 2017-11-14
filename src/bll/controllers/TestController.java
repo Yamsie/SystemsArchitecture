@@ -27,13 +27,11 @@ public class TestController {
 
     public void run(TestCase tc){
         String logMessage = tc.runTest();
-        //action.setDate();
         action.setDatabaseTestingLine("test name is " + tc.getName()); //String here, for set testing line
         action.setTestingStatement(logMessage);
         actionInvocation.setAction(action);
         String result = actionInvocation.invoke();
         System.out.println("result is : " + result);
-        //operator.addData(result); - was adding to an array list and writing arraylist to file instead of writing string directly to file
         operator.addData(result);
     }
 }
