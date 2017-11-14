@@ -8,7 +8,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
-@SuppressWarnings("unchecked")
 public class JSONFormatter implements I_DataFormatter
 {
     @Override

@@ -33,7 +33,6 @@ public class CreateTestController implements Initializable, I_Controller {
     @FXML private ChoiceBox<String> loadDropDown;
     private XMLParser xmlParser = new XMLParser();
     private TestModel model;
-
     private ObservableList<MyElement> elementList, testList;
     private ArrayList<TableColumn<MyElement, String>> elementColumns = new ArrayList<>();
     private ArrayList<TableColumn<MyElement, String>> testColumns = new ArrayList<>();

@@ -2,7 +2,6 @@ package bll.dataformatter;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
-
 import bll.models.Settings;
 import bll.XMLWriter;
 import bll.parser.MyElement;
@@ -21,23 +20,6 @@ public class XMLFormatter implements I_DataFormatter
         this.list = list;
         this.rootName = rootName;
         createDocument();
-    }
-
-    private void createDocument()
-    {
-        try
-        {
-            DocumentBuilderFactory xml_factory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder docBuilder = xml_factory.newDocumentBuilder();
-            Document document = docBuilder.newDocument();
-            Element rootElement = document.createElement("root");
-            document.appendChild(rootElement);
-            createElements(document, rootElement);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
     }
 
     private void createElements(Document document, Element rootElement)
@@ -67,5 +49,22 @@ public class XMLFormatter implements I_DataFormatter
             rootElement.appendChild(element);
         }
         XMLWriter.writeTest(rootName, Settings.getInstance().getProperty("XML_PATH"), document);
+    }
+
+    private void createDocument()
+    {
+        try
+        {
+            DocumentBuilderFactory xml_factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = xml_factory.newDocumentBuilder();
+            Document document = docBuilder.newDocument();
+            Element rootElement = document.createElement("root");
+            document.appendChild(rootElement);
+            createElements(document, rootElement);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 }
