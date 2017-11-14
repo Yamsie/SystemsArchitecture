@@ -1,8 +1,8 @@
 package bll.logger;
 
 public class TestingStatementInterceptor implements I_Interceptor {
-    Boolean statement = false;
-    int priority = 1;
+    private boolean statement = false;
+    private int priority = 1;
 
     @Override
     public void operation(I_Action action) {

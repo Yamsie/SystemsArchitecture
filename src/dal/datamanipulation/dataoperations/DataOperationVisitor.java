@@ -10,12 +10,11 @@ public class DataOperationVisitor implements I_Visitor {
     public void visit(DeleteOperation delete) {
         delete.doDelete();
     }
-
     public void visit(InsertOperation insert) {
         insert.doInsert();
     }
-
     public void visit(UpdateOperation update) {
         update.doUpdate();
     }
+
 }

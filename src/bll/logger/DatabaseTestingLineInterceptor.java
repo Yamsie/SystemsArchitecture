@@ -1,8 +1,8 @@
 package bll.logger;
 
 public class DatabaseTestingLineInterceptor implements I_Interceptor {
-    boolean statement = false;
-    int priority = 2;
+    private boolean statement = false;
+    private int priority = 2;
 
     @Override
     public void operation(I_Action action) {

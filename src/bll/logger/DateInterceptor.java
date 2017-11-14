@@ -4,8 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DateInterceptor implements I_Interceptor {
-    boolean statement = false;
-    int priority = 3;
+    private boolean statement = false;
+    private int priority = 3;
 
     @Override
     public void operation(I_Action action) {
