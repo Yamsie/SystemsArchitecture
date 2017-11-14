@@ -1,3 +1,0 @@
-name,path
-FacebookTest,rsc/xml/tests/FacebookTest.xml
-Example,rsc/xml/tests/Example.xml
